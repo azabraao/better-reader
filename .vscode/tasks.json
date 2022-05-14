@@ -8,6 +8,9 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
       "isBackground": true,
       "problemMatcher": {
         "owner": "custom",
