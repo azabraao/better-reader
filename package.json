@@ -132,6 +132,14 @@
   ],
   "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
+    "roots": [
+      "<rootDir>",
+      "<rootDir>/src"
+    ],
+    "modulePaths": [
+      "<rootDir>",
+      "<rootDir>/src"
+    ],
     "testURL": "http://localhost/",
     "testEnvironment": "jsdom",
     "transform": {
