@@ -1,8 +1,10 @@
 type Styles = Record<string, string>;
 
 declare module '*.svg' {
-  const content: string;
-  export default content;
+  import React = require('react');
+
+  const src: React.FC<React.SVGProps<SVGSVGElement>>;
+  export default src;
 }
 
 declare module '*.png' {
