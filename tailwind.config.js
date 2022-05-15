@@ -10,6 +10,11 @@ module.exports = {
         muted: '#A7A9BE',
       },
     },
+    fontFamily: {
+      sans: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],
+      display: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],
+      body: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],
+    },
   },
   plugins: [],
 };
