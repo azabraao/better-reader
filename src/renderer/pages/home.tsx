@@ -1,10 +1,10 @@
 import { memo, ReactNode } from 'react';
-import Logo from 'renderer/atoms/Logo';
+import { Navbar } from 'renderer/organisms';
 
 const Home: React.FC<ReactNode> = () => {
   return (
     <div className="bg-background">
-      <Logo />;
+      <Navbar />
     </div>
   );
 };
