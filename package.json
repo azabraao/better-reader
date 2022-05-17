@@ -161,7 +161,8 @@
       "release/app/node_modules"
     ],
     "testPathIgnorePatterns": [
-      "release/app/dist"
+      "release/app/dist",
+      ".fttemplates"
     ],
     "setupFiles": [
       "./.erb/scripts/check-build-exists.ts"
