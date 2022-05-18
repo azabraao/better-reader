@@ -4,6 +4,12 @@ import Section from './index';
 
 describe('Section', () => {
   it('should render', () => {
-    expect(render(<Section />)).toBeTruthy();
+    expect(
+      render(
+        <Section title="test">
+          <span />
+        </Section>
+      )
+    ).toBeTruthy();
   });
 });
