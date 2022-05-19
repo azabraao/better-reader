@@ -8,6 +8,8 @@ import { ifSpaceBar } from 'renderer/utils';
 import ArrowRight from 'renderer/assets/icons/muted/arrow-right.svg';
 import ArrowTop from 'renderer/assets/icons/muted/arrow-top.svg';
 import ArrowDown from 'renderer/assets/icons/muted/arrow-down.svg';
+import useLayoutSwitch from 'renderer/contexts/LayoutSwitch/useLayoutSwitch';
+
 import { readingMock } from './data';
 
 interface RankingItemProps {
@@ -103,8 +105,9 @@ const RankingContentLoader = ({
 };
 
 const Ranking: React.FC<ReactNode> = () => {
+  const { toggleRankingFocus, isRankingFocused } = useLayoutSwitch();
+
   const [writingDown, setWritingDown] = useState(true);
-  const [showAllRanking, setShowAllRanking] = useState(false);
 
   const toggleWritingDown = useCallback(
     () => setWritingDown(!writingDown),
@@ -112,8 +115,9 @@ const Ranking: React.FC<ReactNode> = () => {
   );
 
   const toggleShowAllRanking = useCallback(
-    () => setShowAllRanking(!showAllRanking),
-    [showAllRanking]
+    () => toggleRankingFocus(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isRankingFocused]
   );
 
   const filteredRanking = useMemo(() => {
@@ -122,12 +126,12 @@ const Ranking: React.FC<ReactNode> = () => {
       ranking = ranking.filter(({ words }) => !!words);
     }
 
-    if (showAllRanking) {
+    if (isRankingFocused) {
       return ranking;
     }
 
     return ranking.slice(0, 3);
-  }, [showAllRanking, writingDown]);
+  }, [isRankingFocused, writingDown]);
 
   return (
     <Section title="Performance Ranking">
@@ -159,7 +163,7 @@ const Ranking: React.FC<ReactNode> = () => {
         ))}
       </RankingContainer>
       <RankingContentLoader
-        isShowingAll={showAllRanking}
+        isShowingAll={isRankingFocused}
         toggleSeeAllRanking={toggleShowAllRanking}
       />
     </Section>
