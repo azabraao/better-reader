@@ -15,6 +15,9 @@ module.exports = {
         'elevation-3': '0px 8px 16px rgba(0, 0, 0, 0.12)',
         'elevation-4': '0px 16px 24px rgba(0, 0, 0, 0.12)',
       },
+      borderWidth: {
+        1: '1px',
+      },
     },
     fontFamily: {
       sans: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],

@@ -8,6 +8,7 @@ import SweepingIcon from 'renderer/assets/icons/sweeping.svg';
 type ListItemProps = React.PropsWithChildren<{
   onSelect: (item: string) => void;
   children: string;
+  selected: boolean;
 }>;
 
 type DropdownProps = React.PropsWithChildren<{
@@ -15,12 +16,20 @@ type DropdownProps = React.PropsWithChildren<{
   defaultOpen?: boolean;
 }>;
 
-const ListItem = ({ onSelect, children }: ListItemProps) => (
+const ListItem = ({ onSelect, selected, children }: ListItemProps) => (
   <li
     onClick={() => onSelect(children)}
-    onKeyDown={() => onSelect(children)}
-    className="px-4 py-2 text-white hover:text-black hover:bg-muted"
+    onKeyDown={(event) => {
+      if (event.keyCode === 32) {
+        onSelect(children);
+      }
+    }}
+    className={clsx(
+      'px-4 py-2 text-white hover:text-black hover:bg-muted',
+      selected && 'bg-muted text-black'
+    )}
     role="menuitem"
+    tabIndex={0}
   >
     {children}
   </li>
@@ -41,8 +50,7 @@ const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
     <div className="relative w-full">
       <button
         onClick={toggleDropdown}
-        onKeyDown={toggleDropdown}
-        className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-black text-white cursor-pointer"
+        className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-background text-white cursor-pointer"
         type="button"
         tabIndex={0}
       >
@@ -54,7 +62,7 @@ const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
       </button>
       <ul
         className={clsx(
-          'absolute py-2 bg-black shadow-elevation-2 rounded-lg w-full transition-[top,opacity]',
+          'absolute py-2 bg-background shadow-elevation-2 rounded-lg w-full transition-[top,opacity]',
           isOpen
             ? 'top-full opacity-100'
             : 'top-0 opacity-0 pointer-events-none'
@@ -62,7 +70,11 @@ const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
         aria-hidden={!isOpen}
       >
         {items.map((item, index) => (
-          <ListItem key={index} onSelect={onSelect}>
+          <ListItem
+            selected={item === selected}
+            key={index}
+            onSelect={onSelect}
+          >
             {item}
           </ListItem>
         ))}

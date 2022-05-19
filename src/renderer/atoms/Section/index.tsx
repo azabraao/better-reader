@@ -9,7 +9,7 @@ interface SectionProps {
 const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <div className="my-4">
-      <h2 className="flex text-2xl text-white mb-4">
+      <h2 className="flex items-center text-2xl text-white mb-4">
         <span className="h-2 w-2 block mr-2 bg-white" />
         <span>{title}</span>
       </h2>
