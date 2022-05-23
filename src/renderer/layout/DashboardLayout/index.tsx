@@ -16,10 +16,12 @@ const DashboardLayout = ({
   const { isRankingFocused } = useLayoutSwitch();
 
   return (
-    <div className="grid gap-4 lg:gap-x-20 grid-cols-2">
-      <div className={clsx(isRankingFocused && 'row-span-2')}>{ranking}</div>
+    <div className="grid gap-4 lg:gap-x-20 lg:grid-cols-2">
+      <div className={clsx(isRankingFocused && 'lg:row-span-2')}>{ranking}</div>
       {evolution}
-      <div className={clsx(!isRankingFocused && 'col-span-2')}>{practices}</div>
+      <div className={clsx(!isRankingFocused && 'lg:col-span-2')}>
+        {practices}
+      </div>
     </div>
   );
 };

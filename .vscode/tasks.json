@@ -12,6 +12,11 @@
         "runOn": "folderOpen"
       },
       "isBackground": true,
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
       "problemMatcher": {
         "owner": "custom",
         "pattern": {
@@ -22,6 +27,23 @@
           "beginsPattern": "Compiling\\.\\.\\.$",
           "endsPattern": "(Compiled successfully|Failed to compile)\\.$"
         }
+      }
+    },
+    {
+      "type": "shell",
+      "command": "cd ../backend/ && json-server --watch db.json",
+      "label": "Start Backend",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "isBackground": true,
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
       }
     }
   ]

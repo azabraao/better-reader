@@ -1,53 +1,82 @@
 /* eslint-disable react/no-array-index-key */
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import ArrowIcon from 'renderer/assets/icons/arrow-down-white.svg';
-import SweepingIcon from 'renderer/assets/icons/sweeping.svg';
+import { usePortal } from 'renderer/contexts';
 
 type ListItemProps = React.PropsWithChildren<{
-  onSelect: (item: string) => void;
-  children: string;
+  onSelect: (item: ItemType) => void;
+  label: string;
   selected: boolean;
+  icon: React.ReactNode;
 }>;
+
+type ItemType = {
+  label: string;
+  icon?: React.ReactNode;
+};
 
 type DropdownProps = React.PropsWithChildren<{
-  items: string[];
+  items: ItemType[];
   defaultOpen?: boolean;
+  onSelected: (item: string) => void;
 }>;
 
-const ListItem = ({ onSelect, selected, children }: ListItemProps) => (
+const ListItem = ({ onSelect, selected, icon, label }: ListItemProps) => (
   <li
-    onClick={() => onSelect(children)}
+    onClick={() => {
+      onSelect({ icon, label });
+    }}
     onKeyDown={(event) => {
       if (event.keyCode === 32) {
-        onSelect(children);
+        onSelect({ icon, label });
       }
     }}
     className={clsx(
-      'px-4 py-2 text-white hover:text-black hover:bg-muted',
-      selected && 'bg-muted text-black'
+      'px-4 py-2 text-white  hover:bg-muted',
+      selected && 'bg-muted font-bold'
     )}
     role="menuitem"
     tabIndex={0}
   >
-    {children}
+    <div className="flex items-center">
+      <span>{icon}</span>
+      <span className="ml-2">{label}</span>
+    </div>
   </li>
 );
 
-const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
+const Dropdown = ({ items, defaultOpen, onSelected }: DropdownProps) => {
   const [selected, setSelected] = useState(items[0]);
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
-  const toggleDropdown = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const { openPortal, closePortal, setOnPortalClick } = usePortal();
 
-  const onSelect = useCallback((item: string) => {
-    setSelected(item);
-    setIsOpen(false);
+  useEffect(() => {
+    setOnPortalClick(closePortal);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    isOpen ? openPortal() : closePortal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  const toggleDropdown = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+
+  const onSelect = useCallback(
+    (item) => {
+      onSelected(item.label);
+      setSelected(item);
+      setIsOpen(false);
+    },
+    [onSelected]
+  );
+
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-10">
       <button
         onClick={toggleDropdown}
         className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-background text-white cursor-pointer"
@@ -55,8 +84,8 @@ const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
         tabIndex={0}
       >
         <div className="flex items-center">
-          <SweepingIcon />
-          <span className="ml-2">{selected}</span>
+          {selected.icon}
+          <span className="ml-2">{selected.label}</span>
         </div>
         <ArrowIcon />
       </button>
@@ -71,12 +100,12 @@ const Dropdown = ({ items, defaultOpen }: DropdownProps) => {
       >
         {items.map((item, index) => (
           <ListItem
-            selected={item === selected}
+            selected={item.label === selected.label}
             key={index}
+            icon={item.icon}
             onSelect={onSelect}
-          >
-            {item}
-          </ListItem>
+            label={item.label}
+          />
         ))}
       </ul>
     </div>
