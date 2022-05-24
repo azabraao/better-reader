@@ -4,6 +4,6 @@ import Portal from './index';
 
 describe('Portal', () => {
   it('should render', () => {
-    expect(render(<Portal />)).toBeTruthy();
+    expect(render(<Portal isOpen onClick={() => {}} />)).toBeTruthy();
   });
 });

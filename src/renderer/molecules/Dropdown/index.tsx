@@ -63,6 +63,7 @@ const Dropdown = ({
               ? 'top-full opacity-100'
               : 'top-0 opacity-0 pointer-events-none'
           )}
+          role="menu"
           aria-hidden={!isOpen}
         >
           {items.map((item, index) => (
@@ -79,5 +80,7 @@ const Dropdown = ({
     </>
   );
 };
+
+Dropdown.defaultProps = defaultProps;
 
 export default memo(Dropdown);

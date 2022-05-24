@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
-import { shallow } from 'enzyme';
+import { fireEvent, render } from '@testing-library/react';
+import { techniques } from 'renderer/utils';
+
 import Dropdown from './index';
 
 /*
@@ -11,7 +13,10 @@ import Dropdown from './index';
   - Dropdown should render a list of items visible when clicking on the dropdown button
 */
 
-const element = shallow(<Dropdown items={['item1', 'item2', 'item3']} />);
+const element = render(<Dropdown onSelected={() => {}} items={techniques} />);
+
+const ul = document.querySelector('ul.absolute');
+const button = document.querySelector('button');
 
 describe('<Dropdown/> molecule', () => {
   const hiddenElementClass = 'top-0 opacity-0 pointer-events-none';
@@ -21,32 +26,39 @@ describe('<Dropdown/> molecule', () => {
   });
 
   it('should render a list of items hidden by default', () => {
-    expect(element.find('ul').hasClass(hiddenElementClass)).toBeTruthy();
+    expect(ul).toHaveClass(hiddenElementClass);
   });
 
   it('should render a list of items visible when clicking on the dropdown button', () => {
-    element.find('button').simulate('click');
-    expect(element.find('ul').hasClass(hiddenElementClass)).toBeTruthy();
+    button?.click();
+
+    setTimeout(() => {
+      expect(ul).not.toHaveClass(hiddenElementClass);
+    }, 200);
   });
 
   it('should render a list of items hidden when clicking outside of it', () => {
     // click outside of the dropdown
-    window.document.body.dispatchEvent(new Event('click'));
-    expect(element.find('ul').hasClass(hiddenElementClass)).toBeTruthy();
-  });
+    fireEvent.click(document.body);
 
-  it('should be closed by default', () => {
-    expect(element.find('ul').hasClass(hiddenElementClass)).toBeTruthy();
+    setTimeout(() => {
+      expect(ul).toHaveClass(hiddenElementClass);
+    }, 200);
   });
 
   it('should be closed when clicking on the dropdown button', () => {
-    element.find('button').simulate('click');
-    expect(element.find('ul').hasClass(hiddenElementClass)).toBeTruthy();
-    element.find('button').simulate('click');
+    button?.click();
+
+    setTimeout(() => {
+      expect(ul).not.toHaveClass(hiddenElementClass);
+    }, 200);
+
+    button?.click();
+
     // wait for the transition to finish
 
     setTimeout(() => {
-      expect(element.find('ul').hasClass(hiddenElementClass)).toBeFalsy();
+      expect(ul).toHaveClass(hiddenElementClass);
     }, 200);
   });
 });
