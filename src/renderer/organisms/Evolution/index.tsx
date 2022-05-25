@@ -1,10 +1,15 @@
 import { memo, ReactNode } from 'react';
 import { Section } from 'renderer/atoms';
+import useRanking from 'renderer/contexts/Ranking/useRanking';
+import Chart from './Chart';
+import LoadingState from './LoadingState';
 
 const Evolution: React.FC<ReactNode> = () => {
+  const { isLoadingRanking } = useRanking();
+
   return (
     <Section title="Evolution Over Time">
-      <span />
+      {isLoadingRanking ? <LoadingState /> : <Chart />}
     </Section>
   );
 };
