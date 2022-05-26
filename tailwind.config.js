@@ -8,6 +8,8 @@ module.exports = {
         danger: '#E53170',
         highlight: '#FF8906',
         muted: '#A7A9BE',
+        success: '#9EE493',
+        link: '#4062BB',
       },
       boxShadow: {
         'elevation-1': '0px 2px 4px rgba(0, 0, 0, 0.24)',

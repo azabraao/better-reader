@@ -132,9 +132,6 @@
   ],
   "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.ts"
-    ],
     "roots": [
       "<rootDir>",
       "<rootDir>/src"
@@ -255,7 +252,8 @@
     "react-dom": "^18.0.0",
     "react-hot-toast": "^2.2.0",
     "react-loading-skeleton": "^3.1.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "recharts": "^2.1.10"
   },
   "devEngines": {
     "node": ">=14.x",
