@@ -131,47 +131,11 @@
     "reload"
   ],
   "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
-  "jest": {
-    "roots": [
-      "<rootDir>",
-      "<rootDir>/src"
-    ],
-    "modulePaths": [
-      "<rootDir>",
-      "<rootDir>/src"
-    ],
-    "testURL": "http://localhost/",
-    "testEnvironment": "jsdom",
-    "transform": {
-      "\\.(ts|tsx|js|jsx)$": "ts-jest"
-    },
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "release/app/node_modules"
-    ],
-    "testPathIgnorePatterns": [
-      "release/app/dist",
-      ".fttemplates"
-    ],
-    "setupFiles": [
-      "./.erb/scripts/check-build-exists.ts"
-    ]
-  },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
     "@svgr/webpack": "^6.2.1",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
+    "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.0",
     "@types/jest": "^27.4.1",
@@ -216,6 +180,7 @@
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "jest-dom": "^4.0.0",
     "lint-staged": "^12.3.7",
     "mini-css-extract-plugin": "^2.6.0",
     "opencollective-postinstall": "^2.0.3",
