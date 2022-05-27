@@ -5,13 +5,13 @@ import ArrowIcon from 'renderer/assets/icons/arrow-down-white.svg';
 import { Portal } from 'renderer/atoms';
 import ListItem from './components/ListItem';
 
-type ItemType = {
+type Item = {
   label: string;
   icon?: React.ReactNode;
 };
 
 type DropdownProps = React.PropsWithChildren<{
-  items: ItemType[];
+  items: Item[];
   defaultOpen?: boolean;
   onSelected: (item: string) => void;
 }>;
@@ -25,7 +25,7 @@ const Dropdown = ({
   defaultOpen,
   onSelected,
 }: DropdownProps & typeof defaultProps) => {
-  const [selected, setSelected] = useState(items[0]);
+  const [selected, setSelected] = useState<Item>(items[0]);
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const closeDropdown = useCallback(() => setIsOpen(false), []);

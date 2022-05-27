@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { memo } from 'react';
 
-type ItemType = {
+type Item = {
   label: string;
   icon?: React.ReactNode;
 };
 
 type ListItemProps = React.PropsWithChildren<{
-  onSelect: (item: ItemType) => void;
+  onSelect: (item: Item) => void;
   label: string;
   selected: boolean;
   icon: React.ReactNode;
