@@ -4,27 +4,22 @@ import Skeleton from 'react-loading-skeleton';
 const LoadingState: React.FC<ReactNode> = () => {
   return (
     <>
-      <Skeleton width="100%" height={200} />
-      <div className="flex justify-between mt-1 flex-row px-4">
-        <Skeleton width={40} height={20} />
-        <Skeleton width={40} height={20} />
-        <Skeleton width={40} height={20} />
-        <Skeleton width={40} height={20} />
-        <Skeleton width={40} height={20} />
-        <Skeleton width={40} height={20} />
+      <div className="pl-4 mt-7">
+        <Skeleton width="100%" height={300} />
       </div>
-      <div className="mt-5 pl-4">
+
+      <div className="mt-8 pl-8 ">
         <div className="flex flex-row mb-1 gap-2">
-          <Skeleton width={15} height={15} />
-          <Skeleton width={100} height={15} />
+          <Skeleton width={16} height={16} borderRadius={0} />
+          <Skeleton width={54} height={16} />
         </div>
         <div className="flex flex-row mb-1 gap-2">
-          <Skeleton width={15} height={15} />
-          <Skeleton width={100} height={15} />
+          <Skeleton width={16} height={16} borderRadius={0} />
+          <Skeleton width={127} height={16} />
         </div>
         <div className="flex flex-row mb-1 gap-2">
-          <Skeleton width={15} height={15} />
-          <Skeleton width={100} height={15} />
+          <Skeleton width={16} height={16} borderRadius={0} />
+          <Skeleton width={136} height={16} />
         </div>
       </div>
     </>
