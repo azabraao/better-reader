@@ -31,6 +31,7 @@ type RankingItem = {
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [isLoadingRanking, setIsLoadingRanking] = useState(false);
   const [rankingData, setRankingData] = useState([] as RankingItem[]);
+
   const fetchRankingData = useCallback(async () => {
     try {
       setIsLoadingRanking(true);

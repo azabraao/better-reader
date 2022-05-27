@@ -3,6 +3,7 @@ export const ifSpaceBar = (
   callback: () => void
 ) => {
   if (event.keyCode === 32) {
+    event.preventDefault();
     callback();
   }
 };

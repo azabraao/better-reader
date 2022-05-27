@@ -1,15 +1,24 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Section from './index';
 
 describe('Section', () => {
   it('should render', () => {
-    expect(
-      render(
-        <Section title="test">
-          <span />
-        </Section>
-      )
-    ).toBeTruthy();
+    const component = render(
+      <Section title="test">
+        <span />
+      </Section>
+    );
+    expect(component).toBeTruthy();
+  });
+
+  it('should render a given title', () => {
+    render(
+      <Section title="Test title">
+        <span />
+      </Section>
+    );
+
+    expect(screen.getByText('Test title')).toBeInTheDocument();
   });
 });

@@ -12,7 +12,7 @@ import useRanking from 'renderer/contexts/Ranking/useRanking';
 import { ifSpaceBar, monthNameByDate } from 'renderer/utils';
 
 const Chart: React.FC<ReactNode> = () => {
-  const { rankingData = [] } = useRanking();
+  const { rankingData } = useRanking();
   const [showPoints, setShowPoints] = useState(true);
   const [showComprehension, setShowComprehension] = useState(true);
   const [showWPM, setShowWPM] = useState(true);

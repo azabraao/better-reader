@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { techniques } from 'renderer/utils';
 
 import Dropdown from './index';
@@ -13,52 +13,61 @@ import Dropdown from './index';
   - Dropdown should render a list of items visible when clicking on the dropdown button
 */
 
-const element = render(<Dropdown onSelected={() => {}} items={techniques} />);
-
-const ul = document.querySelector('ul.absolute');
-const button = document.querySelector('button');
-
 describe('<Dropdown/> molecule', () => {
   const hiddenElementClass = 'top-0 opacity-0 pointer-events-none';
+  const visibleElementClass = 'top-full opacity-100';
 
   it('should render', () => {
-    expect(element).toBeTruthy();
+    expect(
+      render(<Dropdown onSelected={jest.fn} items={techniques} />)
+    ).toBeTruthy();
   });
 
   it('should render a list of items hidden by default', () => {
-    expect(ul).toHaveClass(hiddenElementClass);
+    render(<Dropdown onSelected={jest.fn} items={techniques} />);
+
+    expect(screen.getByTestId('dropdown-list')).toHaveClass(hiddenElementClass);
   });
 
   it('should render a list of items visible when clicking on the dropdown button', () => {
-    button?.click();
+    render(<Dropdown onSelected={jest.fn} items={techniques} />);
 
-    setTimeout(() => {
-      expect(ul).not.toHaveClass(hiddenElementClass);
-    }, 200);
+    const button = screen.getByTestId('dropdown-button');
+    const ul = screen.getByTestId('dropdown-list');
+
+    fireEvent.click(button);
+
+    expect(ul).not.toHaveClass(hiddenElementClass);
   });
 
   it('should render a list of items hidden when clicking outside of it', () => {
-    // click outside of the dropdown
-    fireEvent.click(document.body);
+    render(<Dropdown onSelected={jest.fn} items={techniques} />);
 
-    setTimeout(() => {
-      expect(ul).toHaveClass(hiddenElementClass);
-    }, 200);
+    const button = screen.getByTestId('dropdown-button');
+    const ul = screen.getByTestId('dropdown-list');
+    const portal = screen.getByTestId('portal');
+
+    fireEvent.click(button);
+
+    expect(ul).toHaveClass(visibleElementClass);
+
+    fireEvent.click(portal);
+
+    expect(ul).toHaveClass(hiddenElementClass);
   });
 
   it('should be closed when clicking on the dropdown button', () => {
-    button?.click();
+    render(<Dropdown onSelected={jest.fn} items={techniques} />);
 
-    setTimeout(() => {
-      expect(ul).not.toHaveClass(hiddenElementClass);
-    }, 200);
+    const button = screen.getByTestId('dropdown-button');
+    const ul = screen.getByTestId('dropdown-list');
 
-    button?.click();
+    fireEvent.click(button);
 
-    // wait for the transition to finish
+    expect(ul).not.toHaveClass(hiddenElementClass);
 
-    setTimeout(() => {
-      expect(ul).toHaveClass(hiddenElementClass);
-    }, 200);
+    fireEvent.click(button);
+
+    expect(ul).toHaveClass(hiddenElementClass);
   });
 });

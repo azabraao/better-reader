@@ -16,6 +16,7 @@ const Portal = ({ isOpen, onClick }: PortalProps) => {
       onClick={onClick}
       onKeyDown={onClick}
       role="presentation"
+      data-testid="portal"
     />
   );
 };

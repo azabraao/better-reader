@@ -49,6 +49,7 @@ const Dropdown = ({
           className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-background text-white cursor-pointer"
           type="button"
           tabIndex={0}
+          data-testid="dropdown-button"
         >
           <div className="flex items-center">
             {selected.icon}
@@ -63,7 +64,7 @@ const Dropdown = ({
               ? 'top-full opacity-100'
               : 'top-0 opacity-0 pointer-events-none'
           )}
-          role="menu"
+          data-testid="dropdown-list"
           aria-hidden={!isOpen}
         >
           {items.map((item, index) => (

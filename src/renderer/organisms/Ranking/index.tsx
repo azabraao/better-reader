@@ -16,7 +16,7 @@ import RankingLoading from './components/RankingLoading';
 const Ranking: React.FC<ReactNode> = () => {
   const { isRankingFocused } = useLayoutSwitch();
   const [writingDown, setWritingDown] = useState(true);
-  const { rankingData = [], isLoadingRanking } = useRanking();
+  const { rankingData, isLoadingRanking } = useRanking();
   const [filterByTechnique, setFilterByTechnique] = useState('All');
   const [hasMoreToShow, setHasMoreToShow] = useState(true);
 
