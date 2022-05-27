@@ -9,6 +9,9 @@ describe('Section', () => {
         <span />
       </Section>
     );
+
+    screen.logTestingPlaygroundURL();
+
     expect(component).toBeTruthy();
   });
 
