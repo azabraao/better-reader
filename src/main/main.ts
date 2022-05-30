@@ -31,6 +31,25 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+ipcMain.on('window-action', async (event, action) => {
+  switch (action) {
+    case 'minimize':
+      mainWindow?.minimize();
+      break;
+    case 'maximize':
+      mainWindow?.maximize();
+      break;
+    case 'unmaximize':
+      mainWindow?.unmaximize();
+      break;
+    case 'close':
+      mainWindow?.close();
+      break;
+    default:
+      break;
+  }
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -71,8 +90,11 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    minWidth: 1200,
+    minHeight: 850,
+    width: 1200,
+    height: 850,
+    frame: false,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: app.isPackaged
@@ -115,6 +137,10 @@ const createWindow = async () => {
 /**
  * Add event listeners...
  */
+
+ipcMain.handle('quit-app', () => {
+  app.quit();
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
