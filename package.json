@@ -137,7 +137,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/react": "^13.3.0",
     "@types/jest": "^27.4.1",
     "@types/node": "17.0.23",
     "@types/react": "^17.0.43",
@@ -180,7 +180,6 @@
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
-    "jest-dom": "^4.0.0",
     "jest-mock": "^28.1.0",
     "lint-staged": "^12.3.7",
     "mini-css-extract-plugin": "^2.6.0",
@@ -220,7 +219,7 @@
     "react-icons": "^4.3.1",
     "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.3.0",
-    "recharts": "^2.1.10"
+    "recharts": "^2.1.12"
   },
   "devEngines": {
     "node": ">=14.x",
