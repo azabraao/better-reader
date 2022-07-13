@@ -7,8 +7,8 @@ import { Section } from 'renderer/atoms';
 
 const Practices: React.FC<ReactNode> = () => {
   return (
-    <Section title="Practices">
-      <div className="flex gap-4">
+    <Section title="Training Sessions">
+      <div className="flex gap-4 no-scrollbar overflow-y-auto flex-wrap">
         <div className="flex items-center gap-4">
           <div className="flex flex-col gap-2 rounded-lg text-white p-2 border-white border-1">
             <span className="font-medium whitespace-nowrap">
@@ -40,7 +40,9 @@ const Practices: React.FC<ReactNode> = () => {
         </div>
         <div className="flex items-center gap-4">
           <div className="flex flex-col gap-2 rounded-lg text-white p-2 border-white border-1 items-center">
-            <span className="font-medium whitespace-nowrap">Add practice</span>
+            <span className="font-medium whitespace-nowrap">
+              Add Training Session
+            </span>
             <Plus />
           </div>
         </div>

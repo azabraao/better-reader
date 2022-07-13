@@ -55,19 +55,19 @@ const Ranking: React.FC<ReactNode> = () => {
 
   return (
     <Section title="Performance Ranking">
-      <div className="mt-2">
-        <div className="mb-2 text-white">Technique</div>
-      </div>
-      <Dropdown items={techniques} onSelected={setFilterByTechnique} />
-      <div
-        tabIndex={0}
-        className="flex items-center mt-2 cursor-pointer"
-        onClick={toggleWritingDown}
-        onKeyDown={(event) => ifSpaceBar(event, toggleWritingDown)}
-        role="button"
-      >
-        {writingDown ? <SquareChecked /> : <SquareUnchecked />}
-        <span className="ml-2 text-white">Writing down words</span>
+      <div className="my-6 flex gap-4 flex-col">
+        <div className="text-white">Technique</div>
+        <Dropdown items={techniques} onSelected={setFilterByTechnique} />
+        <div
+          tabIndex={0}
+          className="flex items-center cursor-pointer"
+          onClick={toggleWritingDown}
+          onKeyDown={(event) => ifSpaceBar(event, toggleWritingDown)}
+          role="button"
+        >
+          {writingDown ? <SquareChecked /> : <SquareUnchecked />}
+          <span className="ml-2 text-white">Writing down words</span>
+        </div>
       </div>
       <RankingContainer>
         {isLoadingRanking ? (

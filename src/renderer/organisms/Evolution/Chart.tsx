@@ -60,10 +60,10 @@ const Chart: React.FC<ReactNode> = () => {
 
   return (
     <div className="mt-7 max-w-full">
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={212}>
         <LineChart
-          width={500}
-          height={300}
+          width={412}
+          height={212}
           data={ranking}
           margin={{
             top: 0,

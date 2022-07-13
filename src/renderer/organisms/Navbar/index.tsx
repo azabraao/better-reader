@@ -3,7 +3,7 @@ import { Container, Logo } from 'renderer/atoms';
 
 const Navbar: React.FC<ReactNode> = () => {
   return (
-    <div className="py-4">
+    <div className="py-4 mb-4">
       <Container>
         <Logo />
       </Container>
