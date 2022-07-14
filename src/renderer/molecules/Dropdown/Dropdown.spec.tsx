@@ -45,13 +45,13 @@ describe('<Dropdown/> molecule', () => {
 
     const button = screen.getByTestId('dropdown-button');
     const ul = screen.getByTestId('dropdown-list');
-    const portal = screen.getByTestId('portal');
+    const backdrop = screen.getByTestId('backdrop');
 
     fireEvent.click(button);
 
     expect(ul).toHaveClass(visibleElementClass);
 
-    fireEvent.click(portal);
+    fireEvent.click(backdrop);
 
     expect(ul).toHaveClass(hiddenElementClass);
   });

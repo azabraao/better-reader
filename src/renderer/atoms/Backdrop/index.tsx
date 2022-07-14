@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import clsx from 'clsx';
 
-interface PortalProps {
+interface BackdropProps {
   isOpen: boolean;
   onClick: () => void;
 }
 
-const Portal = ({ isOpen, onClick }: PortalProps) => {
+const Backdrop = ({ isOpen, onClick }: BackdropProps) => {
   return (
     <div
       className={clsx(
@@ -16,9 +16,9 @@ const Portal = ({ isOpen, onClick }: PortalProps) => {
       onClick={onClick}
       onKeyDown={onClick}
       role="presentation"
-      data-testid="portal"
+      data-testid="backdrop"
     />
   );
 };
 
-export default memo(Portal);
+export default memo(Backdrop);

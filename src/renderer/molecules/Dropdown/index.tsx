@@ -2,7 +2,7 @@
 import { memo, useCallback, useState } from 'react';
 import clsx from 'clsx';
 import ArrowIcon from 'renderer/assets/icons/arrow-down-white.svg';
-import { Portal } from 'renderer/atoms';
+import { Backdrop } from 'renderer/atoms';
 import ListItem from './components/ListItem';
 
 type Item = {
@@ -42,7 +42,7 @@ const Dropdown = ({
 
   return (
     <>
-      <Portal isOpen={isOpen} onClick={closeDropdown} />
+      <Backdrop isOpen={isOpen} onClick={closeDropdown} />
       <div className="relative w-full z-10">
         <button
           onClick={toggleDropdown}
