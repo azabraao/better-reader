@@ -1,12 +1,10 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import useLayoutSwitch from 'renderer/contexts/LayoutSwitch/useLayoutSwitch';
-import useRanking from 'renderer/contexts/Ranking/useRanking';
+import { useLayoutSwitch, useRanking } from 'renderer/contexts';
 
 import Ranking from './index';
 
-jest.mock('renderer/contexts/LayoutSwitch/useLayoutSwitch');
-jest.mock('renderer/contexts/Ranking/useRanking');
+jest.mock('renderer/contexts');
 
 describe('Ranking', () => {
   it('should render', () => {
@@ -16,8 +14,11 @@ describe('Ranking', () => {
     useRankingMocked.mockReturnValue({
       rankingData: [],
       isLoadingRanking: false,
-    });
-    useLayoutSwitchMocked.mockReturnValue({ isRankingFocused: false });
+    } as any);
+    useLayoutSwitchMocked.mockReturnValue({
+      isRankingFocused: false,
+      setIsRankingFocused: jest.fn,
+    } as any);
 
     expect(render(<Ranking />)).toBeTruthy();
   });
@@ -29,8 +30,11 @@ describe('Ranking', () => {
     useRankingMocked.mockReturnValue({
       rankingData: [],
       isLoadingRanking: false,
-    });
-    useLayoutSwitchMocked.mockReturnValue({ isRankingFocused: false });
+    } as any);
+    useLayoutSwitchMocked.mockReturnValue({
+      isRankingFocused: false,
+      setIsRankingFocused: jest.fn,
+    } as any);
     render(<Ranking />);
 
     expect(screen.queryByText('No items to show')).toBeInTheDocument();
@@ -68,8 +72,11 @@ describe('Ranking', () => {
         },
       ],
       isLoadingRanking: false,
-    });
-    useLayoutSwitchMocked.mockReturnValue({ isRankingFocused: false });
+    } as any);
+    useLayoutSwitchMocked.mockReturnValue({
+      isRankingFocused: false,
+      setIsRankingFocused: jest.fn,
+    } as any);
     render(<Ranking />);
 
     expect(screen.queryByText('973pts')).toBeInTheDocument();

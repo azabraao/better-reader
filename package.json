@@ -125,7 +125,6 @@
     "react",
     "typescript",
     "ts",
-    "sass",
     "webpack",
     "hot",
     "reload"
