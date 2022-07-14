@@ -9,10 +9,10 @@ const ThreeFixations: React.FC<ReactNode> = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect x="1" y="12" width="21" height="2" fill="#FFFFFE" />
-      <circle cx="21" cy="13" r="3" fill="#FFFFFE" />
-      <circle cx="12" cy="13" r="3" fill="#FFFFFE" />
-      <circle cx="3" cy="13" r="3" fill="#FFFFFE" />
+      <rect x="1" y="12" width="21" height="2" fill="currentColor" />
+      <circle cx="21" cy="13" r="3" fill="currentColor" />
+      <circle cx="12" cy="13" r="3" fill="currentColor" />
+      <circle cx="3" cy="13" r="3" fill="currentColor" />
     </svg>
   );
 };

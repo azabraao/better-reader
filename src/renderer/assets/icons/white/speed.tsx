@@ -11,7 +11,7 @@ const Speed: React.FC<ReactNode> = () => {
     >
       <path
         d="M13.8994 2.87488L3.89941 14.8749H12.8994L11.8994 22.8749L21.8994 10.8749H12.8994L13.8994 2.87488Z"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

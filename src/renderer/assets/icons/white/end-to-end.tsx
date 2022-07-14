@@ -11,28 +11,28 @@ const EntToEnd: React.FC<ReactNode> = () => {
     >
       <path
         d="M7.29291 18.7426L3.05027 14.5L7.29291 10.2573"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M3.05028 14.5H12.9498"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M16.7071 5.25732L20.9498 9.49996L16.7071 13.7426"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M20.9497 9.49998H11.0503"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -24,8 +24,8 @@ const ListItem = ({ onSelect, selected, icon, label }: ListItemProps) => (
       }
     }}
     className={clsx(
-      'px-4 py-2 text-white  hover:bg-muted',
-      selected && 'bg-muted font-bold'
+      'px-4 py-2 text-white hover:bg-muted hover:text-black',
+      selected && 'bg-muted font-bold text-black'
     )}
     role="menuitem"
     tabIndex={0}

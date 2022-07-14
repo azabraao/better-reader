@@ -11,28 +11,28 @@ const Centered: React.FC<ReactNode> = () => {
     >
       <path
         d="M18 10H6"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M21 6H3"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M21 14H3"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M18 18H6"
-        stroke="#FFFFFE"
+        stroke="currentColor"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

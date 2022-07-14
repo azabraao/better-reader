@@ -15,7 +15,10 @@ const Section = ({ title, actions, children }: SectionProps) => {
           <span>{title}</span>
         </h2>
 
-        <div data-role="action" className="lg:transition-opacity lg:opacity-0">
+        <div
+          data-role="action"
+          className="lg:transition-opacity lg:opacity-0 text-white"
+        >
           {actions}
         </div>
       </div>
