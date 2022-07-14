@@ -3,6 +3,7 @@ import React, { createContext, memo, useState } from 'react';
 interface LayoutSwitchContextValues {
   isRankingFocused: boolean;
   toggleRankingFocus: () => void;
+  setIsRankingFocused: (isRankingFocused: boolean) => void;
 }
 
 export const LayoutSwitchContext = createContext(
@@ -23,6 +24,7 @@ export const LayoutSwitchProvider: React.FC<ViewUserProps> = ({ children }) => {
       value={{
         isRankingFocused,
         toggleRankingFocus,
+        setIsRankingFocused,
       }}
     >
       {children}

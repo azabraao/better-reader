@@ -68,7 +68,7 @@ const Chart: React.FC<ReactNode> = () => {
           margin={{
             top: 0,
             right: 0,
-            left: 0,
+            left: -16,
             bottom: 0,
           }}
           syncId="month"
@@ -108,7 +108,7 @@ const Chart: React.FC<ReactNode> = () => {
         </LineChart>
       </ResponsiveContainer>
 
-      <div className="mt-8 text-white pl-8">
+      <div className="mt-8 text-white">
         <div
           onKeyDown={(e) => ifSpaceBar(e, toggleShowPoints)}
           onClick={toggleShowPoints}

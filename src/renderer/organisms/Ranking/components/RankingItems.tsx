@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
+import { useLayoutSwitch } from 'renderer/contexts';
 import RankingItem from './RankingItem';
 
 interface RankingItemsProps {
@@ -7,6 +8,13 @@ interface RankingItemsProps {
 }
 
 const RankingItems = ({ items }: RankingItemsProps) => {
+  const { setIsRankingFocused } = useLayoutSwitch();
+
+  useEffect(() => {
+    setIsRankingFocused(items.length > 3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items]);
+
   if (items.length === 0) {
     return <p className="text-white">No items to show</p>;
   }

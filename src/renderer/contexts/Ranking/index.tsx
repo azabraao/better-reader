@@ -11,6 +11,9 @@ import { api } from 'renderer/utils';
 interface RankingContextValues {
   isLoadingRanking: boolean;
   rankingData: RankingItem[];
+  showOnlyPodium: boolean;
+  expandPodium: VoidFunction;
+  minimizePodium: VoidFunction;
 }
 
 export const RankingContext = createContext({} as RankingContextValues);
@@ -31,6 +34,7 @@ type RankingItem = {
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [isLoadingRanking, setIsLoadingRanking] = useState(false);
   const [rankingData, setRankingData] = useState<RankingItem[]>([]);
+  const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(false);
 
   const fetchRankingData = useCallback(async () => {
     try {
@@ -45,6 +49,9 @@ export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
     }
   }, []);
 
+  const expandPodium = useCallback(() => setShowOnlyPodium(false), []);
+  const minimizePodium = useCallback(() => setShowOnlyPodium(true), []);
+
   useEffect(() => {
     fetchRankingData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,6 +62,9 @@ export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
       value={{
         isLoadingRanking,
         rankingData,
+        showOnlyPodium,
+        expandPodium,
+        minimizePodium,
       }}
     >
       {children}
