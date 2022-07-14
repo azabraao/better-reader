@@ -20,11 +20,11 @@ const RankingItem = ({
 }: RankingItemProps) => {
   const isOnPodium = position <= 3;
   return (
-    <div className="flex gap-x-6 rounded-lg border-muted border-1 mb-2 items-stretch p-2">
+    <div className="flex gap-x-6 gap-y-2 rounded-lg border-muted border-1 mb-2 items-stretch p-2 flex-wrap">
       <div className="flex items-center">
         <span
           className={clsx(
-            'font-medium mr-6 w-5',
+            'font-medium w-5',
             isOnPodium ? 'text-white' : 'text-muted'
           )}
         >
@@ -32,7 +32,7 @@ const RankingItem = ({
           {isOnPodium && '#'}
         </span>
       </div>
-      <div className="flex flex-col mr-6">
+      <div className="flex flex-col">
         <span
           className={clsx(
             'font-medium mb-1',
@@ -58,7 +58,7 @@ const RankingItem = ({
           %{comprehension} comprehension
         </span>
       </div>
-      <div className="flex flex-col justify-end w-full">
+      <div className="flex flex-col items-start xs:items-end justify-end flex-grow">
         <span className="text-muted font-medium text-xs text-right">
           {new Date(date).toLocaleDateString('en-US', {
             year: 'numeric',
