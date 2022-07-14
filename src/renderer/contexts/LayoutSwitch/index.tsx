@@ -1,4 +1,10 @@
-import React, { createContext, memo, useState } from 'react';
+import React, {
+  useContext,
+  createContext,
+  memo,
+  useState,
+  useCallback,
+} from 'react';
 
 interface LayoutSwitchContextValues {
   isRankingFocused: boolean;
@@ -14,10 +20,13 @@ interface ViewUserProps {
   children: React.ReactNode;
 }
 
-export const LayoutSwitchProvider: React.FC<ViewUserProps> = ({ children }) => {
-  const [isRankingFocused, setIsRankingFocused] = useState(false);
+export const LayoutSwitchProvider = ({ children }: ViewUserProps) => {
+  const [isRankingFocused, setIsRankingFocused] = useState<boolean>(false);
 
-  const toggleRankingFocus = () => setIsRankingFocused(!isRankingFocused);
+  const toggleRankingFocus = useCallback(
+    () => setIsRankingFocused(!isRankingFocused),
+    [isRankingFocused]
+  );
 
   return (
     <LayoutSwitchContext.Provider
@@ -30,6 +39,16 @@ export const LayoutSwitchProvider: React.FC<ViewUserProps> = ({ children }) => {
       {children}
     </LayoutSwitchContext.Provider>
   );
+};
+
+export const useLayoutSwitch = (): LayoutSwitchContextValues => {
+  const context = useContext(LayoutSwitchContext);
+  if (!context)
+    throw new Error(
+      'useLayoutSwitch must be used within a LayoutSwitchProvider'
+    );
+
+  return context;
 };
 
 export default memo(LayoutSwitchProvider);

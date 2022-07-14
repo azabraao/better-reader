@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from 'react';
+import React, { memo } from 'react';
 import EndToEnd from 'renderer/assets/icons/white/end-to-end';
 import Plus from 'renderer/assets/icons/white/plus';
 import Speed from 'renderer/assets/icons/white/speed';
@@ -45,7 +45,7 @@ const sessions = [
   },
 ];
 
-const TrainingSessions: React.FC<ReactNode> = () => {
+const TrainingSessions = () => {
   return (
     <Section title="Training Sessions" actions={<Plus />}>
       <div className="flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3 lg:grid-cols-4">

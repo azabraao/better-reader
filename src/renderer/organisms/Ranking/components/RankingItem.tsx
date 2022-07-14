@@ -6,7 +6,7 @@ interface RankingItemProps {
   points: number;
   words?: number;
   ppm: number;
-  date: Date;
+  date: string;
   comprehension: number;
 }
 

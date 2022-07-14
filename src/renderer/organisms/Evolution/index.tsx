@@ -1,6 +1,6 @@
 import { memo, ReactNode } from 'react';
 import { Section } from 'renderer/molecules';
-import useRanking from 'renderer/contexts/Ranking/useRanking';
+import { useRanking } from 'renderer/contexts';
 import Chart from './Chart';
 import LoadingState from './LoadingState';
 

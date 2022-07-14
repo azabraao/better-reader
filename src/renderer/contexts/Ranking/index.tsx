@@ -2,6 +2,7 @@ import React, {
   createContext,
   memo,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -22,17 +23,8 @@ interface ViewUserProps {
   children: React.ReactNode;
 }
 
-type RankingItem = {
-  points: number;
-  words: number;
-  ppm: number;
-  date: Date;
-  comprehension: number;
-  techniques: string[];
-};
-
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
-  const [isLoadingRanking, setIsLoadingRanking] = useState(false);
+  const [isLoadingRanking, setIsLoadingRanking] = useState<boolean>(false);
   const [rankingData, setRankingData] = useState<RankingItem[]>([]);
   const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(false);
 
@@ -70,6 +62,14 @@ export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
       {children}
     </RankingContext.Provider>
   );
+};
+
+export const useRanking = (): RankingContextValues => {
+  const context = useContext(RankingContext);
+  if (!context)
+    throw new Error('useRanking must be used within a RankingProvider');
+
+  return context;
 };
 
 export default memo(RankingProvider);

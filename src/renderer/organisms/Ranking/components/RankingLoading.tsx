@@ -1,7 +1,7 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-const RankingLoading: React.FC<ReactNode> = () => {
+const RankingLoading = () => {
   return (
     <>
       <Skeleton

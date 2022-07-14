@@ -3,8 +3,7 @@ import { memo } from 'react';
 import ArrowRight from 'renderer/assets/icons/muted/arrow-right.svg';
 import ArrowTop from 'renderer/assets/icons/muted/arrow-top.svg';
 import ArrowDown from 'renderer/assets/icons/muted/arrow-down.svg';
-import useLayoutSwitch from 'renderer/contexts/LayoutSwitch/useLayoutSwitch';
-import useRanking from 'renderer/contexts/Ranking/useRanking';
+import { useRanking, useLayoutSwitch } from 'renderer/contexts';
 
 const RankingContentLoader = () => {
   const { isRankingFocused } = useLayoutSwitch();

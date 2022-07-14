@@ -1,7 +1,7 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import { Container, Logo } from 'renderer/atoms';
 
-const Navbar: React.FC<ReactNode> = () => {
+const Navbar = () => {
   return (
     <div className="py-4 mb-4">
       <Container>

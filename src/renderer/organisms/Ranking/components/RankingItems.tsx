@@ -4,7 +4,7 @@ import { useLayoutSwitch } from 'renderer/contexts';
 import RankingItem from './RankingItem';
 
 interface RankingItemsProps {
-  items: any[];
+  items: RankingItem[];
 }
 
 const RankingItems = ({ items }: RankingItemsProps) => {

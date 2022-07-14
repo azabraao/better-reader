@@ -1,19 +1,17 @@
 /* eslint-disable react/no-array-index-key */
-import { memo, ReactNode, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { Dropdown, Section } from 'renderer/molecules';
 import SquareChecked from 'renderer/assets/icons/white/square-checked.svg';
 import SquareUnchecked from 'renderer/assets/icons/white/square.svg';
 import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';
-import useLayoutSwitch from 'renderer/contexts/LayoutSwitch/useLayoutSwitch';
-import useRanking from 'renderer/contexts/Ranking/useRanking';
+import { useRanking } from 'renderer/contexts';
 
 import RankingContentLoader from './components/RankingContentLoader';
 import RankingContainer from './components/RankingContainer';
 import RankingItems from './components/RankingItems';
 import RankingLoading from './components/RankingLoading';
 
-const Ranking: React.FC<ReactNode> = () => {
-  const { isRankingFocused } = useLayoutSwitch();
+const Ranking = () => {
   const [writingDown, setWritingDown] = useState(true);
   const { rankingData, isLoadingRanking, showOnlyPodium } = useRanking();
   const [filterByTechnique, setFilterByTechnique] = useState('All');
@@ -32,13 +30,13 @@ const Ranking: React.FC<ReactNode> = () => {
     }
 
     if (filterByTechnique !== 'All') {
-      ranking = ranking?.filter((item: { techniques: any[] }) =>
+      ranking = ranking?.filter((item: { techniques: string[] }) =>
         item.techniques.some((technique) => technique === filterByTechnique)
       );
     }
 
     if (writingDown) {
-      ranking = ranking?.filter((item: { techniques: any[] }) =>
+      ranking = ranking?.filter((item: { techniques: string[] }) =>
         item.techniques.some((technique) => technique === writingDownWords)
       );
     }

@@ -1,9 +1,9 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoIcon from 'renderer/assets/logo-icon.svg';
 import { ifSpaceBar } from 'renderer/utils';
 
-const Logo: React.FC<ReactNode> = () => {
+const Logo = () => {
   const navigate = useNavigate();
 
   const onClick = () => navigate('/');

@@ -1,6 +1,10 @@
 import { memo, ReactNode } from 'react';
 
-const RankingContainer = ({ children }: { children: ReactNode }) => (
+interface RankingContainerProps {
+  children: ReactNode;
+}
+
+const RankingContainer = ({ children }: RankingContainerProps) => (
   <div className="pt-4">{children}</div>
 );
 

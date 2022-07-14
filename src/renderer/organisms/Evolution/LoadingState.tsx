@@ -1,7 +1,7 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-const LoadingState: React.FC<ReactNode> = () => {
+const LoadingState = () => {
   return (
     <>
       <div className="pl-4 mt-7">

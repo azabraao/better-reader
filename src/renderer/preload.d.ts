@@ -1,10 +1,14 @@
-import { Channels } from 'main/preload';
+import { Channels, WindowAction } from 'main/preload';
 
+type WindowActionsArgs = 'unmaximize' | 'maximize' | 'close' | 'minimize';
 declare global {
   interface Window {
     electron: {
       ipcRenderer: {
-        sendMessage(channel: Channels, args: unknown[]): void;
+        sendMessage(
+          channel: Channels | WindowAction,
+          args: unknown[] | WindowActionsArgs
+        ): void;
         on(
           channel: string,
           func: (...args: unknown[]) => void

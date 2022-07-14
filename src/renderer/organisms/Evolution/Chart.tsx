@@ -1,4 +1,4 @@
-import { memo, useMemo, ReactNode, useState, useCallback } from 'react';
+import { memo, useMemo, useState, useCallback } from 'react';
 import clsx from 'clsx';
 import {
   LineChart,
@@ -8,10 +8,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import useRanking from 'renderer/contexts/Ranking/useRanking';
+import { useRanking } from 'renderer/contexts';
 import { ifSpaceBar, monthNameByDate } from 'renderer/utils';
 
-const Chart: React.FC<ReactNode> = () => {
+const Chart = () => {
   const { rankingData } = useRanking();
   const [showPoints, setShowPoints] = useState(true);
   const [showComprehension, setShowComprehension] = useState(true);
@@ -28,13 +28,13 @@ const Chart: React.FC<ReactNode> = () => {
   const toggleShowWPM = useCallback(() => setShowWPM(!showWPM), [showWPM]);
 
   const ranking = useMemo(() => {
-    const withMonth = rankingData.map((day: any) => {
+    const withMonth = rankingData.map((day: RankingItem) => {
       day.month = monthNameByDate(day.date);
 
       return day;
     });
 
-    const ordered = withMonth.sort((a: any, b: any) => {
+    const ordered = withMonth.sort((a: RankingItem, b: RankingItem) => {
       const aMonth = Number(a.date.split('/')[0]);
       const aYear = Number(a.date.split('/')[2]);
       const start = new Date(aYear, aMonth - 1, 1);
@@ -45,17 +45,20 @@ const Chart: React.FC<ReactNode> = () => {
       return new Date(start).getTime() - new Date(end).getTime();
     });
 
-    return ordered.map((day: any, index: any, array: any) => {
-      const monthChanged =
-        day.date.split('/')[0] !==
-          array[index === 0 ? 0 : index - 1].date?.split('/')[0] || index === 0;
+    return ordered.map(
+      (day: RankingItem, index: number, array: RankingItem[]) => {
+        const monthChanged =
+          day.date.split('/')[0] !==
+            array[index === 0 ? 0 : index - 1].date?.split('/')[0] ||
+          index === 0;
 
-      if (!monthChanged) {
-        day.month = null;
+        if (!monthChanged) {
+          day.month = null;
+        }
+
+        return day;
       }
-
-      return day;
-    });
+    );
   }, [rankingData]);
 
   return (

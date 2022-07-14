@@ -1,6 +1,6 @@
 import { memo, ReactNode } from 'react';
 import clsx from 'clsx';
-import useLayoutSwitch from 'renderer/contexts/LayoutSwitch/useLayoutSwitch';
+import { useLayoutSwitch } from 'renderer/contexts';
 
 interface DashboardLayoutProps {
   ranking: ReactNode;
