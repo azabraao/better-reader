@@ -3,7 +3,7 @@ import EndToEnd from 'renderer/assets/icons/white/end-to-end';
 import Plus from 'renderer/assets/icons/white/plus';
 import Speed from 'renderer/assets/icons/white/speed';
 import Swiping from 'renderer/assets/icons/white/swiping';
-import { Section } from 'renderer/atoms';
+import { Section } from 'renderer/molecules';
 
 const sessions = [
   {

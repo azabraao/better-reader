@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { memo, ReactNode, useCallback, useMemo, useState } from 'react';
-import { Section } from 'renderer/atoms';
-import { Dropdown } from 'renderer/molecules';
+import { Dropdown, Section } from 'renderer/molecules';
 import SquareChecked from 'renderer/assets/icons/white/square-checked.svg';
 import SquareUnchecked from 'renderer/assets/icons/white/square.svg';
 import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';

@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from 'react';
 import { FiX, FiMinus, FiMaximize2 } from 'react-icons/fi';
 
-const Header: React.FC = () => {
+const WindowTitleBar: React.FC = () => {
   const handleCloseWindow = useCallback(() => {
     window.electron.ipcRenderer.sendMessage('window-action', 'close');
   }, []);
@@ -46,4 +46,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default memo(Header);
+export default memo(WindowTitleBar);
