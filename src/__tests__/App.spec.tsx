@@ -5,8 +5,6 @@ import App from '../renderer/App';
 const { ResizeObserver } = window;
 
 beforeEach(() => {
-  // @ts-ignore
-  delete window.ResizeObserver;
   window.ResizeObserver = jest.fn().mockImplementation(() => ({
     observe: jest.fn(),
     unobserve: jest.fn(),
