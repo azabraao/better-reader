@@ -1,6 +1,6 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
-const EntToEnd: React.FC<ReactNode> = () => {
+const EntToEnd = () => {
   return (
     <svg
       width={24}

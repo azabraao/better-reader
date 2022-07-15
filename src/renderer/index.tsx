@@ -2,8 +2,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import '@fontsource/space-grotesk';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 
 // calling IPC exposed from preload script

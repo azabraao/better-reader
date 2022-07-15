@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import { Container } from 'renderer/atoms';
 import { LayoutSwitchProvider } from 'renderer/contexts';
 import { DashboardLayout } from 'renderer/layout';
@@ -9,7 +9,7 @@ import {
   Ranking,
 } from 'renderer/organisms';
 
-const Home: React.FC<ReactNode> = () => {
+const Home = () => {
   return (
     <LayoutSwitchProvider>
       <div className="bg-background">

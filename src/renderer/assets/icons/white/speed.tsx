@@ -1,6 +1,6 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
-const Speed: React.FC<ReactNode> = () => {
+const Speed = () => {
   return (
     <svg
       width={25}

@@ -1,6 +1,6 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
-const Sondagem: React.FC<ReactNode> = () => {
+const Sondagem = () => {
   return (
     <svg
       width={24}

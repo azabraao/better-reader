@@ -1,6 +1,6 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
-const Swiping: React.FC<ReactNode> = () => {
+const Swiping = () => {
   return (
     <svg
       width={24}

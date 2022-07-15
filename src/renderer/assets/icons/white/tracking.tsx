@@ -1,6 +1,6 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
-const Tracking: React.FC<ReactNode> = () => {
+const Tracking = () => {
   return (
     <svg
       width={24}

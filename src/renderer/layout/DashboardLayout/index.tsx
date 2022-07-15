@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 import clsx from 'clsx';
 import { useLayoutSwitch } from 'renderer/contexts';
 
