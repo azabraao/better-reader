@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-boilerplate",
+  "name": "better-reader",
   "description": "A foundation for scalable desktop apps",
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
@@ -90,18 +90,18 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
+      "owner": "azabraao",
+      "repo": "better-reader"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron-react-boilerplate/electron-react-boilerplate.git"
+    "url": "git+https://github.com/azabraao/better-reader.git"
   },
   "author": {
     "name": "Electron React Boilerplate Maintainers",
     "email": "electronreactboilerplate@gmail.com",
-    "url": "https://electron-react-boilerplate.js.org"
+    "url": "https://github.com/azabraao/better-reader"
   },
   "contributors": [
     {
@@ -117,7 +117,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues"
+    "url": "https://github.com/azabraao/better-reader/issues"
   },
   "keywords": [
     "electron",
@@ -129,7 +129,7 @@
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/azabraao/better-reader#readme",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
     "@svgr/webpack": "^6.2.1",
@@ -223,9 +223,6 @@
   "devEngines": {
     "node": ">=14.x",
     "npm": ">=7.x"
-  },
-  "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
   },
   "browserslist": [],
   "prettier": {
