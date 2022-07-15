@@ -32,7 +32,7 @@ const Dropdown = ({
   const toggleDropdown = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
   const onSelect = useCallback(
-    (item) => {
+    (item: Item) => {
       onSelected(item.label);
       setSelected(item);
       setIsOpen(false);
