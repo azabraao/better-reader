@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 interface RankingContainerProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const RankingContainer = ({ children }: RankingContainerProps) => (

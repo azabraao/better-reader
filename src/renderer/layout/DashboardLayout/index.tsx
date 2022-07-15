@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { useLayoutSwitch } from 'renderer/contexts';
 
 interface DashboardLayoutProps {
-  ranking: ReactNode;
-  evolution: ReactNode;
-  practices: ReactNode;
+  ranking: React.ReactNode;
+  evolution: React.ReactNode;
+  practices: React.ReactNode;
 }
 
 const DashboardLayout = ({

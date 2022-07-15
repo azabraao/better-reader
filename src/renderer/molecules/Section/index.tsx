@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
 interface SectionProps {
-  children: ReactNode;
-  actions?: ReactNode;
+  children: React.ReactNode;
+  actions?: React.ReactNode;
   title: string;
 }
 
