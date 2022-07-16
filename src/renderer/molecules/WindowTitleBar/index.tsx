@@ -18,7 +18,7 @@ const WindowTitleBar: React.FC = () => {
     <div className="bg-background w-full h-10 relative select-none drag flex items-center justify-center ">
       <div className="absolute top-0 h-full flex gap-2 items-center left-4">
         <button
-          className="window-action w-3 h-3 rounded-md cursor-pointer flex items-center justify-center cursor-pointer bg-[#E96379]"
+          className="window-action w-3 h-3 rounded-md flex items-center justify-center cursor-pointer bg-[#E96379]"
           onClick={handleCloseWindow}
           tabIndex={-1}
           type="button"
