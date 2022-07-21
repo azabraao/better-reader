@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import React, { memo } from 'react';
 import EndToEnd from 'renderer/assets/icons/white/end-to-end';
 import Plus from 'renderer/assets/icons/white/plus';
 import Speed from 'renderer/assets/icons/white/speed';
 import Swiping from 'renderer/assets/icons/white/swiping';
+import { useLayoutSwitch } from 'renderer/contexts';
 import { Section } from 'renderer/molecules';
 
 const sessions = [
@@ -46,9 +48,15 @@ const sessions = [
 ];
 
 const TrainingSessions = () => {
+  const { isRankingFocused } = useLayoutSwitch();
   return (
     <Section title="Training Sessions" actions={<Plus />}>
-      <div className="flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3 lg:grid-cols-4">
+      <div
+        className={clsx(
+          'flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3',
+          isRankingFocused ? 'lg:grid-cols-2' : 'lg:grid-cols-4'
+        )}
+      >
         {sessions.map((session) => (
           <div
             key={session.id}

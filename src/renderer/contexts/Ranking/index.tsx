@@ -26,7 +26,7 @@ interface ViewUserProps {
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [isLoadingRanking, setIsLoadingRanking] = useState<boolean>(false);
   const [rankingData, setRankingData] = useState<RankingItem[]>([]);
-  const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(false);
+  const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(true);
 
   const fetchRankingData = useCallback(async () => {
     try {
