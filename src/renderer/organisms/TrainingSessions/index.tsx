@@ -1,9 +1,6 @@
 import clsx from 'clsx';
-import React, { memo } from 'react';
-import EndToEnd from 'renderer/assets/icons/white/end-to-end';
-import Plus from 'renderer/assets/icons/white/plus';
-import Speed from 'renderer/assets/icons/white/speed';
-import Swiping from 'renderer/assets/icons/white/swiping';
+import { memo } from 'react';
+import Icon, { Plus, Speed } from 'renderer/atoms/Icon';
 import { useLayoutSwitch } from 'renderer/contexts';
 import { Section } from 'renderer/molecules';
 
@@ -11,38 +8,38 @@ const sessions = [
   {
     id: 'a',
     name: 'Varredura & ponta-ponta',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
   {
     id: 'b',
     name: 'Somente Varredura',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
   {
     id: 'c',
     name: 'Varredura & ponta-ponta',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
   {
     id: 'd',
     name: 'Somente Varredura',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
   {
     id: 'e',
     name: 'Varredura & ponta-ponta',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
 
   {
     id: 'f',
     name: 'Somente Varredura',
-    techniques: [<Swiping />, <EndToEnd />],
+    techniques: ['swiping', 'end-to-end'],
     target: 500,
   },
 ];
@@ -67,11 +64,9 @@ const TrainingSessions = () => {
                 {session.name}
               </span>
               <div className="flex gap-2 items-center">
-                {session.techniques.map((technique) =>
-                  React.cloneElement(technique, {
-                    key: session.id + Math.random(),
-                  })
-                )}
+                {session.techniques.map((technique) => (
+                  <Icon key={session.id + Math.random()} name={technique} />
+                ))}
                 <div className="ml-1 flex gap-2 items-center">
                   <Speed />
                   {session.target}ppm

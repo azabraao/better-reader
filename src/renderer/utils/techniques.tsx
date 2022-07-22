@@ -1,12 +1,14 @@
-import ThreeFixations from 'renderer/assets/icons/white/3-fixations';
-import TwoFixations from 'renderer/assets/icons/white/2-fixations';
-import Centered from 'renderer/assets/icons/white/centered';
-import EndToEnd from 'renderer/assets/icons/white/end-to-end';
-import Music from 'renderer/assets/icons/white/music';
-import Sondagem from 'renderer/assets/icons/white/sondagem';
-import Swiping from 'renderer/assets/icons/white/swiping';
-import Tracking from 'renderer/assets/icons/white/tracking';
-import Writing from 'renderer/assets/icons/white/writing';
+import {
+  TwoFixations,
+  ThreeFixations,
+  Centered,
+  EndToEnd,
+  Music,
+  Sondagem,
+  Swiping,
+  Tracking,
+  Writing,
+} from 'renderer/atoms/Icon';
 
 export const writingDownWords = 'Writing down words';
 export const techniques = [

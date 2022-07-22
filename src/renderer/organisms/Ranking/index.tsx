@@ -1,8 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Dropdown, Section } from 'renderer/molecules';
-import SquareChecked from 'renderer/assets/icons/white/square-checked.svg';
-import SquareUnchecked from 'renderer/assets/icons/white/square.svg';
+import { SquareChecked, SquareUnchecked } from 'renderer/atoms/Icon';
 import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';
 import { useRanking } from 'renderer/contexts';
 
@@ -58,13 +57,13 @@ const Ranking = () => {
         <Dropdown items={techniques} onSelected={setFilterByTechnique} />
         <div
           tabIndex={0}
-          className="flex items-center cursor-pointer"
+          className="flex items-center cursor-pointer text-white"
           onClick={toggleWritingDown}
           onKeyDown={(event) => ifSpaceBar(event, toggleWritingDown)}
           role="button"
         >
           {writingDown ? <SquareChecked /> : <SquareUnchecked />}
-          <span className="ml-2 text-white">Writing down words</span>
+          <span className="ml-2">Writing down words</span>
         </div>
       </div>
       <RankingContainer>

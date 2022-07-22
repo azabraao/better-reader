@@ -1,8 +1,6 @@
 import { memo, useCallback } from 'react';
 
-import ArrowRight from 'renderer/assets/icons/muted/arrow-right.svg';
-import ArrowTop from 'renderer/assets/icons/muted/arrow-top.svg';
-import ArrowDown from 'renderer/assets/icons/muted/arrow-down.svg';
+import { ArrowTop, ArrowDown, ArrowRight } from 'renderer/atoms/Icon';
 import { useRanking, useLayoutSwitch } from 'renderer/contexts';
 
 const RankingContentLoader = () => {
@@ -24,19 +22,19 @@ const RankingContentLoader = () => {
       <div className="flex justify-between p-2">
         <button
           type="button"
-          className="flex flex-row items-center justify-center cursor-pointer"
+          className="flex flex-row items-center justify-center cursor-pointer text-muted"
           onClick={minimizePodium}
         >
-          <span className="text-muted font-medium mr-2">See less</span>
+          <span className="font-medium mr-2">See less</span>
           <ArrowTop />
         </button>
         {!reachedRankingEnd && (
           <button
             type="button"
-            className="flex flex-row items-center justify-center cursor-pointer"
+            className="flex flex-row items-center justify-center cursor-pointer text-muted"
             onClick={onLoadMoreClick}
           >
-            <span className="text-muted font-medium mr-2">Load more</span>
+            <span className="font-medium mr-2">Load more</span>
             <ArrowDown />
           </button>
         )}
@@ -47,10 +45,10 @@ const RankingContentLoader = () => {
   return (
     <button
       type="button"
-      className="p-2 flex cursor-pointer"
+      className="p-2 flex cursor-pointer text-muted"
       onClick={onLoadMoreClick}
     >
-      <span className="text-muted mr-2">See more</span>
+      <span className="mr-2">See more</span>
       <ArrowRight />
     </button>
   );

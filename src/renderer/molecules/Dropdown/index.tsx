@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { memo, useCallback, useState } from 'react';
 import clsx from 'clsx';
-import ArrowIcon from 'renderer/assets/icons/arrow-down-white.svg';
+import { ArrowDown } from 'renderer/atoms/Icon';
 import { Backdrop } from 'renderer/atoms';
 import ListItem from './components/ListItem';
 
@@ -55,7 +55,7 @@ const Dropdown = ({
             {selected.icon}
             <span className="ml-2">{selected.label}</span>
           </div>
-          <ArrowIcon />
+          <ArrowDown />
         </button>
         <ul
           className={clsx(
