@@ -13,7 +13,8 @@ import RankingLoading from './components/RankingLoading';
 
 const Ranking = () => {
   const [writingDown, setWritingDown] = useState(true);
-  const { rankingData, isLoadingRanking, showOnlyPodium } = useRanking();
+  const { rankingData, isLoadingRanking, showOnlyPodium, rankingIsEmpty } =
+    useRanking();
   const [filterByTechnique, setFilterByTechnique] = useState('All');
   const [hasMoreToShow, setHasMoreToShow] = useState(true);
 
@@ -67,8 +68,8 @@ const Ranking = () => {
         </div>
       </div>
       <RankingContainer>
-        {isLoadingRanking ? (
-          <RankingLoading />
+        {isLoadingRanking && rankingIsEmpty ? (
+          <RankingLoading count={3} />
         ) : (
           <RankingItems items={filteredRanking} />
         )}

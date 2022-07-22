@@ -1,7 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import { memo, useEffect } from 'react';
-import { useLayoutSwitch } from 'renderer/contexts';
+import { useLayoutSwitch, useRanking } from 'renderer/contexts';
 import RankingItem from './RankingItem';
+import RankingLoading from './RankingLoading';
 
 interface RankingItemsProps {
   items: RankingItem[];
@@ -9,6 +10,7 @@ interface RankingItemsProps {
 
 const RankingItems = ({ items }: RankingItemsProps) => {
   const { setIsRankingFocused } = useLayoutSwitch();
+  const { isLoadingRanking } = useRanking();
 
   useEffect(() => {
     setIsRankingFocused(items.length > 3);
@@ -32,6 +34,7 @@ const RankingItems = ({ items }: RankingItemsProps) => {
           comprehension={item.comprehension}
         />
       ))}
+      {isLoadingRanking && <RankingLoading count={10} />}
     </>
   );
 };

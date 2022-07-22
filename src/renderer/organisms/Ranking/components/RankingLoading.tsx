@@ -1,7 +1,11 @@
 import { memo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-const RankingLoading = () => {
+interface RankingLoadingProps {
+  count: number;
+}
+
+const RankingLoading = ({ count }: RankingLoadingProps) => {
   return (
     <>
       <Skeleton
@@ -9,7 +13,7 @@ const RankingLoading = () => {
         height={62}
         width="100%"
         borderRadius={8}
-        count={3}
+        count={count}
       />
     </>
   );
