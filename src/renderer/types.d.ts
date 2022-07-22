@@ -1,4 +1,4 @@
-type RankingItem = {
+type PracticeItem = {
   points: number;
   words: number;
   ppm: number;

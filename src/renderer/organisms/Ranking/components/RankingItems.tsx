@@ -5,7 +5,7 @@ import RankingItem from './RankingItem';
 import RankingLoading from './RankingLoading';
 
 interface RankingItemsProps {
-  items: RankingItem[];
+  items: PracticeItem[];
 }
 
 const RankingItems = ({ items }: RankingItemsProps) => {

@@ -12,7 +12,7 @@ import { api } from 'renderer/utils';
 
 interface RankingContextValues {
   isLoadingRanking: boolean;
-  rankingData: RankingItem[];
+  rankingData: PracticeItem[];
   showOnlyPodium: boolean;
   reachedRankingEnd: boolean;
   rankingIsEmpty: boolean;
@@ -29,7 +29,7 @@ interface ViewUserProps {
 
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [isLoadingRanking, setIsLoadingRanking] = useState<boolean>(false);
-  const [rankingData, setRankingData] = useState<RankingItem[]>([]);
+  const [rankingData, setRankingData] = useState<PracticeItem[]>([]);
   const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
   const [reachedRankingEnd, setReachedRankingEnd] = useState<boolean>(false);

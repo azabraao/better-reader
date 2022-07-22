@@ -8,11 +8,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { useRanking } from 'renderer/contexts';
+import { usePractices } from 'renderer/contexts';
 import { ifSpaceBar, monthNameByDate } from 'renderer/utils';
 
 const Chart = () => {
-  const { rankingData } = useRanking();
+  const { practicesData } = usePractices();
   const [showPoints, setShowPoints] = useState(true);
   const [showComprehension, setShowComprehension] = useState(true);
   const [showWPM, setShowWPM] = useState(true);
@@ -27,14 +27,14 @@ const Chart = () => {
   );
   const toggleShowWPM = useCallback(() => setShowWPM(!showWPM), [showWPM]);
 
-  const ranking = useMemo(() => {
-    const withMonth = rankingData.map((day: RankingItem) => {
+  const practices = useMemo(() => {
+    const withMonth = practicesData.map((day: PracticeItem) => {
       day.month = monthNameByDate(day.date);
 
       return day;
     });
 
-    const ordered = withMonth.sort((a: RankingItem, b: RankingItem) => {
+    const ordered = withMonth.sort((a: PracticeItem, b: PracticeItem) => {
       const aMonth = Number(a.date.split('/')[0]);
       const aYear = Number(a.date.split('/')[2]);
       const start = new Date(aYear, aMonth - 1, 1);
@@ -46,7 +46,7 @@ const Chart = () => {
     });
 
     return ordered.map(
-      (day: RankingItem, index: number, array: RankingItem[]) => {
+      (day: PracticeItem, index: number, array: PracticeItem[]) => {
         const monthChanged =
           day.date.split('/')[0] !==
             array[index === 0 ? 0 : index - 1].date?.split('/')[0] ||
@@ -59,7 +59,7 @@ const Chart = () => {
         return day;
       }
     );
-  }, [rankingData]);
+  }, [practicesData]);
 
   return (
     <div className="mt-7 max-w-full">
@@ -67,7 +67,7 @@ const Chart = () => {
         <LineChart
           width={412}
           height={212}
-          data={ranking}
+          data={practices}
           margin={{
             top: 0,
             right: 0,
