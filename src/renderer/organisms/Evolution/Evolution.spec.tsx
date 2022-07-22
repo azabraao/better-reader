@@ -20,9 +20,11 @@ afterEach(() => {
 jest.mock('renderer/contexts', () => {
   return {
     useRanking() {
+      return { isLoadingRanking: false };
+    },
+    usePractices() {
       return {
-        rankingData: [],
-        isLoadingRanking: false,
+        practicesData: [],
       };
     },
   };
