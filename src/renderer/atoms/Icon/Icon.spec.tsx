@@ -4,6 +4,6 @@ import Icon from './index';
 
 describe('Icon', () => {
   it('should render', () => {
-    expect(render(<Icon />)).toBeTruthy();
+    expect(render(<Icon name="fake-name" />)).toBeTruthy();
   });
 });
