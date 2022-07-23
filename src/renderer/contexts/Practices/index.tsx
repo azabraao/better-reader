@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react';
 import toast from 'react-hot-toast';
-import { api } from 'renderer/utils';
+import { api } from 'renderer/services';
 
 interface PracticesContextValues {
   isLoadingPractices: boolean;

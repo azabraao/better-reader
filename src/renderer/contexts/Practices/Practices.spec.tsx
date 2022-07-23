@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { waitFor, render, cleanup } from '@testing-library/react';
-import { api } from 'renderer/utils';
+import { api } from 'renderer/services';
 import { PracticesProvider } from './index';
 
 jest.mock('renderer/utils', () => {
