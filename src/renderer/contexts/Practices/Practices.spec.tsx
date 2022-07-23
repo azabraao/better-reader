@@ -3,7 +3,7 @@ import { waitFor, render, cleanup } from '@testing-library/react';
 import { api } from 'renderer/services';
 import { PracticesProvider } from './index';
 
-jest.mock('renderer/utils', () => {
+jest.mock('renderer/services', () => {
   return {
     api: {
       get: jest.fn(() => Promise.resolve({ data: [] })),
@@ -26,7 +26,10 @@ describe('PracticesProvider', () => {
     expect(listNode).toBeTruthy();
   });
 
-  it('should call /Practices and load data', async () => {
+  it('should call /practices and load data', async () => {
+    const page = 0;
+    const start = page * 10;
+
     const mockedGet = jest.mocked(api.get);
 
     const date = new Date();
@@ -44,7 +47,9 @@ describe('PracticesProvider', () => {
       ],
     });
 
-    const response = await api.get('/Practices');
+    const response = await api.get(
+      `/practices?_sort=points&_order=desc&_limit=10&page=${page}&_start=${start}`
+    );
 
     expect(response.data).toEqual(
       expect.arrayContaining([
