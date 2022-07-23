@@ -208,6 +208,8 @@
   },
   "dependencies": {
     "@fontsource/space-grotesk": "^4.5.8",
+    "@tanstack/react-query": "^4.0.10",
+    "@tanstack/react-query-devtools": "^4.0.10",
     "axios": "^0.27.2",
     "clsx": "^1.1.1",
     "electron-debug": "^3.2.0",
