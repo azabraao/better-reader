@@ -59,9 +59,9 @@ const Dropdown = ({
         </button>
         <ul
           className={clsx(
-            'absolute py-2 bg-background shadow-elevation-2 rounded-lg w-full transition-[top,opacity]',
+            'absolute py-2 bg-background shadow-elevation-2 w-full transition-[top,opacity] rounded-lg border-white border-2',
             isOpen
-              ? 'top-full opacity-100'
+              ? 'top-[calc(100%+4px)] opacity-100'
               : 'top-0 opacity-0 pointer-events-none'
           )}
           data-testid="dropdown-list"

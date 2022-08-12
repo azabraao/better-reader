@@ -1,30 +1,13 @@
-import {
-  TwoFixations,
-  ThreeFixations,
-  Centered,
-  EndToEnd,
-  Music,
-  Sondagem,
-  Swiping,
-  Tracking,
-  Writing,
-} from 'renderer/atoms/Icon';
+export const writingDownWords = 'Writing words';
 
-export const writingDownWords = 'Writing down words';
-export const techniques = [
-  {
-    label: 'All',
-  },
-  {
-    label: 'Sweeping',
-    icon: <Swiping />,
-  },
-  { label: writingDownWords, icon: <Writing /> },
-  { label: '3 fixations', icon: <ThreeFixations /> },
-  { label: '2 fixations', icon: <TwoFixations /> },
-  { label: 'Rastreio', icon: <Tracking /> },
-  { label: 'Sondagem', icon: <Sondagem /> },
-  { label: 'Centralizada', icon: <Centered /> },
-  { label: 'Ponta-a-ponta', icon: <EndToEnd /> },
-  { label: 'Cantarolando', icon: <Music /> },
+export const techniques: TechniqueItem[] = [
+  { label: 'Sweeping', value: 'sweeping' },
+  { label: writingDownWords, value: 'writing' },
+  { label: '3 fixations', value: '3_fixations' },
+  { label: '2 fixations', value: '2_fixations' },
+  { label: 'Rastreio', value: 'tracking' },
+  { label: 'Sondagem', value: 'scanning' },
+  { label: 'Centralizada', value: 'centered' },
+  { label: 'Ponta-a-ponta', value: 'end_to_end' },
+  { label: 'Cantarolando', value: 'singing' },
 ];

@@ -25,7 +25,7 @@ const RankingItems = ({ items }: RankingItemsProps) => {
     <>
       {items.map((item, index) => (
         <RankingItem
-          key={index}
+          key={index + Math.random()}
           position={index + 1}
           points={item.points}
           words={item.words}

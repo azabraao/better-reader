@@ -1,9 +1,9 @@
 import { api } from './api';
 
-const getTrainingSessions = async (): Promise<TrainingSession[]> => {
+const getTrainingSession = async (): Promise<TrainingSession[]> => {
   const response = await api.get('/training-sessions');
 
   return response.data;
 };
 
-export default getTrainingSessions;
+export default getTrainingSession;

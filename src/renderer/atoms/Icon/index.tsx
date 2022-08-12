@@ -5,9 +5,10 @@ import Centered from './library/centered.svg';
 import EndToEnd from './library/end-to-end.svg';
 import Music from './library/music.svg';
 import Plus from './library/plus.svg';
-import Sondagem from './library/sondagem.svg';
+import PlusClean from './library/plus-clean.svg';
+import Scanning from './library/scanning.svg';
 import Speed from './library/speed.svg';
-import Swiping from './library/swiping.svg';
+import Sweeping from './library/sweeping.svg';
 import Tracking from './library/tracking.svg';
 import Writing from './library/writing.svg';
 import SquareUnchecked from './library/square.svg';
@@ -15,55 +16,141 @@ import SquareChecked from './library/square-checked.svg';
 import ArrowDown from './library/arrow-down.svg';
 import ArrowRight from './library/arrow-right.svg';
 import ArrowTop from './library/arrow-top.svg';
+import Exercise from './library/exercise.svg';
+import Clock from './library/clock.svg';
+import Close from './library/close.svg';
+import CloseSM from './library/close-sm.svg';
+import Checked from './library/checked.svg';
+import CheckedSM from './library/checked-sm.svg';
 
 interface IconProps {
-  name: string;
+  name: Icon;
   color?: string;
   className?: string;
+  onClick?: () => void;
 }
 
-const Icon = ({ name, color, className }: IconProps) => {
+const Icon = ({ name, color, className, onClick }: IconProps) => {
   switch (name) {
-    case '2-fixations':
-      return <TwoFixations className={className} style={{ color }} />;
-    case '3-fixations':
-      return <ThreeFixations className={className} style={{ color }} />;
+    case '2_fixations':
+      return (
+        <TwoFixations
+          className={className}
+          style={{ color }}
+          onClick={onClick}
+        />
+      );
+    case '3_fixations':
+      return (
+        <ThreeFixations
+          className={className}
+          style={{ color }}
+          onClick={onClick}
+        />
+      );
     case 'centered':
-      return <Centered className={className} style={{ color }} />;
-    case 'end-to-end':
-      return <EndToEnd className={className} style={{ color }} />;
+      return (
+        <Centered className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'end_to_end':
+      return (
+        <EndToEnd className={className} style={{ color }} onClick={onClick} />
+      );
     case 'music':
-      return <Music className={className} style={{ color }} />;
+      return (
+        <Music className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'singing':
+      return (
+        <Music className={className} style={{ color }} onClick={onClick} />
+      );
     case 'plus':
-      return <Plus className={className} style={{ color }} />;
-    case 'sondagem':
-      return <Sondagem className={className} style={{ color }} />;
+      return <Plus className={className} style={{ color }} onClick={onClick} />;
+    case 'scanning':
+      return (
+        <Scanning className={className} style={{ color }} onClick={onClick} />
+      );
     case 'speed':
-      return <Speed className={className} style={{ color }} />;
-    case 'swiping':
-      return <Swiping className={className} style={{ color }} />;
+      return (
+        <Speed className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'sweeping':
+      return (
+        <Sweeping className={className} style={{ color }} onClick={onClick} />
+      );
     case 'tracking':
-      return <Tracking className={className} style={{ color }} />;
+      return (
+        <Tracking className={className} style={{ color }} onClick={onClick} />
+      );
     case 'writing':
-      return <Writing className={className} style={{ color }} />;
+      return (
+        <Writing className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'checked':
+      return (
+        <Checked className={className} style={{ color }} onClick={onClick} />
+      );
     case 'square':
-      return <SquareUnchecked className={className} style={{ color }} />;
-    case 'square-checked':
-      return <SquareChecked className={className} style={{ color }} />;
-    case 'arrow-down':
-      return <ArrowDown className={className} style={{ color }} />;
-    case 'arrow-right':
-      return <ArrowRight className={className} style={{ color }} />;
-    case 'arrow-top':
-      return <ArrowTop className={className} style={{ color }} />;
+      return (
+        <SquareUnchecked
+          className={className}
+          style={{ color }}
+          onClick={onClick}
+        />
+      );
+    case 'square_checked':
+      return (
+        <SquareChecked
+          className={className}
+          style={{ color }}
+          onClick={onClick}
+        />
+      );
+    case 'arrow_down':
+      return (
+        <ArrowDown className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'arrow_right':
+      return (
+        <ArrowRight className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'arrow_top':
+      return (
+        <ArrowTop className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'exercise':
+      return (
+        <Exercise className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'plus_clean':
+      return (
+        <PlusClean className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'clock':
+      return (
+        <Clock className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'close':
+      return (
+        <Close className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'checked-sm':
+      return (
+        <CheckedSM className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'close-sm':
+      return (
+        <CloseSM className={className} style={{ color }} onClick={onClick} />
+      );
     default:
       return null;
   }
 };
 
 Icon.defaultProps = {
-  color: '#fff',
+  color: 'currentColor',
   className: '',
+  onClick: () => {},
 };
 
 export {
@@ -73,9 +160,9 @@ export {
   EndToEnd,
   Music,
   Plus,
-  Sondagem,
+  Scanning,
   Speed,
-  Swiping,
+  Sweeping,
   Tracking,
   Writing,
   SquareUnchecked,
@@ -83,6 +170,13 @@ export {
   ArrowDown,
   ArrowRight,
   ArrowTop,
+  Exercise,
+  PlusClean,
+  Clock,
+  Close,
+  Checked,
+  CheckedSM,
+  CloseSM,
 };
 
 export default memo(Icon);

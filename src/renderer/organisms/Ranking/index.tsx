@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Dropdown, Section } from 'renderer/molecules';
-import { SquareChecked, SquareUnchecked } from 'renderer/atoms/Icon';
+import Icon, { SquareChecked, SquareUnchecked } from 'renderer/atoms/Icon';
 import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';
 import { useRanking } from 'renderer/contexts';
 
@@ -9,6 +9,14 @@ import RankingContentLoader from './components/RankingContentLoader';
 import RankingContainer from './components/RankingContainer';
 import RankingItems from './components/RankingItems';
 import RankingLoading from './components/RankingLoading';
+
+const dropDownItems = [
+  { label: 'All' },
+  ...techniques.map((item) => ({
+    ...item,
+    icon: <Icon name={item.value as Icon} />,
+  })),
+];
 
 const Ranking = () => {
   const [writingDown, setWritingDown] = useState(true);
@@ -54,7 +62,7 @@ const Ranking = () => {
     <Section title="Performance Ranking">
       <div className="my-6 flex gap-4 flex-col">
         <div className="text-white">Technique</div>
-        <Dropdown items={techniques} onSelected={setFilterByTechnique} />
+        <Dropdown items={dropDownItems} onSelected={setFilterByTechnique} />
         <div
           tabIndex={0}
           className="flex items-center cursor-pointer text-white"

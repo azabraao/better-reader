@@ -10,17 +10,22 @@ type PracticeItem = {
 
 type Technique =
   | 'sweeping'
-  | '3 fixations'
-  | '2 fixations'
-  | 'rastreio'
-  | 'sondagem'
-  | 'centralizada'
-  | 'ponta-a-ponta'
-  | 'Cantarolando'
-  | 'writing down words';
+  | '3_fixations'
+  | '2_fixations'
+  | 'tracking'
+  | 'scanning'
+  | 'centered'
+  | 'end_to_end'
+  | 'singing'
+  | 'writing';
+
+type TechniqueItem = {
+  label: string;
+  value: Technique;
+};
 
 type TrainingUnit = {
-  techniques: Technique[];
+  techniques: TechniqueItem[];
   target: number;
   duration: number;
 };
@@ -28,5 +33,10 @@ type TrainingUnit = {
 type TrainingSession = {
   id: string;
   name: string;
+  summary: {
+    target: number;
+    duration: number;
+    techniques: Technique[];
+  };
   units: TrainingUnit[];
 };
