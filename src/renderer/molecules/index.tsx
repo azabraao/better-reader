@@ -9,3 +9,4 @@ export { default as AddTrainingUnit } from './AddTrainingUnit';
 export { default as EditTrainingUnit } from './EditTrainingUnit';
 export { default as TechniqueCheckbox } from './TechniqueCheckbox';
 export { default as TechniquesSelector } from './TechniquesSelector';
+export { default as TrainingSessionCard } from './TrainingSessionCard';

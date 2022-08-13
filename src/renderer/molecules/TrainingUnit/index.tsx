@@ -1,45 +1,27 @@
-import { memo, useCallback, useState } from 'react';
+import clsx from 'clsx';
+import { memo, useCallback } from 'react';
 import Icon from 'renderer/atoms/Icon';
-import EditTrainingUnit from '../EditTrainingUnit';
 
 interface TrainingUnitProps extends TrainingUnit {
-  isEditing?: boolean;
+  isActive?: boolean;
 }
 
 const TrainingUnit = ({
   target,
   duration,
   techniques,
-  isEditing,
+  isActive,
 }: TrainingUnitProps) => {
-  const [shouldEdit, setShouldEdit] = useState<boolean>(false);
-
-  const onClick = useCallback(() => {
-    if (isEditing) setShouldEdit(true);
-  }, [isEditing]);
-
-  const onEdit = useCallback(() => {
-    setShouldEdit(false);
-  }, []);
-
-  if (shouldEdit)
-    return (
-      <EditTrainingUnit
-        onEdit={onEdit}
-        onCancel={() => setShouldEdit(false)}
-        defaultValues={{
-          target,
-          duration,
-          techniques,
-        }}
-      />
-    );
+  const onClick = useCallback(() => {}, []);
 
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 p-2 md:p-4 border-2 border-solid border-white rounded-lg cursor-pointer"
+      className={clsx(
+        'flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 p-2 md:p-4 border-2 border-solid rounded-lg cursor-pointer',
+        isActive ? 'border-white text-white' : 'border-muted text-muted'
+      )}
     >
       <div className="flex gap-2 items-center">
         <Icon name="speed" />
@@ -63,7 +45,7 @@ const TrainingUnit = ({
 };
 
 TrainingUnit.defaultProps = {
-  isEditing: false,
+  isActive: false,
 };
 
 export default memo(TrainingUnit);

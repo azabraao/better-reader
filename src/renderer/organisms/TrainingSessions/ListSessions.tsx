@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import SessionCard from './SessionCard';
+import { TrainingSessionCard } from 'renderer/molecules';
 
 interface ListSessionsProps {
   sessions: TrainingSession[];
@@ -9,7 +9,7 @@ const ListSessions = ({ sessions }: ListSessionsProps) => {
   return (
     <>
       {sessions.map((session) => (
-        <SessionCard key={session.id} session={session} />
+        <TrainingSessionCard key={session.id} session={session} />
       ))}
     </>
   );

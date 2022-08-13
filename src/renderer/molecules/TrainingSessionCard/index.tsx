@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import Icon, { Speed } from 'renderer/atoms/Icon';
 
-interface SessionCardProps {
+interface TrainingSessionCardProps {
   session: TrainingSession;
 }
 
-const SessionCard = ({ session }: SessionCardProps) => {
+const TrainingSessionCard = ({ session }: TrainingSessionCardProps) => {
   return (
     <div className="flex items-center gap-4 border-white border-1 rounded-lg w-full xs:max-w-[calc(50vw-27px)]">
       <div className="flex flex-col gap-2 text-white p-2">
@@ -24,4 +24,4 @@ const SessionCard = ({ session }: SessionCardProps) => {
   );
 };
 
-export default memo(SessionCard);
+export default memo(TrainingSessionCard);
