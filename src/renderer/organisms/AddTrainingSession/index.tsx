@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Checked, Error, Spinner, Title } from 'renderer/atoms';
@@ -6,8 +6,8 @@ import Icon from 'renderer/atoms/Icon';
 import {
   AddTrainingUnit,
   BottomSheet,
+  EditableTrainingUnit,
   TextInput,
-  TrainingUnit,
 } from 'renderer/molecules';
 import { addTrainingSession } from 'renderer/services';
 
@@ -142,7 +142,7 @@ const AddTrainingSession = ({ isOpen, close }: AddTrainingSessionProps) => {
 
           {trainingUnits.map(
             ({ target, duration, techniques }: TrainingUnit) => (
-              <TrainingUnit
+              <EditableTrainingUnit
                 key={target + Math.random()}
                 duration={duration}
                 target={target}
