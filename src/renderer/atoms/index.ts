@@ -10,3 +10,4 @@ export { default as DragIndicator } from './DragIndicator';
 export { default as Error } from './Error';
 export { default as Spinner } from 'renderer/assets/spinner.svg';
 export { default as Checked } from './Checked';
+export { default as Countdown } from './Countdown';
