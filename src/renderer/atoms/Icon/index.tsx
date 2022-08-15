@@ -22,6 +22,7 @@ import Close from './library/close.svg';
 import CloseSM from './library/close-sm.svg';
 import Checked from './library/checked.svg';
 import CheckedSM from './library/checked-sm.svg';
+import Play from './library/play.svg';
 
 interface IconProps {
   name: Icon;
@@ -142,6 +143,8 @@ const Icon = ({ name, color, className, onClick }: IconProps) => {
       return (
         <CloseSM className={className} style={{ color }} onClick={onClick} />
       );
+    case 'play':
+      return <Play className={className} style={{ color }} onClick={onClick} />;
     default:
       return null;
   }
@@ -177,6 +180,7 @@ export {
   Checked,
   CheckedSM,
   CloseSM,
+  Play,
 };
 
 export default memo(Icon);

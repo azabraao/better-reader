@@ -22,4 +22,5 @@ type Icon =
   | 'close'
   | 'checked'
   | 'checked-sm'
-  | 'close-sm';
+  | 'close-sm'
+  | 'play';
