@@ -14,7 +14,7 @@ interface TextInputProps {
   textComplement?: string;
   maxLength?: number;
   defaultValue?: string | number | undefined;
-  size?: 'sm' | 'md';
+  size?: 'xs' | 'sm' | 'md';
   min?: string | number | undefined;
   max?: string | number | undefined;
   onChange?: ChangeHandler | ChangeEventHandler;
@@ -61,7 +61,8 @@ const TextInput = forwardRef(
             className={clsx(
               'placeholder:text-muted border-white bg-transparent border-1 flex-1',
               size === 'sm' && 'p-2 rounded-[0.25rem]',
-              size === 'md' && 'p-4 rounded-lg'
+              size === 'md' && 'p-4 rounded-lg',
+              size === 'xs' && 'px-2 py-[2px] rounded-sm'
             )}
             placeholder={placeholder}
             maxLength={maxLength}
