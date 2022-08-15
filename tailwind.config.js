@@ -18,7 +18,7 @@ module.exports = {
         highlight: '#FF8906',
         muted: '#A7A9BE',
         link: '#4062BB',
-        'danger-transparent': '#FF6B86',
+        'danger-transparent': 'rgba(255, 107, 134, 0.4)',
         'info-100': '#D5FEFC',
         'info-200': '#ABFDFE',
         'info-300': '#81F2FD',

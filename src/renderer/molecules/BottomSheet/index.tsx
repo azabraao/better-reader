@@ -31,6 +31,10 @@ const BottomSheetModal = ({
           wrap: 'text-white border-t-2 border-t-white rounded-none lg:border-white lg:rounded-lg lg:border-1',
         },
       }}
+      onDrag={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+      }}
       styles={{
         backdrop: {
           ...(isOpen && { backgroundColor: 'rgba(15, 14, 23)' }),

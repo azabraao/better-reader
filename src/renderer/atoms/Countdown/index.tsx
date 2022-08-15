@@ -11,9 +11,14 @@ const minutesToSeconds = (minutes: number) => minutes * 60;
 interface CountdownProps {
   minutes: number;
   onFinish: () => void;
+  onStart?: () => void;
 }
 
-const Countdown = ({ minutes, onFinish }: CountdownProps) => {
+const Countdown = ({
+  minutes,
+  onFinish,
+  onStart = () => {},
+}: CountdownProps) => {
   const [secondsRemaining, setSecondsRemaining] = useState(
     minutesToSeconds(minutes)
   );
@@ -23,7 +28,10 @@ const Countdown = ({ minutes, onFinish }: CountdownProps) => {
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
   const minutesToDisplay = minutesRemaining % 60;
 
-  const handleStart = () => setIsStarted(true);
+  const handleStart = () => {
+    onStart();
+    setIsStarted(true);
+  };
 
   useInterval(
     () => {
@@ -56,6 +64,10 @@ const Countdown = ({ minutes, onFinish }: CountdownProps) => {
       </div>
     </div>
   );
+};
+
+Countdown.defaultProps = {
+  onStart: () => {},
 };
 
 export default Countdown;
