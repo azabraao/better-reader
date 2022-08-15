@@ -19,7 +19,7 @@ const TrainingUnit = ({
       type="button"
       onClick={onClick}
       className={clsx(
-        'flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 p-2 md:p-4 border-2 border-solid rounded-lg cursor-pointer',
+        'flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 p-2 md:p-4 border-2 border-solid rounded-lg cursor-pointer w-full',
         isActive ? 'border-white text-white' : 'border-muted text-muted'
       )}
     >
