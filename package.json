@@ -220,7 +220,7 @@
     "history": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-draggable-bottom-sheet": "^1.9.0",
+    "react-draggable-bottom-sheet": "^1.10.0",
     "react-hook-form": "^7.34.0",
     "react-hot-toast": "^2.2.0",
     "react-icons": "^4.3.1",
