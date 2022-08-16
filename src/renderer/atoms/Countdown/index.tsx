@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { useInterval } from 'renderer/hooks';
+import { useTrainingSessionCard } from 'renderer/molecules/TrainingSessionCard/Context';
 import { twoDigits } from 'renderer/utils';
 import Icon from '../Icon';
 
@@ -10,7 +11,6 @@ const minutesToSeconds = (minutes: number) => minutes * 60;
 
 interface CountdownProps {
   minutes: number;
-  started?: boolean;
   onFinish: () => void;
   onStart?: () => void;
 }
@@ -18,22 +18,33 @@ interface CountdownProps {
 const Countdown = ({
   minutes,
   onFinish,
-  started = false,
   onStart = () => {},
 }: CountdownProps) => {
-  const [secondsRemaining, setSecondsRemaining] = useState(
-    minutesToSeconds(minutes)
-  );
-  const [isStarted, setIsStarted] = useState<boolean>(started);
+  const [secondsRemaining, setSecondsRemaining] = useState(3);
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+  const { isOnPreCountdown, setIsOnPreCountdown } = useTrainingSessionCard();
 
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
   const minutesToDisplay = minutesRemaining % 60;
 
   const handleStart = () => {
-    onStart();
-    setIsStarted(true);
+    setIsOnPreCountdown(true);
   };
+
+  useInterval(
+    () => {
+      if (secondsRemaining > 0) {
+        setSecondsRemaining(secondsRemaining - 1);
+      } else {
+        setSecondsRemaining(minutesToSeconds(minutes));
+        setIsStarted(true);
+        onStart();
+        setIsOnPreCountdown(false);
+      }
+    },
+    isOnPreCountdown ? 1000 : null
+  );
 
   useInterval(
     () => {
@@ -59,7 +70,7 @@ const Countdown = ({
     >
       <div className="flex gap-2 items-center">
         <Icon name="play" />
-        {isStarted ? (
+        {isStarted || isOnPreCountdown ? (
           <span>
             {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
           </span>
@@ -73,7 +84,6 @@ const Countdown = ({
 
 Countdown.defaultProps = {
   onStart: () => {},
-  started: false,
 };
 
 export default Countdown;

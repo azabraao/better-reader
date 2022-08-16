@@ -22,6 +22,8 @@ const TrainingUnit = ({
     setIsWaiting,
     setActiveTrainingIndex,
     setTrainingIsFinished,
+    isOnPreCountdown,
+    setIsOnPreCountdown,
   } = useTrainingSessionCard();
   const [isTesting, setIsTesting] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
@@ -29,20 +31,23 @@ const TrainingUnit = ({
   const isActive = trainingStarted && activeTrainingIndex === index;
 
   useEffect(() => {
-    if (isActive) {
+    if (isActive && !isOnPreCountdown) {
       setTimeout(() => {
         setIsTesting(true);
       }, durationInMilliseconds);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, isOnPreCountdown]);
 
   const onLessonFinish = () => {
     setIsFinished(true);
     setIsTesting(false);
     setIsWaiting(false);
+    const shouldStartNextLesson =
+      activeTrainingIndex < session.units.length - 1;
 
-    if (activeTrainingIndex < session.units.length - 1) {
+    if (shouldStartNextLesson) {
+      setIsOnPreCountdown(true);
       setActiveTrainingIndex(activeTrainingIndex + 1);
     } else {
       setTrainingIsFinished(true);
@@ -57,7 +62,10 @@ const TrainingUnit = ({
       )}
     >
       <div className="flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 w-full relative p-2 md:p-4">
-        <TimedGrowing start={isActive} duration={durationInMilliseconds} />
+        <TimedGrowing
+          start={isActive && !isOnPreCountdown}
+          duration={durationInMilliseconds}
+        />
         <div className="flex gap-2 items-center">
           <Icon name="speed" />
           <span className="text-base">{target}ppm</span>

@@ -35,7 +35,6 @@ const SessionControl = () => {
     <Countdown
       minutes={session.units[activeTrainingIndex]?.duration}
       onFinish={() => setIsWaiting(true)}
-      started={activeTrainingIndex > 0}
       onStart={() => !trainingStarted && setTrainingStarted(true)}
     />
   );
