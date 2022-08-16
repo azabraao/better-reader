@@ -10,6 +10,7 @@ const addTrainingSession = async (
 ): Promise<TrainingSessionPayload[]> => {
   const response = await api.post('/training-sessions', {
     ...payload,
+    // should be removed when backend is made
     summary: {
       target: 1000,
       techniques: ['swiping', 'end-to-end'],
