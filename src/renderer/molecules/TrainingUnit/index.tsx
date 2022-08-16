@@ -64,10 +64,7 @@ const TrainingUnit = ({
         <span className="text-base">{duration}min</span>
       </div>
       {techniques.map((technique) => (
-        <div
-          key={technique.value + Math.random()}
-          className="flex gap-2 items-center"
-        >
+        <div key={Math.random()} className="flex gap-2 items-center">
           <Icon name={technique.value} />
           <span className="text-base">{technique.label}</span>
         </div>
