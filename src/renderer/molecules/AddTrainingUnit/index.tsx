@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Title, AddTrainingUnitButton } from 'renderer/atoms';
 import TextInput from '../TextInput';
@@ -38,14 +38,13 @@ const validationSchema = {
   },
 };
 
-const techniques: TechniqueItem[] = [];
-
 interface AddTrainingUnitProps {
   onAdd: (data: TrainingUnit) => void;
 }
 
 const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
   const [isActive, setIsActive] = useState<boolean>();
+  const [techniques, setTechniques] = useState<TechniqueItem[]>([]);
 
   const {
     register,
@@ -56,13 +55,16 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
     formState: { errors },
   } = useForm<TrainingUnit>();
 
-  const onTechniqueSelected = useCallback((technique: TechniqueItem) => {
-    clearErrors('techniques');
-    return techniques.some((item) => technique.value === item.value)
-      ? techniques.splice(techniques.indexOf(technique), 1)
-      : techniques.push(technique);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onTechniqueSelected = useCallback(
+    (technique: TechniqueItem) => {
+      clearErrors('techniques');
+
+      return techniques.some((item) => technique.value === item.value)
+        ? setTechniques(techniques.splice(techniques.indexOf(technique), 1))
+        : setTechniques([...techniques, technique]);
+    },
+    [clearErrors, techniques]
+  );
 
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
@@ -76,9 +78,11 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
 
       onAdd(data);
       reset();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      setTechniques([]);
       return setIsActive(false);
     },
-    [onAdd, reset, setError]
+    [onAdd, reset, setError, techniques]
   );
 
   if (!isActive)
