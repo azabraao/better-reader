@@ -1,9 +1,20 @@
-import React, { createContext, memo, useContext, useState } from 'react';
+import React, {
+  createContext,
+  memo,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { useTrainingUnitBottomSheet } from './BottomSheetContext';
 
 interface TrainingSessionCardContextValues {
   trainingStarted: boolean;
   activeTrainingIndex: number;
   isWaiting: boolean;
+  wordsPerPage: number;
+  trainingIsFinished: boolean;
+  setTrainingIsFinished: (value: boolean) => void;
+  setWordsPerPage: (wordsPerPage: number) => void;
   setTrainingStarted: (trainingStarted: boolean) => void;
   setActiveTrainingIndex: (activeTrainingIndex: number) => void;
   setIsWaiting: (isWaiting: boolean) => void;
@@ -19,6 +30,10 @@ interface ViewUserProps {
   session: TrainingSession;
 }
 
+const initialWordsPerPage = localStorage.getItem('wordsPerPage')
+  ? Number(localStorage.getItem('wordsPerPage'))
+  : 200;
+
 export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
   session,
   children,
@@ -26,6 +41,19 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
   const [trainingStarted, setTrainingStarted] = useState<boolean>(false);
   const [activeTrainingIndex, setActiveTrainingIndex] = useState<number>(0);
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
+  const [wordsPerPage, setWordsPerPage] = useState<number>(initialWordsPerPage);
+  const [trainingIsFinished, setTrainingIsFinished] = useState<boolean>(false);
+
+  const { isOpen } = useTrainingUnitBottomSheet();
+
+  useEffect(() => {
+    if (!isOpen) {
+      setTrainingStarted(false);
+      setActiveTrainingIndex(0);
+      setIsWaiting(false);
+      setTrainingIsFinished(false);
+    }
+  }, [isOpen]);
 
   return (
     <TrainingSessionCardContext.Provider
@@ -34,6 +62,10 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
         trainingStarted,
         activeTrainingIndex,
         isWaiting,
+        wordsPerPage,
+        trainingIsFinished,
+        setTrainingIsFinished,
+        setWordsPerPage,
         setTrainingStarted,
         setActiveTrainingIndex,
         setIsWaiting,

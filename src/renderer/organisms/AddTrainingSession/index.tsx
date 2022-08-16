@@ -40,6 +40,7 @@ const AddTrainingSession = ({ isOpen, close }: AddTrainingSessionProps) => {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm<TrainingSessionFormData>();
 
   const onAddTrainingUnit = useCallback(
@@ -55,12 +56,13 @@ const AddTrainingSession = ({ isOpen, close }: AddTrainingSessionProps) => {
         { name: sessionName, units: trainingUnits },
         {
           onSuccess: () => {
+            reset();
             queryClient.invalidateQueries(['getTrainingSessions']);
           },
         }
       );
     },
-    [mutate, queryClient, trainingUnits]
+    [mutate, queryClient, reset, trainingUnits]
   );
 
   if (isError) {

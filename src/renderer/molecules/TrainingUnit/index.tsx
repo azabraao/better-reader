@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import { memo, useCallback, useEffect, useMemo } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { TimedGrowing } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
 import { useTrainingSessionCard } from '../TrainingSessionCard/Context';
+import Test from './Test';
 
 interface TrainingUnitProps extends TrainingUnit {
   index: number;
@@ -20,55 +21,63 @@ const TrainingUnit = ({
     activeTrainingIndex,
     setIsWaiting,
     setActiveTrainingIndex,
+    setTrainingIsFinished,
   } = useTrainingSessionCard();
-
+  const [isTesting, setIsTesting] = useState<boolean>(false);
+  const [isFinished, setIsFinished] = useState<boolean>(false);
   const durationInMilliseconds = duration * 60 * 1000;
   const isActive = trainingStarted && activeTrainingIndex === index;
 
   useEffect(() => {
     if (isActive) {
       setTimeout(() => {
-        if (activeTrainingIndex < session.units.length - 1) {
-          setActiveTrainingIndex(activeTrainingIndex + 1);
-        }
-        setTimeout(() => {
-          console.log('isWaiting?');
-          setIsWaiting(false);
-        }, 3000);
+        setIsTesting(true);
       }, durationInMilliseconds);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
-  const onClick = useCallback(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onLessonFinish = () => {
+    setIsFinished(true);
+    setIsTesting(false);
+    setIsWaiting(false);
+
+    if (activeTrainingIndex < session.units.length - 1) {
+      setActiveTrainingIndex(activeTrainingIndex + 1);
+    } else {
+      setTrainingIsFinished(true);
+    }
+  };
 
   return (
     <div
-      role="button"
-      onClick={onClick}
-      onKeyPress={onClick}
-      tabIndex={0}
       className={clsx(
-        'flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 p-2 md:p-4 border-2 border-solid rounded-lg cursor-pointer w-full relative overflow-hidden'
+        'border-2 border-solid rounded-lg overflow-hidden',
+        isFinished && 'border-success-300 text-success-300'
       )}
     >
-      <TimedGrowing start={isActive} duration={durationInMilliseconds} />
-      <div className="flex gap-2 items-center">
-        <Icon name="speed" />
-        <span className="text-base">{target}ppm</span>
-      </div>
-      <div className="flex gap-2 items-center">
-        <Icon name="clock" />
-        <span className="text-base">{duration}min</span>
-      </div>
-      {techniques.map((technique) => (
-        <div key={Math.random()} className="flex gap-2 items-center">
-          <Icon name={technique.value} />
-          <span className="text-base">{technique.label}</span>
+      <div className="flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 w-full relative p-2 md:p-4">
+        <TimedGrowing start={isActive} duration={durationInMilliseconds} />
+        <div className="flex gap-2 items-center">
+          <Icon name="speed" />
+          <span className="text-base">{target}ppm</span>
         </div>
-      ))}
+        <div className="flex gap-2 items-center">
+          <Icon name="clock" />
+          <span className="text-base">{duration}min</span>
+        </div>
+        {techniques.map((technique) => (
+          <div key={Math.random()} className="flex gap-2 items-center">
+            <Icon name={technique.value} />
+            <span className="text-base">{technique.label}</span>
+          </div>
+        ))}
+      </div>
+      {isTesting && (
+        <div className="p-2 md:p-4">
+          <Test techniques={techniques} onFinish={onLessonFinish} />
+        </div>
+      )}
     </div>
   );
 };

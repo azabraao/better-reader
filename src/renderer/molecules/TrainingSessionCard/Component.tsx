@@ -1,27 +1,19 @@
-import { memo, useCallback, useState } from 'react';
+import { memo } from 'react';
 import Card from './Card';
 import TrainingBottomSheet from './BottomSheet';
+import { useTrainingUnitBottomSheet } from './BottomSheetContext';
 
 interface TrainingSessionCardProps {
   session: TrainingSession;
 }
 
 const TrainingSessionCard = ({ session }: TrainingSessionCardProps) => {
-  const [openBottomSheet, setOpenBottomSheet] = useState<boolean>(false);
-
-  const onClick = useCallback(() => {
-    setOpenBottomSheet(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { openBottomSheet, closeBottomSheet } = useTrainingUnitBottomSheet();
 
   return (
     <>
-      <Card onClick={onClick} session={session} />
-      <TrainingBottomSheet
-        session={session}
-        isOpen={openBottomSheet}
-        close={() => setOpenBottomSheet(false)}
-      />
+      <Card onClick={openBottomSheet} session={session} />
+      <TrainingBottomSheet session={session} close={closeBottomSheet} />
     </>
   );
 };
