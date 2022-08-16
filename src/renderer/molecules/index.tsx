@@ -11,3 +11,4 @@ export { default as EditTrainingUnit } from './EditTrainingUnit';
 export { default as TechniqueCheckbox } from './TechniqueCheckbox';
 export { default as TechniquesSelector } from './TechniquesSelector';
 export { default as TrainingSessionCard } from './TrainingSessionCard';
+export { default as WordsPerPageInput } from './WordsPerPageInput';
