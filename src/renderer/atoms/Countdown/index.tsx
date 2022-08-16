@@ -10,6 +10,7 @@ const minutesToSeconds = (minutes: number) => minutes * 60;
 
 interface CountdownProps {
   minutes: number;
+  started?: boolean;
   onFinish: () => void;
   onStart?: () => void;
 }
@@ -17,12 +18,13 @@ interface CountdownProps {
 const Countdown = ({
   minutes,
   onFinish,
+  started = false,
   onStart = () => {},
 }: CountdownProps) => {
   const [secondsRemaining, setSecondsRemaining] = useState(
     minutesToSeconds(minutes)
   );
-  const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [isStarted, setIsStarted] = useState<boolean>(started);
 
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
@@ -50,7 +52,10 @@ const Countdown = ({
       onKeyDown={handleStart}
       tabIndex={0}
       role="button"
-      className={clsx('flex justify-center py-6')}
+      className={clsx(
+        'flex justify-center py-6',
+        isStarted && ' pointer-events-none cursor-not-allowed'
+      )}
     >
       <div className="flex gap-2 items-center">
         <Icon name="play" />
@@ -68,6 +73,7 @@ const Countdown = ({
 
 Countdown.defaultProps = {
   onStart: () => {},
+  started: false,
 };
 
 export default Countdown;
