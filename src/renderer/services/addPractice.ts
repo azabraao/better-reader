@@ -10,7 +10,11 @@ type PracticePayload = {
 const addPractice = async (
   payload: PracticePayload
 ): Promise<PracticePayload[]> => {
-  const response = await api.post('/practice', payload);
+  const response = await api.post('/practices', {
+    ...payload,
+    // temporary fix for backend not handling date yet
+    date: '01/01/2020',
+  });
 
   return response.data;
 };
