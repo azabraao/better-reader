@@ -34,11 +34,11 @@ const TextArea = forwardRef(
   ) => {
     return (
       <div className="flex flex-col gap-1 text-base">
-        {label && <label htmlFor="input">{label}</label>}
+        {label && <label htmlFor={name}>{label}</label>}
 
         <TextareaAutosize
           name={name}
-          id="input"
+          id={name}
           ref={ref}
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
@@ -46,8 +46,8 @@ const TextArea = forwardRef(
           onChange={onChange}
           onBlur={onBlur}
           className={clsx(
-            'placeholder:text-muted border-white bg-transparent border-1 flex-1',
-            size === 'sm' && 'p-2 rounded-[0.25rem] max-w-fit',
+            'placeholder:text-muted border-white bg-transparent border-1 flex-1 w-full',
+            size === 'sm' && 'p-2 rounded-[0.25rem]',
             size === 'md' && 'p-4 rounded-lg',
             size === 'xs' && 'px-2 py-[2px] rounded-sm'
           )}
