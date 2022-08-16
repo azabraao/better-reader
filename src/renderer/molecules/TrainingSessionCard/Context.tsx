@@ -41,7 +41,7 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
   children,
 }) => {
   const [trainingStarted, setTrainingStarted] = useState<boolean>(false);
-  const [activeTrainingIndex, setActiveTrainingIndex] = useState<number>(0);
+  const [activeTrainingIndex, setActiveTrainingIndex] = useState<number>(-1);
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
   const [wordsPerPage, setWordsPerPage] = useState<number>(initialWordsPerPage);
   const [trainingIsFinished, setTrainingIsFinished] = useState<boolean>(false);

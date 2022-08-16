@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { TimedGrowing } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
+import { useAudioFeedback } from 'renderer/hooks';
 import { useTrainingSessionCard } from '../TrainingSessionCard/Context';
 import Test from './Test';
 
@@ -29,13 +30,20 @@ const TrainingUnit = ({
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const durationInMilliseconds = duration * 60 * 1000;
   const isActive = trainingStarted && activeTrainingIndex === index;
+  const { lessonBell } = useAudioFeedback();
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
     if (isActive && !isOnPreCountdown) {
-      setTimeout(() => {
+      timeout = setTimeout(() => {
+        lessonBell.play();
         setIsTesting(true);
       }, durationInMilliseconds);
     }
+
+    return () => {
+      clearTimeout(timeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, isOnPreCountdown]);
 
@@ -50,6 +58,7 @@ const TrainingUnit = ({
       setIsOnPreCountdown(true);
       setActiveTrainingIndex(activeTrainingIndex + 1);
     } else {
+      setActiveTrainingIndex(-1);
       setTrainingIsFinished(true);
     }
   };

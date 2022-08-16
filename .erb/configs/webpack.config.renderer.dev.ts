@@ -87,6 +87,11 @@ const configuration: webpack.Configuration = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+      // Song
+      {
+        test: /\.(mp3|wav)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [

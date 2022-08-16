@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
 
 import clsx from 'clsx';
-import { useState } from 'react';
-import { useInterval } from 'renderer/hooks';
+import { useEffect, useState } from 'react';
+import { useAudioFeedback, useInterval } from 'renderer/hooks';
 import { useTrainingSessionCard } from 'renderer/molecules/TrainingSessionCard/Context';
 import { twoDigits } from 'renderer/utils';
 import Icon from '../Icon';
@@ -23,10 +23,26 @@ const Countdown = ({
   const [secondsRemaining, setSecondsRemaining] = useState(3);
   const [isStarted, setIsStarted] = useState<boolean>(false);
   const { isOnPreCountdown, setIsOnPreCountdown } = useTrainingSessionCard();
-
+  const { countdownTick, lessonBell } = useAudioFeedback();
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
   const minutesToDisplay = minutesRemaining % 60;
+
+  useEffect(() => {
+    if (isOnPreCountdown) {
+      countdownTick.play();
+      setTimeout(() => {
+        countdownTick.play();
+        setTimeout(() => {
+          countdownTick.play();
+          setTimeout(() => {
+            lessonBell.play();
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOnPreCountdown]);
 
   const handleStart = () => {
     setIsOnPreCountdown(true);

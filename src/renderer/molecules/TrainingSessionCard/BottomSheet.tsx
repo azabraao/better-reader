@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Title } from 'renderer/atoms';
+import Icon from 'renderer/atoms/Icon';
 import BottomSheet from '../BottomSheet';
 import TrainingUnit from '../TrainingUnit';
 import WordsPerPageInput from '../WordsPerPageInput';
@@ -11,17 +12,17 @@ interface TrainingBottomSheetProps {
   close: () => void;
 }
 
-const TrainingBottomSheet = ({
-  session,
-
-  close,
-}: TrainingBottomSheetProps) => {
+const TrainingBottomSheet = ({ session, close }: TrainingBottomSheetProps) => {
   const { isOpen } = useTrainingUnitBottomSheet();
   return (
     <BottomSheet isOpen={isOpen} close={close}>
       <div className="px-4 max-w-screen-lg  w-full mx-auto lg:px-6">
-        <div className="mb-5">
+        <div className="pt-2 pb-4 flex justify-between lg:pt-6">
           <Title>{session.name}</Title>
+
+          <div className="hidden lg:block">
+            <Icon name="close" className="cursor-pointer" onClick={close} />
+          </div>
         </div>
         <WordsPerPageInput />
         <div className="flex flex-col gap-2">
