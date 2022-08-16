@@ -65,7 +65,7 @@ const Countdown = ({
       role="button"
       className={clsx(
         'flex justify-center py-6',
-        isStarted && ' pointer-events-none cursor-not-allowed'
+        isStarted && 'pointer-events-none cursor-not-allowed'
       )}
     >
       <div className="flex gap-2 items-center">
