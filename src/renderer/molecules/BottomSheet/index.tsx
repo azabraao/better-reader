@@ -58,6 +58,14 @@ const BottomSheetModal = ({
         },
       }}
       modalOnDesktop
+      onMouseDown={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      }}
+      onStart={(event) => {
+        event.stopPropagation();
+        event.preventDefault();
+      }}
     >
       {!hideDragIndicator && <DragIndicator />}
       {children}
