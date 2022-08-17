@@ -1,20 +1,11 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { Plus } from 'renderer/atoms/Icon';
-import AddTrainingSession from '../AddTrainingSession';
+import { useAddTrainingSession } from 'renderer/hooks';
 
 const SectionActionsIcons = () => {
-  const [isAddingTrainingSession, setIsAddingTrainingSession] =
-    useState<boolean>(false);
+  const { openAddTrainingSession } = useAddTrainingSession();
 
-  return (
-    <>
-      <AddTrainingSession
-        isOpen={isAddingTrainingSession}
-        close={() => setIsAddingTrainingSession(false)}
-      />
-      <Plus onClick={() => setIsAddingTrainingSession(true)} />
-    </>
-  );
+  return <Plus onClick={openAddTrainingSession} />;
 };
 
 export default memo(SectionActionsIcons);

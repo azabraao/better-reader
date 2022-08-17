@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Checked, Error, Spinner, Title } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
+import { useAppInitialization } from 'renderer/contexts';
 import {
   AddTrainingUnit,
   BottomSheet,
@@ -21,13 +22,19 @@ type TrainingSessionFormData = {
   sessionName: string;
 };
 
-interface AddTrainingSessionProps {
-  isOpen: boolean;
-  close: () => void;
-}
+const channel = new BroadcastChannel('training-session');
 
-const AddTrainingSession = ({ isOpen, close }: AddTrainingSessionProps) => {
+const AddTrainingSession = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [trainingUnits, setTrainingUnits] = useState<TrainingUnit[]>([]);
+  const { registerAppInitialization } = useAppInitialization();
+  const close = useCallback(() => setIsOpen(false), []);
+
+  useEffect(() => {
+    channel.onmessage = (event: { data: { shouldOpen: boolean } }) => {
+      setIsOpen(event.data.shouldOpen);
+    };
+  }, []);
 
   const { isError, isLoading, isSuccess, mutate } = useMutation(
     ['addTrainingSession'],
@@ -58,11 +65,12 @@ const AddTrainingSession = ({ isOpen, close }: AddTrainingSessionProps) => {
           onSuccess: () => {
             reset();
             queryClient.invalidateQueries(['getTrainingSessions']);
+            registerAppInitialization();
           },
         }
       );
     },
-    [mutate, queryClient, reset, trainingUnits]
+    [mutate, queryClient, registerAppInitialization, reset, trainingUnits]
   );
 
   if (isError) {
