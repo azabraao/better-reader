@@ -4,6 +4,7 @@ import { Dropdown, Section } from 'renderer/molecules';
 import Icon, { SquareChecked, SquareUnchecked } from 'renderer/atoms/Icon';
 import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';
 import { useRanking } from 'renderer/contexts';
+import { NoRankingData } from 'renderer/atoms/Illustration';
 
 import RankingContentLoader from './components/RankingContentLoader';
 import RankingContainer from './components/RankingContainer';
@@ -17,6 +18,10 @@ const dropDownItems = [
     icon: <Icon name={item.value as Icon} />,
   })),
 ];
+
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+  <Section title="Performance Ranking">{children}</Section>
+);
 
 const Ranking = () => {
   const [writingDown, setWritingDown] = useState(true);
@@ -58,8 +63,23 @@ const Ranking = () => {
     return ranking;
   }, [rankingData, filterByTechnique, writingDown, showOnlyPodium]);
 
+  if (rankingIsEmpty) {
+    return (
+      <Wrapper>
+        <div className="w-full flex flex-col items-center justify-center py-12 px-14 gap-6 lg:items-start lg:pl-6">
+          <div className="max-w-min flex flex-col items-center justify-center gap-6">
+            <NoRankingData />
+            <span className="text-base text-white text-center w-full block">
+              No trainings to rank yet.
+            </span>
+          </div>
+        </div>
+      </Wrapper>
+    );
+  }
+
   return (
-    <Section title="Performance Ranking">
+    <Wrapper>
       <div className="my-6 flex gap-4 flex-col">
         <div className="text-white">Technique</div>
         <Dropdown items={dropDownItems} onSelected={setFilterByTechnique} />
@@ -85,7 +105,7 @@ const Ranking = () => {
       {!isLoadingRanking && filteredRanking.length !== 0 && hasMoreToShow && (
         <RankingContentLoader />
       )}
-    </Section>
+    </Wrapper>
   );
 };
 

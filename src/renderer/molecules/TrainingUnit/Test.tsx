@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { memo, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from 'renderer/atoms';
@@ -60,6 +60,7 @@ const Test = ({ techniques, onFinish }: TestProps) => {
 
   const { wordsPerPage } = useTrainingSessionCard();
 
+  const queryClient = useQueryClient();
   const { isError, isLoading, isSuccess, mutate } = useMutation(
     ['addPractice'],
     addPractice
@@ -83,12 +84,19 @@ const Test = ({ techniques, onFinish }: TestProps) => {
 
     const ppm = wordsPerPage * Number(data.pagesAmount);
 
-    mutate({
-      ppm,
-      words,
-      comprehension: Number(data.comprehension),
-      techniques: techniques.map((technique) => technique.value),
-    });
+    mutate(
+      {
+        ppm,
+        words,
+        comprehension: Number(data.comprehension),
+        techniques: techniques.map((technique) => technique.value),
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries(['getRanking']);
+        },
+      }
+    );
   };
 
   return (

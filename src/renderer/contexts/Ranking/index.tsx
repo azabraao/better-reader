@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import React, {
   createContext,
   memo,
@@ -8,7 +9,7 @@ import React, {
   useState,
 } from 'react';
 import toast from 'react-hot-toast';
-import { api } from 'renderer/services';
+import { api, getRanking } from 'renderer/services';
 
 interface RankingContextValues {
   isLoadingRanking: boolean;
@@ -28,30 +29,23 @@ interface ViewUserProps {
 }
 
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
-  const [isLoadingRanking, setIsLoadingRanking] = useState<boolean>(false);
-  const [rankingData, setRankingData] = useState<PracticeItem[]>([]);
   const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
   const [reachedRankingEnd, setReachedRankingEnd] = useState<boolean>(false);
+  const start = page * 10;
+  // TODO: implement this again:
+  //     setReachedRankingEnd(
+  //       parseInt(headers['x-total-count'], 10) <= rankingData.length + 10
+  //     );
 
-  const fetchRankingData = useCallback(async () => {
-    try {
-      setIsLoadingRanking(true);
-
-      const start = page * 10;
-      const { data, headers } = await api.get(
-        `/ranking?_sort=points&_order=desc&_limit=10&page=${page}&_start=${start}`
-      );
-      setRankingData([...rankingData, ...data]);
-      setReachedRankingEnd(
-        parseInt(headers['x-total-count'], 10) <= rankingData.length + 10
-      );
-    } catch (err) {
-      toast.error("Couldn't load ranking");
-    } finally {
-      setIsLoadingRanking(false);
+  const { isLoading: isLoadingRanking, data: rankingData } = useQuery(
+    ['getRanking', page],
+    () => getRanking({ page, start }),
+    {
+      keepPreviousData: true,
+      initialData: [] as PracticeItem[],
     }
-  }, [page, rankingData]);
+  );
 
   const loadMoreRankingData = useCallback(() => {
     setPage(page + 1);
@@ -61,7 +55,7 @@ export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const minimizePodium = useCallback(() => setShowOnlyPodium(true), []);
 
   useEffect(() => {
-    fetchRankingData();
+    // fetchRankingData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
