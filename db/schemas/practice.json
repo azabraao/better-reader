@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "ppm": {
+      "type": "number"
+    },
+    "comprehension": {
+      "type": "number"
+    },
+    "techniques": {
+      "type": "array",
+      "uniqueItems": true
+    },
+    "date": {
+      "type": "string"
+    }
+  }
+}
