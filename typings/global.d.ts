@@ -1,3 +1,10 @@
+type PracticeType = {
+  words: number;
+  ppm: number;
+  comprehension: number;
+  techniques: Technique[];
+};
+
 type PracticeItem = {
   points: number;
   words: number;
@@ -31,12 +38,17 @@ type TrainingUnit = {
 };
 
 type TrainingSession = {
-  id: string;
+  _id: string;
   name: string;
   summary: {
     target: number;
     duration: number;
     techniques: Technique[];
   };
+  units: TrainingUnit[];
+};
+
+type TrainingSessionPayload = {
+  name: string;
   units: TrainingUnit[];
 };

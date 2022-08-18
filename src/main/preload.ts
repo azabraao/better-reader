@@ -1,5 +1,7 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
+const trainingSession = require('../../db/stores/trainingSession');
+
 export type Channels = 'ipc-example';
 export type WindowAction = 'window-action';
 
@@ -17,6 +19,24 @@ contextBridge.exposeInMainWorld('electron', {
     },
     once(channel: Channels | WindowAction, func: (...args: unknown[]) => void) {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
+    },
+  },
+  api: {
+    trainingSession: {
+      create(payload: TrainingSessionPayload) {
+        ipcRenderer.send('create-training-session', payload);
+      },
+      readAll() {
+        ipcRenderer.send('read-all-training-session');
+      },
+    },
+    practices: {
+      create(payload: PracticeType) {
+        ipcRenderer.send('add-practice', payload);
+      },
+      readAll(payload: PracticeType) {
+        ipcRenderer.send('get-practices', payload);
+      },
     },
   },
 });

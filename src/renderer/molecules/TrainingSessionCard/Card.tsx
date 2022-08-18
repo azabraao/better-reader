@@ -19,7 +19,7 @@ const Card = ({ session, onClick }: CardProps) => {
         <span className="font-medium whitespace-nowrap">{session.name}</span>
         <div className="flex gap-2 items-center">
           {session.summary.techniques.map((technique) => (
-            <Icon key={session.id + Math.random()} name={technique} />
+            <Icon key={session._id + Math.random()} name={technique} />
           ))}
           <div className="ml-1 flex gap-2 items-center">
             <Icon name="speed" />

@@ -9,7 +9,7 @@ const ListSessions = ({ sessions }: ListSessionsProps) => {
   return (
     <>
       {sessions.map((session) => (
-        <TrainingSessionCard key={session.id} session={session} />
+        <TrainingSessionCard key={session._id} session={session} />
       ))}
     </>
   );

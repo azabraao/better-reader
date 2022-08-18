@@ -10,18 +10,11 @@
  */
 import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import { autoUpdater } from 'electron-updater';
-import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
-export default class AppUpdater {
-  constructor() {
-    log.transports.file.level = 'info';
-    autoUpdater.logger = log;
-    autoUpdater.checkForUpdatesAndNotify();
-  }
-}
+const practice = require('../../db/stores/practice');
+const trainingSession = require('../../db/stores/trainingSession');
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -47,6 +40,42 @@ ipcMain.on('window-action', async (_event, action: string) => {
       break;
     default:
       break;
+  }
+});
+
+ipcMain.on('add-practice', async (_event, arg: PracticeType) => {
+  practice.create(arg);
+});
+
+ipcMain.on('get-practices', async (_event, arg: PracticeType) => {
+  try {
+    const all = await practice.readAll();
+    _event.reply('get-practices', all);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return practice.readAll();
+});
+
+ipcMain.on(
+  'create-training-session',
+  async (_event, payload: TrainingSessionPayload) => {
+    try {
+      const all = await trainingSession.create(payload);
+      _event.reply('create-training-session', all);
+    } catch (error) {
+      _event.reply('create-training-session', error);
+    }
+  }
+);
+
+ipcMain.on('read-all-training-session', async (_event) => {
+  try {
+    const all = await trainingSession.readAll();
+    _event.reply('read-all-training-session', all);
+  } catch (error) {
+    _event.reply('read-all-training-session', error);
   }
 });
 
@@ -97,7 +126,6 @@ const createWindow = async () => {
     frame: false,
     icon: getAssetPath('icon.png'),
     webPreferences: {
-      nodeIntegration: true,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
@@ -129,10 +157,6 @@ const createWindow = async () => {
     shell.openExternal(edata.url);
     return { action: 'deny' };
   });
-
-  // Remove this if your app does not use auto updates
-  // eslint-disable-next-line
-  new AppUpdater();
 };
 
 /**

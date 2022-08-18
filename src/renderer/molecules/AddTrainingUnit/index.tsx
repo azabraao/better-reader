@@ -76,6 +76,9 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
         });
       }
 
+      data.target = Number(data.target);
+      data.duration = Number(data.duration);
+
       onAdd(data);
       reset();
       // eslint-disable-next-line react-hooks/exhaustive-deps

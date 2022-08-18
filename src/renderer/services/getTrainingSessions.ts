@@ -1,9 +1,11 @@
-import { api } from './api';
+const getTrainingSessions = async (): Promise<TrainingSession[]> => {
+  return new Promise((resolve, reject) => {
+    window.electron.api.trainingSession.readAll();
 
-const getTrainingSession = async (): Promise<TrainingSession[]> => {
-  const response = await api.get('/training-sessions');
-
-  return response.data;
+    window.electron.ipcRenderer.once('read-all-training-session', (arg) => {
+      resolve(arg);
+    });
+  });
 };
 
-export default getTrainingSession;
+export default getTrainingSessions;
