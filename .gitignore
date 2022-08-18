@@ -30,3 +30,9 @@ npm-debug.log.*
 
 # React Component Preview
 previewConfig.json
+
+
+# local db
+betterReader.db
+practices.db
+trainingSessions.db
