@@ -46,24 +46,14 @@ const configuration: webpack.Configuration = {
   module: {
     rules: [
       {
-        test: /\.s?(a|c)ss$/,
+        test: /\.css$/i,
         use: [
-          MiniCssExtractPlugin.loader,
+          'style-loader',
+          'css-loader',
           {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1,
-            },
+            loader: 'postcss-loader',
           },
         ],
-        include: /\.module\.s?(c|a)ss$/,
-      },
-      {
-        test: /\.s?(a|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        exclude: /\.module\.s?(c|a)ss$/,
       },
       // Fonts
       {
@@ -72,7 +62,7 @@ const configuration: webpack.Configuration = {
       },
       // Images
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
       {
