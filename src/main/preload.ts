@@ -37,6 +37,9 @@ contextBridge.exposeInMainWorld('electron', {
       readAll(payload: PracticeType) {
         ipcRenderer.send('get-practices', payload);
       },
+      rank(payload: RankingPayload) {
+        ipcRenderer.send('get-rank', payload);
+      },
     },
   },
 });

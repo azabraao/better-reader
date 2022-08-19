@@ -1,19 +1,11 @@
-import { api } from './api';
+const getRanking = async (payload: RankingPayload): Promise<RankData> => {
+  return new Promise((resolve) => {
+    window.electron.api.practices.rank(payload);
 
-interface GetRankingProps {
-  page: number;
-  start: number;
-}
-
-const getRanking = async ({
-  page,
-  start,
-}: GetRankingProps): Promise<PracticeItem[]> => {
-  const response = await api.get(
-    `/ranking?_sort=points&_order=desc&_limit=10&page=${page}&_start=${start}`
-  );
-
-  return response.data;
+    window.electron.ipcRenderer.once('get-rank', (arg) => {
+      resolve(arg);
+    });
+  });
 };
 
 export default getRanking;

@@ -44,7 +44,23 @@ ipcMain.on('window-action', async (_event, action: string) => {
 });
 
 ipcMain.on('add-practice', async (_event, arg: PracticeType) => {
-  practice.create(arg);
+  try {
+    const result = await practice.create(arg);
+    _event.reply('add-practice', result);
+  } catch (error) {
+    _event.reply('add-practice', error);
+  }
+});
+
+ipcMain.on('get-rank', async (_event, payload: RankingPayload) => {
+  try {
+    const all = await practice.rank(payload);
+    _event.reply('get-rank', all);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return practice.readAll();
 });
 
 ipcMain.on('get-practices', async (_event, arg: PracticeType) => {

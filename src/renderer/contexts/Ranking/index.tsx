@@ -31,33 +31,30 @@ interface ViewUserProps {
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
-  const [reachedRankingEnd, setReachedRankingEnd] = useState<boolean>(false);
-  const start = page * 10;
-  // TODO: implement this again:
-  //     setReachedRankingEnd(
-  //       parseInt(headers['x-total-count'], 10) <= rankingData.length + 10
-  //     );
+  const [rankingData, setRankingData] = useState<PracticeItem[]>([]);
 
-  const { isLoading: isLoadingRanking, data: rankingData } = useQuery(
+  const { isLoading: isLoadingRanking, data } = useQuery(
     ['getRanking', page],
-    () => getRanking({ page, start }),
-    {
-      keepPreviousData: true,
-      initialData: [] as PracticeItem[],
-    }
+    () => getRanking({ page, limit: 10 })
   );
 
+  useEffect(() => {
+    if (data?.rank) {
+      setRankingData([...rankingData, ...data.rank]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  const reachedRankingEnd = useMemo(() => {
+    return data?.count === rankingData.length;
+  }, [rankingData.length, data]);
+
   const loadMoreRankingData = useCallback(() => {
-    setPage(page + 1);
-  }, [page]);
+    if (!reachedRankingEnd) setPage(page + 1);
+  }, [page, reachedRankingEnd]);
 
   const expandPodium = useCallback(() => setShowOnlyPodium(false), []);
   const minimizePodium = useCallback(() => setShowOnlyPodium(true), []);
-
-  useEffect(() => {
-    // fetchRankingData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
 
   const rankingIsEmpty = useMemo(() => {
     return rankingData.length === 0;

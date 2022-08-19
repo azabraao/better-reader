@@ -15,6 +15,13 @@ type PracticeItem = {
   techniques: string[];
 };
 
+type PracticePayload = {
+  words: number;
+  ppm: number;
+  comprehension: number;
+  techniques: Technique[];
+};
+
 type Technique =
   | 'sweeping'
   | '3_fixations'
@@ -51,4 +58,14 @@ type TrainingSession = {
 type TrainingSessionPayload = {
   name: string;
   units: TrainingUnit[];
+};
+
+type RankingPayload = {
+  page: number;
+  limit: number;
+};
+
+type RankData = {
+  rank: PracticeItem[];
+  count: number;
 };

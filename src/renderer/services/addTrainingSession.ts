@@ -6,7 +6,7 @@ type TrainingSessionPayload = {
 const addTrainingSession = async (
   payload: TrainingSessionPayload
 ): Promise<TrainingSession> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     window.electron.api.trainingSession.create(payload);
 
     window.electron.ipcRenderer.once('create-training-session', (arg) => {

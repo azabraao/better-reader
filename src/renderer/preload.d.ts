@@ -13,7 +13,21 @@ declare global {
           channel: string,
           func: (...args: unknown[]) => void
         ): (() => void) | undefined;
-        once(channel: string, func: (...args: unknown[]) => void): void;
+        once(
+          channel: string,
+          func: (...args: unknown[] | PracticeItem) => void
+        ): void;
+      };
+      api: {
+        practices: {
+          create(payload: PracticePayload): void;
+          readAll(): void;
+          rank(payload: RankingPayload): void;
+        };
+        trainingSession: {
+          readAll(): void;
+          create(payload: TrainingSessionPayload): void;
+        };
       };
     };
   }

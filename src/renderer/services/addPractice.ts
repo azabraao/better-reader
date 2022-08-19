@@ -1,22 +1,11 @@
-import { api } from './api';
+const addPractice = async (payload: PracticePayload): Promise<PracticeItem> => {
+  return new Promise((resolve) => {
+    window.electron.api.practices.create(payload);
 
-type PracticePayload = {
-  words: number;
-  ppm: number;
-  comprehension: number;
-  techniques: Technique[];
-};
-
-const addPractice = async (
-  payload: PracticePayload
-): Promise<PracticePayload[]> => {
-  const response = await api.post('/practices', {
-    ...payload,
-    // temporary fix for backend not handling date yet
-    date: '01/01/2020',
+    window.electron.ipcRenderer.once('add-practice', (arg) => {
+      resolve(arg);
+    });
   });
-
-  return response.data;
 };
 
 export default addPractice;

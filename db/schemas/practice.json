@@ -1,6 +1,9 @@
 {
   "type": "object",
   "properties": {
+    "words": {
+      "type": "number"
+    },
     "ppm": {
       "type": "number"
     },
@@ -10,9 +13,6 @@
     "techniques": {
       "type": "array",
       "uniqueItems": true
-    },
-    "date": {
-      "type": "string"
     }
   }
 }
