@@ -8,11 +8,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import { usePractices } from 'renderer/contexts';
 import { ifSpaceBar, monthNameByDate } from 'renderer/utils';
 
-const Chart = () => {
-  const { practicesData } = usePractices();
+interface ChartProps {
+  data: PracticeItem[];
+}
+
+const Chart = ({ data }: ChartProps) => {
   const [showPoints, setShowPoints] = useState(true);
   const [showComprehension, setShowComprehension] = useState(true);
   const [showWPM, setShowWPM] = useState(true);
@@ -28,18 +30,18 @@ const Chart = () => {
   const toggleShowWPM = useCallback(() => setShowWPM(!showWPM), [showWPM]);
 
   const practices = useMemo(() => {
-    const withMonth = practicesData.map((day: PracticeItem) => {
-      day.month = monthNameByDate(day.date);
+    const withMonth = data.map((day: PracticeItem) => {
+      day.month = monthNameByDate(day.createdAt);
 
       return day;
     });
 
     const ordered = withMonth.sort((a: PracticeItem, b: PracticeItem) => {
-      const aMonth = Number(a.date.split('/')[0]);
-      const aYear = Number(a.date.split('/')[2]);
+      const aMonth = new Date(a.createdAt).getMonth() + 1;
+      const aYear = new Date(a.createdAt).getFullYear();
       const start = new Date(aYear, aMonth - 1, 1);
-      const bMonth = Number(b.date.split('/')[0]);
-      const bYear = Number(b.date.split('/')[2]);
+      const bMonth = new Date(b.createdAt).getMonth() + 1;
+      const bYear = new Date(b.createdAt).getFullYear();
       const end = new Date(bYear, bMonth - 1, 1);
 
       return new Date(start).getTime() - new Date(end).getTime();
@@ -47,10 +49,10 @@ const Chart = () => {
 
     return ordered.map(
       (day: PracticeItem, index: number, array: PracticeItem[]) => {
-        const monthChanged =
-          day.date.split('/')[0] !==
-            array[index === 0 ? 0 : index - 1].date?.split('/')[0] ||
-          index === 0;
+        const currentMonth = new Date(day.createdAt).getMonth();
+        const prevMonth = new Date(array[index - 1]?.createdAt).getMonth();
+
+        const monthChanged = currentMonth !== prevMonth || index === 0;
 
         if (!monthChanged) {
           day.month = null;
@@ -59,7 +61,7 @@ const Chart = () => {
         return day;
       }
     );
-  }, [practicesData]);
+  }, [data]);
 
   return (
     <div className="mt-7 max-w-full">

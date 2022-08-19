@@ -1,7 +1,8 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { Section } from 'renderer/molecules';
-import { useRanking } from 'renderer/contexts';
 import { NoEvolutionData } from 'renderer/atoms/Illustration';
+import { useQuery } from '@tanstack/react-query';
+import { getPractices } from 'renderer/services';
 import Chart from './Chart';
 import LoadingState from './LoadingState';
 
@@ -10,9 +11,15 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Evolution = () => {
-  const { isLoadingRanking, rankingIsEmpty } = useRanking();
+  const { isLoading, data } = useQuery(['getPractices'], getPractices, {
+    initialData: [],
+  });
 
-  if (rankingIsEmpty) {
+  const noPractices = useMemo(() => {
+    return data.length === 0;
+  }, [data]);
+
+  if (noPractices && !isLoading) {
     return (
       <Wrapper>
         <div className="w-full flex flex-col items-center justify-center py-12 px-14 gap-6 lg:items-start lg:pl-6">
@@ -27,7 +34,9 @@ const Evolution = () => {
     );
   }
 
-  return <Wrapper>{isLoadingRanking ? <LoadingState /> : <Chart />}</Wrapper>;
+  return (
+    <Wrapper>{isLoading ? <LoadingState /> : <Chart data={data} />}</Wrapper>
+  );
 };
 
 export default memo(Evolution);
