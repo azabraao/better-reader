@@ -15,11 +15,15 @@ class PracticeStore {
 
     this.schemaValidator = ajv.compile(practiceSchema);
 
-    const dbPath = `${process.cwd()}/practices.db`;
+    const path =
+      process.env.NODE_ENV === 'dev'
+        ? `${process.cwd()}/practices.db`
+        : `${process.resourcesPath}/data/practices.db`;
 
     this.db = Datastore.create({
-      filename: dbPath,
+      filename: path,
       timestampData: true,
+      autoload: true,
     });
   }
 

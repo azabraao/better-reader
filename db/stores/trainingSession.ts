@@ -14,10 +14,16 @@ class TrainingSessionStore {
     });
 
     this.schemaValidator = ajv.compile(trainingSessionSchema);
-    const dbPath = `${process.cwd()}/trainingSessions.db`;
+
+    const path =
+      process.env.NODE_ENV === 'dev'
+        ? `${process.cwd()}/trainingSessions.db`
+        : `${process.resourcesPath}/data/trainingSessions.db`;
+
     this.db = Datastore.create({
-      filename: dbPath,
+      filename: path,
       timestampData: true,
+      autoload: true,
     });
   }
 
