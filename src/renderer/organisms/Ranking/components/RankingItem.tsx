@@ -3,10 +3,10 @@ import clsx from 'clsx';
 
 interface RankingItemProps {
   position: number;
-  points: number;
+  date: Date;
   words?: number;
+  points: number;
   ppm: number;
-  date: string;
   comprehension: number;
 }
 
@@ -19,6 +19,7 @@ const RankingItem = ({
   comprehension,
 }: RankingItemProps) => {
   const isOnPodium = position <= 3;
+
   return (
     <div className="flex gap-x-6 gap-y-2 rounded-lg border-muted border-1 mb-2 items-stretch p-2 flex-wrap">
       <div className="flex items-center">

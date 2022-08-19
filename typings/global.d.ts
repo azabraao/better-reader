@@ -7,9 +7,10 @@ type PracticeType = {
 
 type PracticeItem = {
   points: number;
-  words: number;
+  words?: number;
   ppm: number;
-  date: string;
+  createdAt: Date;
+  updatedAt: Date;
   month?: string | null;
   comprehension: number;
   techniques: string[];

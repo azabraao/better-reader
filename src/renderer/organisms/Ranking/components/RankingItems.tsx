@@ -30,7 +30,7 @@ const RankingItems = ({ items }: RankingItemsProps) => {
           points={item.points}
           words={item.words}
           ppm={item.ppm}
-          date={item.date}
+          date={item.createdAt}
           comprehension={item.comprehension}
         />
       ))}
