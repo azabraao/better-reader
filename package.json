@@ -33,8 +33,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Better Reader",
+    "appId": "org.erb.betterReader",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -101,36 +101,15 @@
     "url": "git+https://github.com/azabraao/better-reader.git"
   },
   "author": {
-    "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
+    "name": "azabraao",
+    "email": "az.abraao@gmail.com",
     "url": "https://github.com/azabraao/better-reader"
   },
-  "contributors": [
-    {
-      "name": "Amila Welihinda",
-      "email": "amilajack@gmail.com",
-      "url": "https://github.com/amilajack"
-    },
-    {
-      "name": "John Tran",
-      "email": "jptran318@gmail.com",
-      "url": "https://github.com/jooohhn"
-    }
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/azabraao/better-reader/issues"
   },
-  "keywords": [
-    "electron",
-    "boilerplate",
-    "react",
-    "typescript",
-    "ts",
-    "webpack",
-    "hot",
-    "reload"
-  ],
+  "keywords": [],
   "homepage": "https://github.com/azabraao/better-reader#readme",
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.5",
