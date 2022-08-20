@@ -1,11 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { useLayoutSwitch, useRanking } from 'renderer/contexts';
+import {
+  useAppInitialization,
+  useLayoutSwitch,
+  useRanking,
+} from 'renderer/contexts';
 
-import Ranking from './index';
+import Ranking from './Component';
 
 jest.mock('renderer/contexts');
+jest.mock('react-draggable-bottom-sheet', () => {
+  return {
+    DraggableBottomSheet: ({ children }: any) => children,
+  };
+});
 
 describe('Ranking', () => {
   it('should render', () => {
@@ -27,15 +36,29 @@ describe('Ranking', () => {
   it('should render with no items displayed', () => {
     const useLayoutSwitchMocked = jest.mocked(useLayoutSwitch);
     const useRankingMocked = jest.mocked(useRanking);
+    const useAppInitializationMocked = jest.mocked(useAppInitialization);
 
     useRankingMocked.mockReturnValue({
       rankingData: [],
       isLoadingRanking: false,
-    } as any);
+      showOnlyPodium: false,
+      rankingIsEmpty: false,
+      reachedRankingEnd: false,
+      expandPodium: jest.fn,
+      minimizePodium: jest.fn,
+      loadMoreRankingData: jest.fn,
+    });
     useLayoutSwitchMocked.mockReturnValue({
       isRankingFocused: false,
       setIsRankingFocused: jest.fn,
-    } as any);
+      toggleRankingFocus: jest.fn,
+    });
+    useAppInitializationMocked.mockReturnValue({
+      isAppInitialized: true,
+      registerAppInitialization: jest.fn,
+      setIsAppInitialized: jest.fn,
+    });
+
     render(<Ranking />);
 
     expect(screen.queryByText('No items to show')).toBeInTheDocument();
@@ -50,34 +73,44 @@ describe('Ranking', () => {
         {
           words: 77,
           ppm: 1103,
-          date: '1/24/2022',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           comprehension: 15,
           points: 973,
-          techniques: ['Sweeping', 'Writing down words', 'Cantarolando'],
+          techniques: ['sweeping', 'writing'],
         },
         {
           words: 79,
           ppm: 840,
-          date: '4/9/2022',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           comprehension: 11,
           points: 840,
-          techniques: ['Sweeping', 'Writing down words', 'Cantarolando'],
+          techniques: ['sweeping', 'writing'],
         },
         {
           words: 4,
           ppm: 350,
-          date: '11/28/2021',
+          createdAt: new Date(),
+          updatedAt: new Date(),
           comprehension: 30,
           points: 751,
-          techniques: ['Sweeping', 'Writing down words'],
+          techniques: ['sweeping', 'writing'],
         },
       ],
       isLoadingRanking: false,
-    } as any);
+      showOnlyPodium: false,
+      reachedRankingEnd: false,
+      rankingIsEmpty: false,
+      expandPodium: jest.fn,
+      minimizePodium: jest.fn,
+      loadMoreRankingData: jest.fn,
+    });
     useLayoutSwitchMocked.mockReturnValue({
       isRankingFocused: false,
       setIsRankingFocused: jest.fn,
     } as any);
+
     render(<Ranking />);
 
     expect(screen.queryByText('973pts')).toBeInTheDocument();

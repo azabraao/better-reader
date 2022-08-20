@@ -71,7 +71,7 @@ const EditTrainingUnit = ({
 
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
-      data.techniques = techniques;
+      data.techniques = techniques.map((item) => item.value);
       data.duration = minutesToMilliseconds(data.duration);
       if (techniques.length === 0) {
         return setError('techniques', {

@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from 'react';
 import Icon from 'renderer/atoms/Icon';
-import { millisecondsToMinutes } from 'renderer/utils';
+import { millisecondsToMinutes, techniquesToItems } from 'renderer/utils';
 import EditTrainingUnit from '../EditTrainingUnit';
 
 interface TrainingUnitProps extends TrainingUnit {
@@ -38,6 +38,8 @@ const EditableTrainingUnit = ({
 
   const minutes = millisecondsToMinutes(duration);
 
+  const techniquesItems = techniquesToItems(techniques);
+
   return (
     <button
       type="button"
@@ -52,7 +54,7 @@ const EditableTrainingUnit = ({
         <Icon name="clock" />
         <span className="text-base">{minutes}min</span>
       </div>
-      {techniques.map((technique) => (
+      {techniquesItems.map((technique) => (
         <div
           key={technique.value + Math.random()}
           className="flex gap-2 items-center"

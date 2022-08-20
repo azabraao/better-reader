@@ -15,7 +15,7 @@ import Dropdown from './index';
 
 describe('<Dropdown/> molecule', () => {
   const hiddenElementClass = 'top-0 opacity-0 pointer-events-none';
-  const visibleElementClass = 'top-full opacity-100';
+  const visibleElementClass = 'top-[calc(100%+4px)] opacity-100';
 
   it('should render', () => {
     expect(

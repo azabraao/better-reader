@@ -8,8 +8,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import toast from 'react-hot-toast';
-import { api, getRanking } from 'renderer/services';
+import { getRanking } from 'renderer/services';
 
 interface RankingContextValues {
   isLoadingRanking: boolean;

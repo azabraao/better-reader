@@ -11,3 +11,17 @@ export const techniques: TechniqueItem[] = [
   { label: 'Ponta-a-ponta', value: 'end_to_end' },
   { label: 'Cantarolando', value: 'singing' },
 ];
+
+export const techniquesToItems = (
+  entries: Technique[] | undefined
+): TechniqueItem[] => {
+  if (entries === undefined) {
+    return [];
+  }
+
+  return entries.map((technique) => {
+    const techniqueItem = techniques.find((item) => item.value === technique);
+
+    return techniqueItem as TechniqueItem;
+  });
+};

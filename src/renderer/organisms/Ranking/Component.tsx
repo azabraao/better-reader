@@ -2,7 +2,7 @@
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Dropdown, Section } from 'renderer/molecules';
 import Icon, { SquareChecked, SquareUnchecked } from 'renderer/atoms/Icon';
-import { ifSpaceBar, techniques, writingDownWords } from 'renderer/utils';
+import { ifSpaceBar, techniques } from 'renderer/utils';
 import { useRanking } from 'renderer/contexts';
 import { NoRankingData } from 'renderer/atoms/Illustration';
 
@@ -50,7 +50,7 @@ const Ranking = () => {
 
     if (writingDown) {
       ranking = ranking?.filter((item: { techniques: string[] }) =>
-        item.techniques.some((technique) => technique === writingDownWords)
+        item.techniques.some((technique) => technique === 'writing')
       );
     }
 

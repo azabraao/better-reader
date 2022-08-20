@@ -1,14 +1,17 @@
 import clsx from 'clsx';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { TimedGrowing } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
 import { useAudioFeedback } from 'renderer/hooks';
-import { millisecondsToMinutes } from 'renderer/utils';
+import { millisecondsToMinutes, techniquesToItems } from 'renderer/utils';
 import { useTrainingSessionCard } from '../TrainingSessionCard/Context';
 import Test from './Test';
 
-interface TrainingUnitProps extends TrainingUnit {
+interface TrainingUnitProps {
   index: number;
+  techniques: Technique[];
+  target: number;
+  duration: number;
 }
 
 const TrainingUnit = ({
@@ -63,6 +66,8 @@ const TrainingUnit = ({
     }
   };
 
+  const techniquesItems = techniquesToItems(techniques);
+
   return (
     <div
       className={clsx(
@@ -85,7 +90,7 @@ const TrainingUnit = ({
             {millisecondsToMinutes(duration)}min
           </span>
         </div>
-        {techniques.map((technique) => (
+        {techniquesItems.map((technique) => (
           <div key={Math.random()} className="flex gap-2 items-center">
             <Icon name={technique.value} />
             <span className="text-base">{technique.label}</span>
@@ -94,7 +99,7 @@ const TrainingUnit = ({
       </div>
       {isTesting && (
         <div className="p-2 md:p-4">
-          <Test techniques={techniques} onFinish={onLessonFinish} />
+          <Test techniques={techniquesItems} onFinish={onLessonFinish} />
         </div>
       )}
     </div>
