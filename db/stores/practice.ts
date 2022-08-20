@@ -3,9 +3,9 @@ const Ajv = require('ajv');
 const practiceSchema = require('../schemas/practice.json');
 
 class PracticeStore {
-  schemaValidator: any;
+  schemaValidator;
 
-  db: any;
+  db;
 
   constructor() {
     const ajv = new Ajv({

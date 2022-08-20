@@ -63,7 +63,7 @@ ipcMain.on('get-rank', async (_event, payload: RankingPayload) => {
   return practice.readAll();
 });
 
-ipcMain.on('get-practices', async (_event, arg: PracticeType) => {
+ipcMain.on('get-practices', async (_event) => {
   try {
     const all = await practice.readAll();
     _event.reply('get-practices', all);

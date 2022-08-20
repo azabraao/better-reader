@@ -3,9 +3,9 @@ const Ajv = require('ajv');
 const trainingSessionSchema = require('../schemas/trainingSession.json');
 
 class TrainingSessionStore {
-  schemaValidator: any;
+  schemaValidator;
 
-  db: any;
+  db;
 
   constructor() {
     const ajv = new Ajv({

@@ -1,7 +1,5 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
-const trainingSession = require('../../db/stores/trainingSession');
-
 export type Channels = 'ipc-example';
 export type WindowAction = 'window-action';
 
