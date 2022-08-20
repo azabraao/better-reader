@@ -5,14 +5,18 @@ function useInterval(callback: VoidFunction, delay: number | null) {
 
   // Remember the latest callback.
   useEffect(() => {
-    savedCallback.current = callback;
+    if (callback) {
+      savedCallback.current = callback;
+    }
   }, [callback]);
 
   // Set up the interval.
   useEffect(() => {
     let id: NodeJS.Timer;
     function tick() {
-      savedCallback.current();
+      if (savedCallback.current) {
+        savedCallback.current();
+      }
     }
     if (delay !== null) {
       id = setInterval(tick, delay);

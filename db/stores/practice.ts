@@ -1,5 +1,7 @@
+import Ajv from 'ajv';
+
 const Datastore = require('nedb-promises');
-const Ajv = require('ajv');
+
 const practiceSchema = require('../schemas/practice.json');
 
 class PracticeStore {
@@ -61,7 +63,7 @@ class PracticeStore {
   }
 
   readAll() {
-    return this.db.find();
+    return this.db.find({}).exec();
   }
 
   async rank({ page = 0, limit = 10 }: RankingPayload): Promise<RankData> {
@@ -71,7 +73,7 @@ class PracticeStore {
       .limit(limit)
       .skip(page * limit);
 
-    const count = await this.db.count();
+    const count = await this.db.count({});
 
     return { rank, count };
   }

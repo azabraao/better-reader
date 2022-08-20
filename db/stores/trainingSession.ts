@@ -1,5 +1,7 @@
+import Ajv from 'ajv';
+
 const Datastore = require('nedb-promises');
-const Ajv = require('ajv');
+
 const trainingSessionSchema = require('../schemas/trainingSession.json');
 
 class TrainingSessionStore {
@@ -43,12 +45,20 @@ class TrainingSessionStore {
         }
       });
 
+      const techniques: Technique[] = [];
+
+      units.forEach((unit) => {
+        unit.techniques.forEach((technique) => {
+          if (techniques.length < 3) {
+            techniques.push(technique);
+          }
+        });
+      });
+
       const summary = {
         target,
         duration: units.reduce((acc, unit) => acc + unit.duration, 0),
-        techniques: units
-          .reduce((acc, unit) => [...acc, ...unit.techniques], [])
-          .slice(0, 3),
+        techniques,
       };
 
       return this.db.insert({ name, units, summary });
@@ -62,7 +72,7 @@ class TrainingSessionStore {
   }
 
   readAll() {
-    return this.db.find();
+    return this.db.find({});
   }
 
   // Todo: implement readActive and archive
