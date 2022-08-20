@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Button, Countdown, CountdownWaiting } from 'renderer/atoms';
+import { millisecondsToMinutes } from 'renderer/utils';
 import { useTrainingUnitBottomSheet } from './BottomSheetContext';
 import { useTrainingSessionCard } from './Context';
 
@@ -31,9 +32,13 @@ const SessionControl = () => {
     );
   }
 
+  const minutes = millisecondsToMinutes(
+    session.units[activeTrainingIndex]?.duration
+  );
+
   return (
     <Countdown
-      minutes={session.units[activeTrainingIndex]?.duration}
+      minutes={minutes}
       onFinish={() => setIsWaiting(true)}
       onStart={() => !trainingStarted && setTrainingStarted(true)}
     />

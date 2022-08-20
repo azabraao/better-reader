@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { memo, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { minutesToMilliseconds } from 'renderer/utils';
 import { Button, Title } from 'renderer/atoms';
 import TextInput from '../TextInput';
 import TechniquesSelector from '../TechniquesSelector';
@@ -71,6 +72,7 @@ const EditTrainingUnit = ({
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
       data.techniques = techniques;
+      data.duration = minutesToMilliseconds(data.duration);
       if (techniques.length === 0) {
         return setError('techniques', {
           type: 'required',

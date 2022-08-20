@@ -3,6 +3,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { TimedGrowing } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
 import { useAudioFeedback } from 'renderer/hooks';
+import { millisecondsToMinutes } from 'renderer/utils';
 import { useTrainingSessionCard } from '../TrainingSessionCard/Context';
 import Test from './Test';
 
@@ -28,7 +29,6 @@ const TrainingUnit = ({
   } = useTrainingSessionCard();
   const [isTesting, setIsTesting] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
-  const durationInMilliseconds = duration * 60 * 1000;
   const isActive = trainingStarted && activeTrainingIndex === index;
   const { lessonBell } = useAudioFeedback();
 
@@ -38,7 +38,7 @@ const TrainingUnit = ({
       timeout = setTimeout(() => {
         lessonBell.play();
         setIsTesting(true);
-      }, durationInMilliseconds);
+      }, duration);
     }
 
     return () => {
@@ -73,7 +73,7 @@ const TrainingUnit = ({
       <div className="flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 w-full relative p-2 md:p-4">
         <TimedGrowing
           start={isActive && !isOnPreCountdown}
-          duration={durationInMilliseconds}
+          duration={duration}
         />
         <div className="flex gap-2 items-center">
           <Icon name="speed" />
@@ -81,7 +81,9 @@ const TrainingUnit = ({
         </div>
         <div className="flex gap-2 items-center">
           <Icon name="clock" />
-          <span className="text-base">{duration}min</span>
+          <span className="text-base">
+            {millisecondsToMinutes(duration)}min
+          </span>
         </div>
         {techniques.map((technique) => (
           <div key={Math.random()} className="flex gap-2 items-center">

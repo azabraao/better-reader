@@ -78,8 +78,6 @@ const Ranking = () => {
     );
   }
 
-  console.log('rankingData>>>', rankingData);
-
   return (
     <Wrapper>
       <div className="my-6 flex gap-4 flex-col">

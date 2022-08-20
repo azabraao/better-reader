@@ -40,7 +40,7 @@ type TechniqueItem = {
 };
 
 type TrainingUnit = {
-  techniques: TechniqueItem[];
+  techniques: Technique[];
   target: number;
   duration: number;
 };

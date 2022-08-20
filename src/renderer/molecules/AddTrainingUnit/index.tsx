@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Title, AddTrainingUnitButton } from 'renderer/atoms';
+import { minutesToMilliseconds } from 'renderer/utils';
 import TextInput from '../TextInput';
 import TechniquesSelector from '../TechniquesSelector';
 
@@ -68,16 +69,15 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
 
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
-      data.techniques = techniques;
+      data.target = Number(data.target);
+      data.techniques = techniques.map((item) => item.value);
+      data.duration = minutesToMilliseconds(data.duration);
       if (techniques.length === 0) {
         return setError('techniques', {
           type: 'required',
           message: 'Please select at least one technique',
         });
       }
-
-      data.target = Number(data.target);
-      data.duration = Number(data.duration);
 
       onAdd(data);
       reset();
