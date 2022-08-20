@@ -36,10 +36,13 @@ const AddTrainingSession = () => {
     };
   }, []);
 
-  const { isError, isLoading, isSuccess, mutate } = useMutation(
-    ['addTrainingSession'],
-    addTrainingSession
-  );
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    mutate,
+    reset: resetMutation,
+  } = useMutation(['addTrainingSession'], addTrainingSession);
 
   const queryClient = useQueryClient();
 
@@ -76,7 +79,10 @@ const AddTrainingSession = () => {
   if (isError) {
     setTimeout(() => {
       close();
-    }, 3000);
+      setTimeout(() => {
+        resetMutation();
+      }, 1000);
+    }, 2000);
 
     return (
       <BottomSheet
@@ -98,11 +104,10 @@ const AddTrainingSession = () => {
   if (isSuccess) {
     setTimeout(() => {
       close();
-
-      // setTimeout(() => {
-      //   setIsSaved(false);
-      // }, 1000);
-    }, 3000);
+      setTimeout(() => {
+        resetMutation();
+      }, 1000);
+    }, 2000);
 
     return (
       <BottomSheet
