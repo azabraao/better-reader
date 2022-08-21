@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import clsx from 'clsx';
-// import { useAppInitialization, useLayoutSwitch } from 'renderer/contexts';
-import { useLayoutSwitch } from 'renderer/contexts';
+import { useAppInitialization, useLayoutSwitch } from 'renderer/contexts';
 
 interface DashboardLayoutProps {
   ranking: React.ReactNode;
@@ -15,9 +14,9 @@ const DashboardLayout = ({
   practices,
 }: DashboardLayoutProps) => {
   const { isRankingFocused } = useLayoutSwitch();
-  // const { isAppInitialized } = useAppInitialization();
+  const { isAppInitialized } = useAppInitialization();
 
-  // if (!isAppInitialized) return null;
+  if (!isAppInitialized) return null;
 
   return (
     <div
