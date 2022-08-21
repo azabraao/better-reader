@@ -69,6 +69,7 @@ const AddTrainingSession = () => {
             reset();
             queryClient.invalidateQueries(['getTrainingSessions']);
             registerAppInitialization();
+            setTrainingUnits([]);
           },
         }
       );
@@ -107,7 +108,7 @@ const AddTrainingSession = () => {
       setTimeout(() => {
         resetMutation();
       }, 1000);
-    }, 2000);
+    }, 1000);
 
     return (
       <BottomSheet

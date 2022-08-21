@@ -65,3 +65,8 @@ input[type='number'] {
 .window-action:focus {
   outline: 0;
 }
+
+*:focus {
+  outline: 1px solid #ff8906;
+  outline-offset: 1px;
+}

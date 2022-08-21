@@ -28,7 +28,8 @@ const BottomSheetModal = ({
       disabled={disabled}
       classNames={{
         window: {
-          wrap: 'text-white border-t-2 border-t-white rounded-none lg:border-white lg:rounded-lg lg:border-1',
+          content:
+            'text-white border-t-2 border-t-white rounded-none lg:border-white lg:rounded-lg lg:border-1',
         },
       }}
       onDrag={(event) => {
@@ -47,8 +48,13 @@ const BottomSheetModal = ({
         window: {
           wrap: {
             zIndex: elevationLevel * Z_INDEX_BASE * 2,
+            backgroundColor: 'transparent',
+            maxWidth: '768px',
+          },
+          content: {
             backgroundColor: 'rgb(0 0 0 / var(--tw-bg-opacity))',
-            maxWidth: '1024px',
+            opacity: isOpen ? 1 : 0,
+            transition: 'opacity 0.2s ease-in-out',
           },
         },
         dragIndicator: {

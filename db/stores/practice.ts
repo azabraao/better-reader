@@ -18,7 +18,7 @@ class PracticeStore {
     this.schemaValidator = ajv.compile(practiceSchema);
 
     const path =
-      process.env.NODE_ENV === 'dev'
+      process.env.NODE_ENV === 'development'
         ? `${process.cwd()}/practices.db`
         : `${process.resourcesPath}/data/practices.db`;
 

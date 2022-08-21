@@ -94,35 +94,37 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="p-4 border-1 border-muted rounded-lg flex flex-col gap-4">
-        <div className="flex gap-2 flex-col">
-          <Title level={3}>Whats the PPM target?</Title>
-          <div className="flex gap-2 items-start">
-            <TextInput
-              max={20000}
-              min={300}
-              size="sm"
-              type="number"
-              placeholder="1000"
-              textComplement="PPM"
-              {...register('target', validationSchema.target)}
-              error={errors.target?.message}
-              autoFocus
-            />
+        <div className="flex flex-col gap-10 lg:flex-row">
+          <div className="flex gap-2 flex-col">
+            <Title level={3}>Whats the PPM target?</Title>
+            <div className="flex gap-2 items-start">
+              <TextInput
+                max={20000}
+                min={300}
+                size="sm"
+                type="number"
+                placeholder="1000"
+                textComplement="PPM"
+                {...register('target', validationSchema.target)}
+                error={errors.target?.message}
+                autoFocus
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex gap-2 flex-col">
-          <Title level={3}>Practice duration</Title>
-          <div className="flex gap-2 items-start">
-            <TextInput
-              max={10}
-              min={1}
-              size="sm"
-              type="number"
-              placeholder="10"
-              textComplement="Minutes"
-              {...register('duration', validationSchema.duration)}
-              error={errors.duration?.message}
-            />
+          <div className="flex gap-2 flex-col">
+            <Title level={3}>Practice duration</Title>
+            <div className="flex gap-2 items-start">
+              <TextInput
+                max={10}
+                min={1}
+                size="sm"
+                type="number"
+                placeholder="10"
+                textComplement="Minutes"
+                {...register('duration', validationSchema.duration)}
+                error={errors.duration?.message}
+              />
+            </div>
           </div>
         </div>
         <TechniquesSelector
