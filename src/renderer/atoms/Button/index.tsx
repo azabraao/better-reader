@@ -1,14 +1,15 @@
 /* eslint-disable react/button-has-type */
 import clsx from 'clsx';
-import { memo } from 'react';
+import { memo, MouseEventHandler } from 'react';
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
-  onClick?: () => void;
+  onClick?: MouseEventHandler;
   children: React.ReactNode;
   size?: 'sm' | 'md';
   fullWidth?: boolean;
   theme?: 'primary' | 'info' | 'success' | 'warning' | 'danger' | 'transparent';
+  disabled?: boolean;
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   children,
   onClick,
   fullWidth,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
@@ -30,6 +32,7 @@ const Button = ({
         theme === 'warning' && 'bg-warning text-black hover:bg-warning-700',
         theme === 'danger' && 'bg-danger text-black hover:bg-danger-700',
         fullWidth && 'w-full',
+        disabled && 'cursor-not-allowed opacity-90',
         'rounded-[4px] transition-colors'
       )}
       type={type}
@@ -46,6 +49,7 @@ Button.defaultProps = {
   fullWidth: false,
   onClick: () => {},
   theme: 'info',
+  disabled: false,
 };
 
 export default memo(Button);

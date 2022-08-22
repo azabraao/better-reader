@@ -5,6 +5,7 @@ const deleteTrainingSession = async (id: string): Promise<TrainingSession> => {
     window.electron.ipcRenderer.once(
       'delete-training-session',
       (arg: TrainingSession) => {
+        console.log('delete-training-session', arg);
         resolve(arg);
       }
     );

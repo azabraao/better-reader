@@ -30,7 +30,7 @@ const TrainingSessions = () => {
       <Section title="Training Sessions" actions={<SectionActionsIcons />}>
         <div
           className={clsx(
-            'flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3',
+            'flex flex-wrap gap-4 no-scrollbar md:grid md:grid-cols-3',
             isRankingFocused ? 'lg:grid-cols-2' : 'lg:grid-cols-4'
           )}
         >

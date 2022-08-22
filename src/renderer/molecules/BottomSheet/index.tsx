@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import BottomSheet from 'react-draggable-bottom-sheet';
-import { DragIndicator } from 'renderer/atoms';
+import { DragIndicator, Title } from 'renderer/atoms';
+import Icon from 'renderer/atoms/Icon';
 
 const Z_INDEX_BASE = 20;
 
@@ -11,6 +12,8 @@ interface BottomSheetModalProps {
   elevationLevel?: number;
   disabled?: boolean;
   hideDragIndicator?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  title?: string;
 }
 
 const BottomSheetModal = ({
@@ -20,7 +23,16 @@ const BottomSheetModal = ({
   elevationLevel = 1,
   disabled,
   hideDragIndicator = false,
+  size = 'md',
+  title,
 }: BottomSheetModalProps) => {
+  const maxWidth = (() => {
+    if (size === 'sm') return 358;
+    if (size === 'lg') return 1024;
+    // md
+    return 768;
+  })();
+
   return (
     <BottomSheet
       isOpen={isOpen}
@@ -49,7 +61,7 @@ const BottomSheetModal = ({
           wrap: {
             zIndex: elevationLevel * Z_INDEX_BASE * 2,
             backgroundColor: 'transparent',
-            maxWidth: '768px',
+            maxWidth,
           },
           content: {
             backgroundColor: 'rgb(0 0 0 / var(--tw-bg-opacity))',
@@ -72,7 +84,18 @@ const BottomSheetModal = ({
       }}
     >
       {!hideDragIndicator && <DragIndicator />}
-      {children}
+      <div className="px-4 max-w-screen-lg w-full mx-auto lg:px-6">
+        {title && (
+          <div className="pt-2 pb-4 flex justify-between lg:pt-6">
+            <Title>{title}</Title>
+
+            <div className="hidden lg:block">
+              <Icon name="close" className="cursor-pointer" onClick={close} />
+            </div>
+          </div>
+        )}
+        {children}
+      </div>
     </BottomSheet>
   );
 };
@@ -82,6 +105,8 @@ BottomSheetModal.defaultProps = {
   disabled: false,
   close: () => {},
   hideDragIndicator: false,
+  size: 'md',
+  title: '',
 };
 
 export default memo(BottomSheetModal);

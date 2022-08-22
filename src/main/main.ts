@@ -100,7 +100,7 @@ ipcMain.on(
 
 ipcMain.on('delete-training-session', async (_event, id: string) => {
   try {
-    const all = await trainingSession.create(id);
+    const all = await trainingSession.delete(id);
     _event.reply('delete-training-session', all);
   } catch (error) {
     _event.reply('delete-training-session', error);

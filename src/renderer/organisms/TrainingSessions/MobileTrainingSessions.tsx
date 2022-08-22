@@ -1,5 +1,5 @@
 import { memo, useCallback, useState } from 'react';
-import { Container, FloatingButton } from 'renderer/atoms';
+import { FloatingButton } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
 import { BottomSheet, Section } from 'renderer/molecules';
 import ListSessions from './ListSessions';
@@ -23,17 +23,15 @@ const MobileTrainingSessions = ({ sessions }: MobileTrainingSessionsProps) => {
   return (
     <div>
       <BottomSheet isOpen={isOpen} close={close}>
-        <Container>
-          <Section
-            justifyBetween
-            title="Training Sessions"
-            actions={<SectionActionsIcons />}
-          >
-            <div className="flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3">
-              <ListSessions sessions={sessions} />
-            </div>
-          </Section>
-        </Container>
+        <Section
+          justifyBetween
+          title="Training Sessions"
+          actions={<SectionActionsIcons />}
+        >
+          <div className="flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3">
+            <ListSessions sessions={sessions} />
+          </div>
+        </Section>
       </BottomSheet>
       <FloatingButton icon={<Icon name="exercise" color="" />} onClick={open} />
     </div>

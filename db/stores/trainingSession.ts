@@ -76,6 +76,7 @@ class TrainingSessionStore {
   }
 
   delete(_id: string) {
+    console.log('delete', _id);
     return this.db.remove({ _id });
   }
 

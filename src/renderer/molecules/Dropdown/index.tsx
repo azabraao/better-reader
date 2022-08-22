@@ -18,12 +18,14 @@ type DropdownProps = React.PropsWithChildren<{
 
 const defaultProps = {
   defaultOpen: false,
+  showButton: true,
 };
 
 const Dropdown = ({
   items,
   defaultOpen,
   onSelected,
+  showButton,
 }: DropdownProps & typeof defaultProps) => {
   const [selected, setSelected] = useState<Item>(items[0]);
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -43,23 +45,25 @@ const Dropdown = ({
   return (
     <>
       <Backdrop isOpen={isOpen} onClick={closeDropdown} />
-      <div className="relative w-full z-10">
-        <button
-          onClick={toggleDropdown}
-          className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-background text-white cursor-pointer"
-          type="button"
-          tabIndex={0}
-          data-testid="dropdown-button"
-        >
-          <div className="flex items-center">
-            {selected.icon}
-            <span className="ml-2">{selected.label}</span>
-          </div>
-          <ArrowDown />
-        </button>
+      <div className={clsx('relative w-full', isOpen && 'z-20')}>
+        {showButton && (
+          <button
+            onClick={toggleDropdown}
+            className="flex justify-between p-2 w-full rounded-lg border-white border-2 bg-background text-white cursor-pointer"
+            type="button"
+            tabIndex={0}
+            data-testid="dropdown-button"
+          >
+            <div className="flex items-center">
+              {selected.icon}
+              <span className="ml-2">{selected.label}</span>
+            </div>
+            <ArrowDown />
+          </button>
+        )}
         <ul
           className={clsx(
-            'absolute py-2 bg-background shadow-elevation-2 w-full transition-[top,opacity] rounded-lg border-white border-2',
+            'absolute py-2 bg-background shadow-elevation-2 w-full transition-[top,opacity] rounded-lg border-white border-2 z-20',
             isOpen
               ? 'top-[calc(100%+4px)] opacity-100'
               : 'top-0 opacity-0 pointer-events-none'

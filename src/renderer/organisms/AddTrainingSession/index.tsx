@@ -117,7 +117,7 @@ const AddTrainingSession = () => {
         elevationLevel={2}
         hideDragIndicator
       >
-        <div className="flex p-8 gap-4 justify-center flex-col items-center">
+        <div className="flex px-3 py-8 gap-4 justify-center flex-col items-center">
           <Checked />
           <span className="text-base">Training saved!</span>
         </div>
@@ -128,7 +128,7 @@ const AddTrainingSession = () => {
   if (isLoading) {
     return (
       <BottomSheet isOpen disabled elevationLevel={2} hideDragIndicator>
-        <div className="flex p-8 gap-4 justify-center flex-col items-center">
+        <div className="flex px-3 py-8 gap-4 justify-center flex-col items-center">
           <div>
             <Spinner />
           </div>
@@ -139,46 +139,40 @@ const AddTrainingSession = () => {
   }
 
   return (
-    <BottomSheet isOpen={isOpen} close={close} elevationLevel={2}>
-      <div className="px-4 max-w-screen-lg  w-full mx-auto lg:px-6">
-        <div className="pt-2 pb-4 flex justify-between lg:pt-6">
-          <Title level={2}>Add Training Session</Title>
+    <BottomSheet
+      title="Add Training Session"
+      isOpen={isOpen}
+      close={close}
+      elevationLevel={2}
+    >
+      <div className="flex flex-col gap-4 pb-5">
+        <TextInput
+          label="Name your session:"
+          placeholder="Focused on speed"
+          {...register('sessionName', validationSchema.sessionName)}
+          error={errors.sessionName?.message}
+        />
 
-          <div className="hidden lg:block">
-            <Icon name="close" className="cursor-pointer" onClick={close} />
-          </div>
-        </div>
-        <div className="flex flex-col gap-4 pb-5">
-          <TextInput
-            label="Name your session:"
-            placeholder="Focused on speed"
-            {...register('sessionName', validationSchema.sessionName)}
-            error={errors.sessionName?.message}
+        {trainingUnits.map(({ target, duration, techniques }: TrainingUnit) => (
+          <EditableTrainingUnit
+            key={target + Math.random()}
+            duration={duration}
+            target={target}
+            techniques={techniques}
+            isEditing
           />
+        ))}
 
-          {trainingUnits.map(
-            ({ target, duration, techniques }: TrainingUnit) => (
-              <EditableTrainingUnit
-                key={target + Math.random()}
-                duration={duration}
-                target={target}
-                techniques={techniques}
-                isEditing
-              />
-            )
-          )}
-
-          <AddTrainingUnit onAdd={onAddTrainingUnit} />
-          {trainingUnits.length > 0 && (
-            <Button
-              type="submit"
-              onClick={handleSubmit(onSubmit)}
-              theme="primary"
-            >
-              Save training session
-            </Button>
-          )}
-        </div>
+        <AddTrainingUnit onAdd={onAddTrainingUnit} />
+        {trainingUnits.length > 0 && (
+          <Button
+            type="submit"
+            onClick={handleSubmit(onSubmit)}
+            theme="primary"
+          >
+            Save training session
+          </Button>
+        )}
       </div>
     </BottomSheet>
   );

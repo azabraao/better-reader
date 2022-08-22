@@ -18,7 +18,7 @@ const Section = ({
     <div className="my-4">
       <div
         className={clsx(
-          'flex gap-6 mb-4 items-center lg:[&>[data-role=action]]:hover:opacity-100',
+          'flex gap-6 mb-4 items-center lg:[&>[data-role=action]]:hover:opacity-100 ',
           justifyBetween && 'justify-between'
         )}
       >
