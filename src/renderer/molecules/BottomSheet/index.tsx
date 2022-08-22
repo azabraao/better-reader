@@ -48,6 +48,10 @@ const BottomSheetModal = ({
         event.stopPropagation();
         event.preventDefault();
       }}
+      onBackdropClick={(event) => {
+        event.stopPropagation();
+        close();
+      }}
       styles={{
         backdrop: {
           ...(isOpen && { backgroundColor: 'rgba(15, 14, 23)' }),

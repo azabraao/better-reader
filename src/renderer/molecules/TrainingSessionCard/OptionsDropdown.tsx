@@ -3,7 +3,7 @@ import { memo, useCallback, useState } from 'react';
 import { Backdrop } from 'renderer/atoms';
 import { ThreeDots } from 'renderer/atoms/Icon';
 import DeleteSession from './components/DeleteSession';
-import EditSession from './EditSession';
+import EditSession from './components/EditSession';
 
 const OptionsDown = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

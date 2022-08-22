@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { session } from 'electron/main';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Checked, Error, Spinner } from 'renderer/atoms';
-import { useAppInitialization } from 'renderer/contexts';
 import {
   AddTrainingUnit,
   BottomSheet,
   EditableTrainingUnit,
   TextInput,
 } from 'renderer/molecules';
-import { addTrainingSession } from 'renderer/services';
+import { updateTrainingSession } from 'renderer/services';
 
 const validationSchema = {
   sessionName: {
@@ -21,19 +21,16 @@ type TrainingSessionFormData = {
   sessionName: string;
 };
 
-const channel = new BroadcastChannel('training-session');
+const channel = new BroadcastChannel('update-training-session');
 
-const AddTrainingSession = () => {
+const UpdateTrainingSession = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [trainingUnits, setTrainingUnits] = useState<TrainingUnit[]>([]);
-  const { registerAppInitialization } = useAppInitialization();
-  const close = useCallback(() => setIsOpen(false), []);
+  const [sessionNameDefaultValue, setSessionNameDefaultValue] =
+    useState<string>('');
+  const [sessionId, setSessionId] = useState<string>('');
 
-  useEffect(() => {
-    channel.onmessage = (event: { data: { shouldOpen: boolean } }) => {
-      setIsOpen(event.data.shouldOpen);
-    };
-  }, []);
+  const [trainingUnits, setTrainingUnits] = useState<TrainingUnit[]>([]);
+  const close = useCallback(() => setIsOpen(false), []);
 
   const {
     isError,
@@ -41,7 +38,7 @@ const AddTrainingSession = () => {
     isSuccess,
     mutate,
     reset: resetMutation,
-  } = useMutation(['addTrainingSession'], addTrainingSession);
+  } = useMutation(['updateTrainingSession'], updateTrainingSession);
 
   const queryClient = useQueryClient();
 
@@ -49,8 +46,19 @@ const AddTrainingSession = () => {
     handleSubmit,
     register,
     formState: { errors },
-    reset,
   } = useForm<TrainingSessionFormData>();
+
+  useEffect(() => {
+    channel.onmessage = (event: {
+      data: { session: TrainingSession; shouldOpen: boolean };
+    }) => {
+      setIsOpen(event.data.shouldOpen);
+      setTrainingUnits(event.data.session.units);
+      setSessionNameDefaultValue(event.data.session.name);
+      setSessionId(event.data.session._id);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onAddTrainingUnit = useCallback(
     (data: TrainingUnit) => {
@@ -61,19 +69,16 @@ const AddTrainingSession = () => {
 
   const onSubmit = useCallback(
     ({ sessionName }: TrainingSessionFormData) => {
-      mutate(
-        { name: sessionName, units: trainingUnits },
+      return mutate(
+        { id: sessionId, name: sessionName, units: trainingUnits },
         {
           onSuccess: () => {
-            reset();
             queryClient.invalidateQueries(['getTrainingSessions']);
-            registerAppInitialization();
-            setTrainingUnits([]);
           },
         }
       );
     },
-    [mutate, queryClient, registerAppInitialization, reset, trainingUnits]
+    [mutate, queryClient, trainingUnits, sessionId]
   );
 
   if (isError) {
@@ -139,7 +144,7 @@ const AddTrainingSession = () => {
 
   return (
     <BottomSheet
-      title="Add Training Session"
+      title="Edit Training Session"
       isOpen={isOpen}
       close={close}
       elevationLevel={2}
@@ -148,6 +153,7 @@ const AddTrainingSession = () => {
         <TextInput
           label="Name your session:"
           placeholder="Focused on speed"
+          defaultValue={sessionNameDefaultValue}
           {...register('sessionName', validationSchema.sessionName)}
           error={errors.sessionName?.message}
         />
@@ -177,4 +183,4 @@ const AddTrainingSession = () => {
   );
 };
 
-export default memo(AddTrainingSession);
+export default memo(UpdateTrainingSession);

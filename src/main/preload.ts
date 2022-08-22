@@ -30,8 +30,8 @@ contextBridge.exposeInMainWorld('electron', {
       delete(id: string) {
         ipcRenderer.send('delete-training-session', id);
       },
-      update(payload: TrainingSessionPayload) {
-        ipcRenderer.send('update-training-session', payload);
+      update(id: string, payload: TrainingSessionPayload) {
+        ipcRenderer.send('update-training-session', id, payload);
       },
     },
     practices: {

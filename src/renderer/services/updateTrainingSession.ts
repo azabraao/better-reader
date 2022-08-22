@@ -1,13 +1,20 @@
-type UpdateTrainingSessionPayload = {
+type EditTrainingSessionPayload = {
+  id: string;
   name: string;
   units: TrainingUnit[];
 };
 
-const addTrainingSession = async (
-  payload: UpdateTrainingSessionPayload
+const updateTrainingSession = async (
+  payload: EditTrainingSessionPayload
 ): Promise<TrainingSession> => {
   return new Promise((resolve) => {
-    window.electron.api.trainingSession.update(payload);
+    const { id } = payload;
+    const data = {
+      name: payload.name,
+      units: payload.units,
+    };
+
+    window.electron.api.trainingSession.update(id, data);
 
     window.electron.ipcRenderer.once(
       'update-training-session',
@@ -18,4 +25,4 @@ const addTrainingSession = async (
   });
 };
 
-export default addTrainingSession;
+export default updateTrainingSession;

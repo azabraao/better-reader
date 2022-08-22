@@ -13,6 +13,7 @@ import {
   Ranking,
   AddTrainingSession,
 } from 'renderer/organisms';
+import UpdateTrainingSession from 'renderer/organisms/UpdateTrainingSession';
 
 const Home = () => {
   return (
@@ -30,6 +31,7 @@ const Home = () => {
         </div>
       </LayoutSwitchProvider>
       <AddTrainingSession />
+      <UpdateTrainingSession />
       <AppIntroduction />
     </AppInitializationProvider>
   );

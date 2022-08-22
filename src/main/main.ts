@@ -76,9 +76,9 @@ ipcMain.on('get-practices', async (_event) => {
 
 ipcMain.on(
   'create-training-session',
-  async (_event, payload: TrainingSessionPayload) => {
+  async (_event, id: string, payload: TrainingSessionPayload) => {
     try {
-      const all = await trainingSession.create(payload);
+      const all = await trainingSession.create(id, payload);
       _event.reply('create-training-session', all);
     } catch (error) {
       _event.reply('create-training-session', error);
@@ -88,9 +88,9 @@ ipcMain.on(
 
 ipcMain.on(
   'update-training-session',
-  async (_event, payload: TrainingSessionPayload) => {
+  async (_event, id: string, payload: TrainingSessionPayload) => {
     try {
-      const all = await trainingSession.update(payload);
+      const all = await trainingSession.update(id, payload);
       _event.reply('update-training-session', all);
     } catch (error) {
       _event.reply('update-training-session', error);
