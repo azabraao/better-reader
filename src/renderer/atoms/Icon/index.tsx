@@ -23,6 +23,9 @@ import CloseSM from './library/close-sm.svg';
 import Checked from './library/checked.svg';
 import CheckedSM from './library/checked-sm.svg';
 import Play from './library/play.svg';
+import Edit from './library/edit.svg';
+import Trash from './library/trash.svg';
+import ThreeDots from './library/three-dots.svg';
 
 interface IconProps {
   name: Icon;
@@ -145,6 +148,16 @@ const Icon = ({ name, color, className, onClick }: IconProps) => {
       );
     case 'play':
       return <Play className={className} style={{ color }} onClick={onClick} />;
+    case 'edit':
+      return <Edit className={className} style={{ color }} onClick={onClick} />;
+    case 'trash':
+      return (
+        <Trash className={className} style={{ color }} onClick={onClick} />
+      );
+    case 'three_dots':
+      return (
+        <ThreeDots className={className} style={{ color }} onClick={onClick} />
+      );
     default:
       return null;
   }
@@ -181,6 +194,9 @@ export {
   CheckedSM,
   CloseSM,
   Play,
+  Edit,
+  Trash,
+  ThreeDots,
 };
 
 export default memo(Icon);

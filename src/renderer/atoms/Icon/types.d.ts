@@ -23,4 +23,7 @@ type Icon =
   | 'checked'
   | 'checked-sm'
   | 'close-sm'
-  | 'play';
+  | 'play'
+  | 'edit'
+  | 'trash'
+  | 'three_dots';
