@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld('electron', {
       readAll() {
         ipcRenderer.send('read-all-training-session');
       },
+      delete(id: string) {
+        ipcRenderer.send('delete-training-session', id);
+      },
     },
     practices: {
       create(payload: PracticeType) {
