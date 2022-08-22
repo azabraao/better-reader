@@ -79,6 +79,15 @@ class TrainingSessionStore {
     return this.db.remove({ _id });
   }
 
+  update(_id: string, data: TrainingSessionPayload) {
+    const isValid = this.validate(data);
+    if (isValid) {
+      return this.db.update({ _id }, { $set: data });
+    }
+
+    throw new Error('invalid data');
+  }
+
   // Todo: implement readActive and archive
   // readActive() {
   //   return this.db.find({ isDone: false }).exec();

@@ -86,6 +86,18 @@ ipcMain.on(
   }
 );
 
+ipcMain.on(
+  'update-training-session',
+  async (_event, payload: TrainingSessionPayload) => {
+    try {
+      const all = await trainingSession.update(payload);
+      _event.reply('update-training-session', all);
+    } catch (error) {
+      _event.reply('update-training-session', error);
+    }
+  }
+);
+
 ipcMain.on('delete-training-session', async (_event, id: string) => {
   try {
     const all = await trainingSession.create(id);

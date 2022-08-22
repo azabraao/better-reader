@@ -24,6 +24,7 @@ declare global {
         trainingSession: {
           readAll(): void;
           create(payload: TrainingSessionPayload): void;
+          update(payload: TrainingSessionPayload): void;
           delete(id: string): void;
         };
       };
