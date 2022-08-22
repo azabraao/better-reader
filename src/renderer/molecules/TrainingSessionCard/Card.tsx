@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Icon, { ThreeDots } from 'renderer/atoms/Icon';
+import Icon from 'renderer/atoms/Icon';
 import OptionsDropdown from './OptionsDropdown';
 
 interface CardProps {

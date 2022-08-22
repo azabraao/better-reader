@@ -1,6 +1,4 @@
 import { memo } from 'react';
-import { Title } from 'renderer/atoms';
-import Icon from 'renderer/atoms/Icon';
 import BottomSheet from '../BottomSheet';
 import TrainingUnit from '../TrainingUnit';
 import WordsPerPageInput from '../WordsPerPageInput';
