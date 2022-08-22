@@ -86,6 +86,15 @@ ipcMain.on(
   }
 );
 
+ipcMain.on('delete-training-session', async (_event, id: string) => {
+  try {
+    const all = await trainingSession.create(id);
+    _event.reply('delete-training-session', all);
+  } catch (error) {
+    _event.reply('delete-training-session', error);
+  }
+});
+
 ipcMain.on('read-all-training-session', async (_event) => {
   try {
     const all = await trainingSession.readAll();

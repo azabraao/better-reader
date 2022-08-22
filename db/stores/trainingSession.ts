@@ -75,6 +75,10 @@ class TrainingSessionStore {
     return this.db.find({});
   }
 
+  delete(_id: string) {
+    return this.db.remove({ _id });
+  }
+
   // Todo: implement readActive and archive
   // readActive() {
   //   return this.db.find({ isDone: false }).exec();
