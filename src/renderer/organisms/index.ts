@@ -3,3 +3,4 @@ export { default as Ranking } from './Ranking';
 export { default as Evolution } from './Evolution';
 export { default as TrainingSessions } from './TrainingSessions';
 export { default as AddTrainingSession } from './AddTrainingSession';
+export { default as UpdateTrainingSession } from './UpdateTrainingSession';

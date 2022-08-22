@@ -12,8 +12,8 @@ import {
   TrainingSessions,
   Ranking,
   AddTrainingSession,
+  UpdateTrainingSession,
 } from 'renderer/organisms';
-import UpdateTrainingSession from 'renderer/organisms/UpdateTrainingSession';
 
 const Home = () => {
   return (
