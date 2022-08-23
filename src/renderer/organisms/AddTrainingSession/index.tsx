@@ -76,6 +76,16 @@ const AddTrainingSession = () => {
     [mutate, queryClient, registerAppInitialization, reset, trainingUnits]
   );
 
+  const onEditTrainingUnit = useCallback(
+    (data: TrainingUnit) => {
+      const index = trainingUnits.findIndex((unit) => unit.id === data.id);
+      const newTrainingUnits = [...trainingUnits];
+      newTrainingUnits[index] = data;
+      setTrainingUnits(newTrainingUnits);
+    },
+    [trainingUnits]
+  );
+
   if (isError) {
     setTimeout(() => {
       close();
@@ -152,15 +162,19 @@ const AddTrainingSession = () => {
           error={errors.sessionName?.message}
         />
 
-        {trainingUnits.map(({ target, duration, techniques }: TrainingUnit) => (
-          <EditableTrainingUnit
-            key={target + Math.random()}
-            duration={duration}
-            target={target}
-            techniques={techniques}
-            isEditing
-          />
-        ))}
+        {trainingUnits.map(
+          ({ target, duration, techniques, id }: TrainingUnit) => (
+            <EditableTrainingUnit
+              id={id}
+              key={id}
+              duration={duration}
+              target={target}
+              techniques={techniques}
+              isEditing
+              onEditTrainingUnit={onEditTrainingUnit}
+            />
+          )
+        )}
 
         <AddTrainingUnit onAdd={onAddTrainingUnit} />
         {trainingUnits.length > 0 && (

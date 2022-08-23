@@ -10,6 +10,9 @@
         {
           "type": "object",
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "target": {
               "type": "number"
             },

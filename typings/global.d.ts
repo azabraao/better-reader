@@ -40,6 +40,7 @@ type TechniqueItem = {
 };
 
 type TrainingUnit = {
+  id: string;
   techniques: Technique[];
   target: number;
   duration: number;

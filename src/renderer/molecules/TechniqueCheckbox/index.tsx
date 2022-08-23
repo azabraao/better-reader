@@ -18,8 +18,7 @@ const TechniqueCheckbox = ({
   const onClick = useCallback(() => {
     onSelect({ value, label });
     setIsActive(!isActive);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isActive, label, onSelect, value]);
 
   return (
     <button

@@ -5,6 +5,7 @@ import EditTrainingUnit from '../EditTrainingUnit';
 
 interface TrainingUnitProps extends TrainingUnit {
   isEditing?: boolean;
+  onEditTrainingUnit: (data: TrainingUnit) => void;
 }
 
 const EditableTrainingUnit = ({
@@ -12,6 +13,8 @@ const EditableTrainingUnit = ({
   duration,
   techniques,
   isEditing,
+  id,
+  onEditTrainingUnit,
 }: TrainingUnitProps) => {
   const [shouldEdit, setShouldEdit] = useState<boolean>(false);
 
@@ -19,18 +22,25 @@ const EditableTrainingUnit = ({
     if (isEditing) setShouldEdit(true);
   }, [isEditing]);
 
-  const onEdit = useCallback(() => {
-    setShouldEdit(false);
-  }, []);
+  const onEdit = useCallback(
+    (data: TrainingUnit) => {
+      onEditTrainingUnit(data);
+
+      setShouldEdit(false);
+    },
+    [onEditTrainingUnit]
+  );
 
   if (shouldEdit)
     return (
       <EditTrainingUnit
         onEdit={onEdit}
+        id={id}
         onCancel={() => setShouldEdit(false)}
         defaultValues={{
+          id,
           target,
-          duration,
+          duration: millisecondsToMinutes(duration),
           techniques,
         }}
       />

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { minutesToMilliseconds } from 'renderer/utils';
 import { Button, Title } from 'renderer/atoms';
@@ -39,19 +39,23 @@ const validationSchema = {
   },
 };
 
-const techniques: TechniqueItem[] = [];
-
 interface EditTrainingUnitProps {
   onEdit: (data: TrainingUnit) => void;
   onCancel: VoidFunction;
+  id: string;
   defaultValues?: TrainingUnit;
 }
 
 const EditTrainingUnit = ({
   onEdit,
   onCancel,
+  id,
   defaultValues,
 }: EditTrainingUnitProps) => {
+  const [techniques, setTechniques] = useState<Technique[]>(
+    defaultValues?.techniques || []
+  );
+
   const {
     register,
     handleSubmit,
@@ -61,18 +65,31 @@ const EditTrainingUnit = ({
     formState: { errors },
   } = useForm<TrainingUnit>();
 
-  const onTechniqueSelected = useCallback((technique: TechniqueItem) => {
-    clearErrors('techniques');
-    return techniques.some((item) => technique.value === item.value)
-      ? techniques.splice(techniques.indexOf(technique), 1)
-      : techniques.push(technique);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onTechniqueSelected = useCallback(
+    (technique: TechniqueItem) => {
+      clearErrors('techniques');
+
+      const shouldRemoveTechnique = techniques.some(
+        (item) => technique.value === item
+      );
+
+      return shouldRemoveTechnique
+        ? setTechniques(
+            techniques.splice(techniques.indexOf(technique.value), 1)
+          )
+        : setTechniques([...techniques, technique.value]);
+    },
+    [clearErrors, techniques]
+  );
 
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
-      data.techniques = techniques.map((item) => item.value);
-      data.duration = minutesToMilliseconds(data.duration);
+      const payload = {
+        id,
+        techniques,
+        target: Number(data.target),
+        duration: minutesToMilliseconds(data.duration),
+      };
       if (techniques.length === 0) {
         return setError('techniques', {
           type: 'required',
@@ -80,10 +97,10 @@ const EditTrainingUnit = ({
         });
       }
 
-      onEdit(data);
+      onEdit(payload);
       return reset();
     },
-    [onEdit, reset, setError]
+    [id, onEdit, reset, setError, techniques]
   );
 
   return (

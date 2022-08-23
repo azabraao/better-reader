@@ -45,7 +45,7 @@ interface AddTrainingUnitProps {
 
 const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
   const [isActive, setIsActive] = useState<boolean>();
-  const [techniques, setTechniques] = useState<TechniqueItem[]>([]);
+  const [techniques, setTechniques] = useState<Technique[]>([]);
 
   const {
     register,
@@ -60,18 +60,28 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
     (technique: TechniqueItem) => {
       clearErrors('techniques');
 
-      return techniques.some((item) => technique.value === item.value)
-        ? setTechniques(techniques.splice(techniques.indexOf(technique), 1))
-        : setTechniques([...techniques, technique]);
+      const shouldRemoveTechnique = techniques.some(
+        (item) => technique.value === item
+      );
+
+      return shouldRemoveTechnique
+        ? setTechniques(
+            techniques.splice(techniques.indexOf(technique.value), 1)
+          )
+        : setTechniques([...techniques, technique.value]);
     },
     [clearErrors, techniques]
   );
 
   const onSubmit = useCallback(
     (data: TrainingUnit) => {
-      data.target = Number(data.target);
-      data.techniques = techniques.map((item) => item.value);
-      data.duration = minutesToMilliseconds(data.duration);
+      const payload = {
+        id: Math.random().toString(),
+        target: Number(data.target),
+        techniques,
+        duration: minutesToMilliseconds(data.duration),
+      };
+
       if (techniques.length === 0) {
         return setError('techniques', {
           type: 'required',
@@ -79,9 +89,8 @@ const AddTrainingUnit = ({ onAdd }: AddTrainingUnitProps) => {
         });
       }
 
-      onAdd(data);
+      onAdd(payload);
       reset();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       setTechniques([]);
       return setIsActive(false);
     },
