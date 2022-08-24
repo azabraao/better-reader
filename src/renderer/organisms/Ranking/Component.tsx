@@ -12,7 +12,7 @@ import RankingItems from './components/RankingItems';
 import RankingLoading from './components/RankingLoading';
 
 const dropDownItems = [
-  { label: 'All' },
+  { label: 'All', value: '' },
   ...techniques.map((item) => ({
     ...item,
     icon: <Icon name={item.value as Icon} />,
