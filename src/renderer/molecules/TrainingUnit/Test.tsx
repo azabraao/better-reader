@@ -100,40 +100,44 @@ const Test = ({ techniques, onFinish }: TestProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 pt-4">
-      <TextInput
-        placeholder="999"
-        autoFocus
-        max={999}
-        min={1}
-        maxLength={3}
-        size="sm"
-        label="How many pages did you read?"
-        type="number"
-        textComplement="Pages"
-        {...register('pagesAmount', validationSchema.pagesAmount)}
-        error={errors.pagesAmount?.message}
-      />
-      <TextInput
-        placeholder="999"
-        max={100}
-        maxLength={3}
-        min={1}
-        size="sm"
-        label="Rate your comprehension:"
-        type="number"
-        textComplement="%"
-        {...register('comprehension', validationSchema.comprehension)}
-        error={errors.comprehension?.message}
-      />
-      {shouldWriteDown && (
-        <TextArea
-          placeholder="Write here..."
+    <div className="flex flex-col gap-2 pt-4 lg:pt-0">
+      <div className="flex flex-col md:flex-row gap-10 pb-4">
+        <TextInput
+          placeholder="999"
+          autoFocus
+          max={999}
+          min={1}
+          maxLength={3}
           size="sm"
-          label="Write down the words"
-          {...register('words', validationSchema.words)}
-          error={errors.words?.message}
+          label="How many pages did you read?"
+          type="number"
+          textComplement="Pages"
+          {...register('pagesAmount', validationSchema.pagesAmount)}
+          error={errors.pagesAmount?.message}
         />
+        <TextInput
+          placeholder="999"
+          max={100}
+          maxLength={3}
+          min={1}
+          size="sm"
+          label="Rate your comprehension:"
+          type="number"
+          textComplement="%"
+          {...register('comprehension', validationSchema.comprehension)}
+          error={errors.comprehension?.message}
+        />
+      </div>
+      {shouldWriteDown && (
+        <div className="pb-4">
+          <TextArea
+            placeholder="Write here..."
+            size="sm"
+            label="Write down the words"
+            {...register('words', validationSchema.words)}
+            error={errors.words?.message}
+          />
+        </div>
       )}
       {isError ? (
         <Button fullWidth size="sm" theme="danger">
