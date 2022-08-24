@@ -5,13 +5,8 @@ import { ArrowDown } from 'renderer/atoms/Icon';
 import { Backdrop } from 'renderer/atoms';
 import ListItem from './components/ListItem';
 
-type Item = {
-  label: string;
-  icon?: React.ReactNode;
-};
-
 type DropdownProps = React.PropsWithChildren<{
-  items: Item[];
+  items: DropdownItem[];
   defaultOpen?: boolean;
   onSelected: (item: string) => void;
 }>;
@@ -27,15 +22,15 @@ const Dropdown = ({
   onSelected,
   showButton,
 }: DropdownProps & typeof defaultProps) => {
-  const [selected, setSelected] = useState<Item>(items[0]);
+  const [selected, setSelected] = useState<DropdownItem>(items[0]);
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const closeDropdown = useCallback(() => setIsOpen(false), []);
   const toggleDropdown = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
   const onSelect = useCallback(
-    (item: Item) => {
-      onSelected(item.label);
+    (item: DropdownItem) => {
+      onSelected(item.value);
       setSelected(item);
       setIsOpen(false);
     },
@@ -78,6 +73,7 @@ const Dropdown = ({
               icon={item.icon}
               onSelect={onSelect}
               label={item.label}
+              value={item.value}
             />
           ))}
         </ul>

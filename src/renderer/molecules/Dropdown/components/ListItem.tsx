@@ -1,26 +1,28 @@
 import clsx from 'clsx';
 import { memo } from 'react';
 
-type Item = {
-  label: string;
-  icon?: React.ReactNode;
-};
-
 type ListItemProps = React.PropsWithChildren<{
-  onSelect: (item: Item) => void;
+  onSelect: (item: DropdownItem) => void;
   label: string;
   selected: boolean;
   icon: React.ReactNode;
+  value: string;
 }>;
 
-const ListItem = ({ onSelect, selected, icon, label }: ListItemProps) => (
+const ListItem = ({
+  onSelect,
+  selected,
+  icon,
+  label,
+  value,
+}: ListItemProps) => (
   <li
     onClick={() => {
-      onSelect({ icon, label });
+      onSelect({ icon, label, value });
     }}
     onKeyDown={(event) => {
       if (event.keyCode === 32) {
-        onSelect({ icon, label });
+        onSelect({ icon, label, value });
       }
     }}
     className={clsx(

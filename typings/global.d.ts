@@ -71,3 +71,9 @@ type RankData = {
   rank: PracticeItem[];
   count: number;
 };
+
+type DropdownItem = {
+  label: string;
+  icon?: React.ReactNode;
+  value: string;
+};
