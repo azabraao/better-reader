@@ -18,6 +18,7 @@ const TrainingSessions = () => {
     getTrainingSessions,
     {
       initialData: [],
+      refetchOnWindowFocus: false,
     }
   );
 

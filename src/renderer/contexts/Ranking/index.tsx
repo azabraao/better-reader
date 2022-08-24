@@ -4,7 +4,6 @@ import React, {
   memo,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -30,19 +29,20 @@ interface ViewUserProps {
 export const RankingProvider: React.FC<ViewUserProps> = ({ children }) => {
   const [showOnlyPodium, setShowOnlyPodium] = useState<boolean>(true);
   const [page, setPage] = useState<number>(0);
-  const [rankingData, setRankingData] = useState<PracticeItem[]>([]);
 
   const { isLoading: isLoadingRanking, data } = useQuery(
     ['getRanking', page],
-    () => getRanking({ page, limit: 10 })
+    () => {
+      return getRanking({ page, limit: 10 });
+    },
+    {
+      refetchOnWindowFocus: false,
+    }
   );
 
-  useEffect(() => {
-    if (data?.rank) {
-      setRankingData([...rankingData, ...data.rank]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  const rankingData: PracticeItem[] = useMemo(() => {
+    return data?.rank || [];
+  }, [data?.rank]);
 
   const reachedRankingEnd = useMemo(() => {
     return data?.count === rankingData.length;
