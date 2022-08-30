@@ -28,23 +28,6 @@
           "endsPattern": "(Compiled successfully|Failed to compile)\\.$"
         }
       }
-    },
-    {
-      "type": "shell",
-      "command": "cd ../backend/ && npm run start",
-      "label": "Start Backend",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "runOptions": {
-        "runOn": "folderOpen"
-      },
-      "isBackground": true,
-      "group": "test",
-      "presentation": {
-        "reveal": "always",
-        "panel": "new"
-      }
     }
   ]
 }
