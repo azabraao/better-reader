@@ -1,5 +1,6 @@
 import { memo, useState } from 'react';
 import { Trash } from 'renderer/atoms/Icon';
+import { ifSpaceBar } from 'renderer/utils';
 import DeleteBottomSheet from './DeleteBottomSheet';
 
 const DeleteSession = () => {
@@ -20,8 +21,8 @@ const DeleteSession = () => {
         className="flex gap-2 pb-4 pt-2 px-4 text-white text-base"
         onClick={onClick}
         role="button"
-        tabIndex={0}
-        onKeyDown={onClick}
+        tabIndex={modalIsOpen ? 0 : 1}
+        onKeyDown={(e) => ifSpaceBar(e, onClick)}
       >
         <Trash />
         <span>Delete Training Session</span>

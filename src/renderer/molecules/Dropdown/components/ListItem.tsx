@@ -7,6 +7,7 @@ type ListItemProps = React.PropsWithChildren<{
   selected: boolean;
   icon: React.ReactNode;
   value: string;
+  DropdownIsOpen: boolean;
 }>;
 
 const ListItem = ({
@@ -15,13 +16,14 @@ const ListItem = ({
   icon,
   label,
   value,
+  DropdownIsOpen,
 }: ListItemProps) => (
   <li
     onClick={() => {
       onSelect({ icon, label, value });
     }}
     onKeyDown={(event) => {
-      if (event.keyCode === 32) {
+      if (event.key === ' ') {
         onSelect({ icon, label, value });
       }
     }}
@@ -30,7 +32,7 @@ const ListItem = ({
       selected && 'bg-muted font-bold text-black'
     )}
     role="menuitem"
-    tabIndex={0}
+    tabIndex={DropdownIsOpen ? 0 : -1}
   >
     <div className="flex items-center">
       <span>{icon}</span>

@@ -2,10 +2,11 @@ import clsx from 'clsx';
 import { memo, useCallback, useState } from 'react';
 import { Backdrop } from 'renderer/atoms';
 import { ThreeDots } from 'renderer/atoms/Icon';
+import { ifSpaceBar } from 'renderer/utils';
 import DeleteSession from './components/DeleteSession';
 import EditSession from './components/EditSession';
 
-const OptionsDown = () => {
+const OptionsDropdown = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onThreeDotsClick = useCallback((e: { stopPropagation: () => void }) => {
@@ -29,16 +30,20 @@ const OptionsDown = () => {
             : 'pointer-events-none opacity-0 bottom-2/4'
         )}
       >
-        <EditSession />
-        <DeleteSession />
+        {isOpen && (
+          <>
+            <EditSession />
+            <DeleteSession />
+          </>
+        )}
       </div>
       <div
         role="button"
         tabIndex={0}
-        onKeyDown={onThreeDotsClick}
+        onKeyDown={(e) => ifSpaceBar(e, onThreeDotsClick)}
         onClick={onThreeDotsClick}
         data-role="action"
-        className="opacity-0 pointer-events-none transition-opacity duration-150"
+        className="opacity-0 pointer-events-none transition-opacity duration-150 focus:pointer-events focus:opacity-100"
       >
         <ThreeDots className="absolute top-1 right-0 text-white" />
       </div>
@@ -46,4 +51,4 @@ const OptionsDown = () => {
   );
 };
 
-export default memo(OptionsDown);
+export default memo(OptionsDropdown);

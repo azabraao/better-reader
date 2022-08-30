@@ -20,7 +20,7 @@ const TrainingBottomSheet = ({ session, close }: TrainingBottomSheetProps) => {
           <TrainingUnit key={Math.random()} {...unit} index={index} />
         ))}
       </div>
-      <Control />
+      {isOpen && <Control />}
     </BottomSheet>
   );
 };

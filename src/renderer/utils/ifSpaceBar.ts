@@ -1,9 +1,15 @@
 export const ifSpaceBar = (
   event: React.KeyboardEvent<HTMLDivElement>,
-  callback: () => void
+  callback:
+    | VoidFunction
+    | ((
+        e:
+          | React.KeyboardEvent<HTMLDivElement>
+          | React.MouseEvent<HTMLDivElement>
+      ) => void)
 ) => {
-  if (event.keyCode === 32) {
+  if (event.key === ' ') {
     event.preventDefault();
-    callback();
+    callback(event);
   }
 };

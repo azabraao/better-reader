@@ -74,6 +74,7 @@ const Dropdown = ({
               onSelect={onSelect}
               label={item.label}
               value={item.value}
+              DropdownIsOpen={isOpen}
             />
           ))}
         </ul>

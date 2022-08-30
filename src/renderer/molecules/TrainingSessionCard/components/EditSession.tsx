@@ -1,13 +1,18 @@
 import { memo } from 'react';
 import { Edit } from 'renderer/atoms/Icon';
 import { useUpdateTrainingSession } from 'renderer/hooks';
+import { ifSpaceBar } from 'renderer/utils';
 import { useTrainingSessionCard } from '../Context';
 
 const EditSession = () => {
   const { session } = useTrainingSessionCard();
   const { openUpdateTrainingSession } = useUpdateTrainingSession();
 
-  const onClick = (event: { stopPropagation: () => void }) => {
+  const onClick = (
+    event:
+      | React.KeyboardEvent<HTMLDivElement>
+      | React.MouseEvent<HTMLDivElement>
+  ) => {
     event.stopPropagation();
     openUpdateTrainingSession(session);
   };
@@ -18,7 +23,7 @@ const EditSession = () => {
       onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={onClick}
+      onKeyDown={(e) => ifSpaceBar(e, onClick)}
     >
       <Edit />
       <span>Edit Training Session</span>

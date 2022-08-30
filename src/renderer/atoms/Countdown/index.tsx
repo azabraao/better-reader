@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useAudioFeedback, useInterval } from 'renderer/hooks';
 import { useTrainingSessionCard } from 'renderer/molecules/TrainingSessionCard/Context';
-import { twoDigits } from 'renderer/utils';
+import { ifSpaceBar, twoDigits } from 'renderer/utils';
 import Icon from '../Icon';
 
 const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -29,6 +29,7 @@ const Countdown = ({
   const minutesToDisplay = minutesRemaining % 60;
 
   useEffect(() => {
+    // TODO: remove this hack
     if (isOnPreCountdown) {
       countdownTick.play();
       setTimeout(() => {
@@ -76,7 +77,7 @@ const Countdown = ({
   return (
     <div
       onClick={handleStart}
-      onKeyDown={handleStart}
+      onKeyDown={(e) => ifSpaceBar(e, handleStart)}
       tabIndex={0}
       role="button"
       className={clsx(
