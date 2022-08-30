@@ -94,6 +94,7 @@ const Test = ({ techniques, onFinish }: TestProps) => {
       {
         onSuccess: () => {
           queryClient.invalidateQueries(['getRanking']);
+          queryClient.invalidateQueries(['getPracticesEvolution']);
         },
       }
     );

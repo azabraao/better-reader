@@ -11,10 +11,14 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Evolution = () => {
-  const { isLoading, data } = useQuery(['getPractices'], getPractices, {
-    initialData: [],
-    refetchOnWindowFocus: false,
-  });
+  const { isLoading, data } = useQuery(
+    ['getPracticesEvolution'],
+    getPractices,
+    {
+      initialData: [],
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const noPractices = useMemo(() => {
     return data.length === 0;
