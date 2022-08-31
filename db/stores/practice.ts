@@ -43,7 +43,7 @@ class PracticeStore {
 
     const isValid = this.validate(data);
 
-    const points = ppm + words * 0.5 * comprehension * 1;
+    const points = Math.round(ppm + words * 0.5 * comprehension * 1);
 
     const practice = {
       comprehension,
