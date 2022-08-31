@@ -26,29 +26,29 @@ const validationSchema = {
   comprehension: {
     required: {
       value: true,
-      message: 'please enter a comprehension',
+      message: 'O quanto você compreendeu?',
     },
     max: {
       value: 100,
-      message: 'comprehension must be less than 101',
+      message: 'Compreensão precisa ser no máximo 100%',
     },
     min: {
       value: 0,
-      message: 'comprehension must be greater than 0',
+      message: 'Compreensão precisa ser no mínimo 0%',
     },
   },
   pagesAmount: {
     required: {
       value: true,
-      message: 'please enter a pages amount',
+      message: 'Quantas páginas você leu?',
     },
     max: {
       value: 999,
-      message: 'pages amount must be less than 1000',
+      message: 'No máximo 999',
     },
     min: {
       value: 0,
-      message: 'pages amount must be greater than 0',
+      message: 'No mínimo 0',
     },
   },
 };
@@ -102,17 +102,28 @@ const Test = ({ techniques, onFinish }: TestProps) => {
 
   return (
     <div className="flex flex-col gap-2 pt-4 lg:pt-0">
+      {shouldWriteDown && (
+        <div className="pb-4">
+          <TextArea
+            placeholder="Escreva aqui..."
+            size="sm"
+            label="Anote as palavras"
+            autoFocus
+            {...register('words', validationSchema.words)}
+            error={errors.words?.message}
+          />
+        </div>
+      )}
       <div className="flex flex-col md:flex-row gap-10 pb-4">
         <TextInput
           placeholder="999"
-          autoFocus
           max={999}
           min={1}
           maxLength={3}
           size="sm"
-          label="How many pages did you read?"
+          label="Quantas páginas você leu?"
           type="number"
-          textComplement="Pages"
+          textComplement="Páginas"
           {...register('pagesAmount', validationSchema.pagesAmount)}
           error={errors.pagesAmount?.message}
         />
@@ -122,35 +133,24 @@ const Test = ({ techniques, onFinish }: TestProps) => {
           maxLength={3}
           min={1}
           size="sm"
-          label="Rate your comprehension:"
+          label="Avalie sua compreensão:"
           type="number"
           textComplement="%"
           {...register('comprehension', validationSchema.comprehension)}
           error={errors.comprehension?.message}
         />
       </div>
-      {shouldWriteDown && (
-        <div className="pb-4">
-          <TextArea
-            placeholder="Write here..."
-            size="sm"
-            label="Write down the words"
-            {...register('words', validationSchema.words)}
-            error={errors.words?.message}
-          />
-        </div>
-      )}
       {isError ? (
         <Button fullWidth size="sm" theme="danger">
-          There was an error, please try again
+          Houve um erro, tente novamente
         </Button>
       ) : isLoading ? (
         <Button fullWidth size="sm">
-          Loading...
+          Carregando...
         </Button>
       ) : (
         <Button fullWidth size="sm" onClick={handleSubmit(onSubmit)}>
-          Save this lesson
+          Salvar esta lição
         </Button>
       )}
     </div>
