@@ -59,9 +59,8 @@ describe('Ranking', () => {
       setIsAppInitialized: jest.fn,
     });
 
-    const { debug } = render(<Ranking />);
+    render(<Ranking />);
 
-    debug();
     expect(screen.queryByText('Sem itens para mostrar')).toBeInTheDocument();
   });
 
