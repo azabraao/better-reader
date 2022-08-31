@@ -12,7 +12,7 @@ import RankingItems from './components/RankingItems';
 import RankingLoading from './components/RankingLoading';
 
 const dropDownItems = [
-  { label: 'All', value: '' },
+  { label: 'Tudo', value: '' },
   ...techniques.map((item) => ({
     ...item,
     icon: <Icon name={item.value as Icon} />,
@@ -20,7 +20,7 @@ const dropDownItems = [
 ];
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <Section title="Performance Ranking">{children}</Section>
+  <Section title="Ranking de performance">{children}</Section>
 );
 
 const Ranking = () => {
@@ -70,7 +70,7 @@ const Ranking = () => {
           <div className="max-w-min flex flex-col items-center justify-center gap-6">
             <NoRankingData />
             <span className="text-base text-white text-center w-full block">
-              No trainings to rank yet.
+              Sem treinos para ranquear
             </span>
           </div>
         </div>
@@ -81,7 +81,7 @@ const Ranking = () => {
   return (
     <Wrapper>
       <div className="my-6 flex gap-4 flex-col">
-        <div className="text-white">Technique</div>
+        <div className="text-white">Técnica</div>
         <Dropdown items={dropDownItems} onSelected={setFilterByTechnique} />
         <div
           tabIndex={0}
@@ -91,7 +91,7 @@ const Ranking = () => {
           role="button"
         >
           {writingDown ? <SquareChecked /> : <SquareUnchecked />}
-          <span className="ml-2">Writing down words</span>
+          <span className="ml-2">Anotando palavras</span>
         </div>
       </div>
       <RankingContainer>

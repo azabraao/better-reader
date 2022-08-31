@@ -25,7 +25,7 @@ const RankingContentLoader = () => {
           className="flex flex-row items-center justify-center cursor-pointer text-muted"
           onClick={minimizePodium}
         >
-          <span className="font-medium mr-2">See less</span>
+          <span className="font-medium mr-2">Ver menos</span>
           <ArrowTop />
         </button>
         {!reachedRankingEnd && (
@@ -34,7 +34,7 @@ const RankingContentLoader = () => {
             className="flex flex-row items-center justify-center cursor-pointer text-muted"
             onClick={onLoadMoreClick}
           >
-            <span className="font-medium mr-2">Load more</span>
+            <span className="font-medium mr-2">Carregar mais</span>
             <ArrowDown />
           </button>
         )}
@@ -48,7 +48,7 @@ const RankingContentLoader = () => {
       className="p-2 flex cursor-pointer text-muted"
       onClick={onLoadMoreClick}
     >
-      <span className="mr-2">See more</span>
+      <span className="mr-2">Ver mais</span>
       <ArrowRight />
     </button>
   );

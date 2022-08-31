@@ -13,7 +13,7 @@ const WordsPerPageInput = () => {
 
   return (
     <div className="flex gap-2 items-center mb-5">
-      <span className="text-base">Words per page</span>
+      <span className="text-base">Palavras por página</span>
       <TextInput
         placeholder="240"
         type="number"

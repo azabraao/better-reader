@@ -25,7 +25,7 @@ const DeleteSession = () => {
         onKeyDown={(e) => ifSpaceBar(e, onClick)}
       >
         <Trash />
-        <span>Delete Training Session</span>
+        <span>Deletar sessão de treino</span>
       </div>
     </>
   );

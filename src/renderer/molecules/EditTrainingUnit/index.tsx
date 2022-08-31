@@ -11,34 +11,33 @@ const validationSchema = {
     required: { value: true, message: 'Provide a target' },
     min: {
       value: 300,
-      message: 'Target must be at least 300',
+      message: 'Objetivo tem de ser pelo menos 300',
     },
     max: {
       value: 20000,
-      message: 'Target must be at most 20000',
+      message: 'Objetivo tem de ser no máximo 20000',
     },
     maxLength: {
       value: 5,
-      message: 'Target must be between 300 and 20000',
+      message: 'Objetivo tem de ser entre 300 e 20000',
     },
     minLength: {
       value: 3,
-      message: 'Target must be between 300 and 20000',
+      message: 'Objetivo tem de ser entre 300 e 20000',
     },
   },
   duration: {
-    required: { value: true, message: 'Provide a duration' },
+    required: { value: true, message: 'Forneça uma duração' },
     maxLength: {
       value: 2,
-      message: 'Duration must be between 1 and 10',
+      message: 'Duração tem de ser entre 1 e 10',
     },
     minLength: {
       value: 1,
-      message: 'Duration must be between 1 and 10',
+      message: 'Duração tem de ser entre 1 e 10',
     },
   },
 };
-
 interface EditTrainingUnitProps {
   onEdit: (data: TrainingUnit) => void;
   onCancel: VoidFunction;
@@ -93,7 +92,7 @@ const EditTrainingUnit = ({
       if (techniques.length === 0) {
         return setError('techniques', {
           type: 'required',
-          message: 'Please select at least one technique',
+          message: 'Selecione pelo menos uma técnica',
         });
       }
 
@@ -108,7 +107,7 @@ const EditTrainingUnit = ({
       <div className="p-4 border-1 border-muted rounded-lg flex flex-col gap-4">
         <div className="flex flex-col gap-10 lg:flex-row">
           <div className="flex gap-2 flex-col">
-            <Title level={3}>Whats the PPM target?</Title>
+            <Title level={3}>Qual é o objetivo em PPM?</Title>
             <div className="flex gap-2 items-start">
               <TextInput
                 max={20000}
@@ -125,7 +124,7 @@ const EditTrainingUnit = ({
             </div>
           </div>
           <div className="flex gap-2 flex-col">
-            <Title level={3}>Practice duration</Title>
+            <Title level={3}>Duração da prática</Title>
             <div className="flex gap-2 items-start">
               <TextInput
                 max={10}
@@ -133,7 +132,7 @@ const EditTrainingUnit = ({
                 size="sm"
                 type="number"
                 placeholder="10"
-                textComplement="Minutes"
+                textComplement="Minutos"
                 {...register('duration', validationSchema.duration)}
                 error={errors.duration?.message}
                 defaultValue={defaultValues?.duration}
@@ -148,10 +147,10 @@ const EditTrainingUnit = ({
         />
         <div className="flex flex-col gap-4 pt-3">
           <Button fullWidth theme="info" size="sm" type="submit">
-            Save training unit
+            Salvar unidade de treinamento
           </Button>
           <Button theme="transparent" fullWidth size="sm" onClick={onCancel}>
-            Cancel
+            Cancelar
           </Button>
         </div>
       </div>

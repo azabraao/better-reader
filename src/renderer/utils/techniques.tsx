@@ -1,10 +1,10 @@
-export const writingDownWords = 'Writing words';
+export const writingDownWords = 'Anotando palavras';
 
 export const techniques: TechniqueItem[] = [
-  { label: 'Sweeping', value: 'sweeping' },
+  { label: 'Varredura', value: 'sweeping' },
   { label: writingDownWords, value: 'writing' },
-  { label: '3 fixations', value: '3_fixations' },
-  { label: '2 fixations', value: '2_fixations' },
+  { label: '3 fixações', value: '3_fixations' },
+  { label: '2 fixações', value: '2_fixations' },
   { label: 'Rastreio', value: 'tracking' },
   { label: 'Sondagem', value: 'scanning' },
   { label: 'Centralizada', value: 'centered' },

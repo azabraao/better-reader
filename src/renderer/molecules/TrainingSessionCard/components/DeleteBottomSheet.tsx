@@ -33,14 +33,14 @@ const DeleteBottomSheet = ({ isOpen, close }: DeleteBottomSheetProps) => {
         close();
       },
       onError: () => {
-        toast.error('Error on deleting training session, please try again');
+        toast.error('Erro ao deletar sessão de treino. Tente novamente.');
         close();
       },
     });
   };
 
   return (
-    <BottomSheet size="sm" title="Are you sure?" isOpen={isOpen} close={close}>
+    <BottomSheet size="sm" title="Tem certeza?" isOpen={isOpen} close={close}>
       <div className="flex flex-col gap-4 pb-6 pt-2">
         <Button
           size="sm"
@@ -49,7 +49,7 @@ const DeleteBottomSheet = ({ isOpen, close }: DeleteBottomSheetProps) => {
           onClick={handleDelete}
           disabled={isLoading}
         >
-          {isLoading ? 'Deleting...' : 'Yes, delete this training session'}
+          {isLoading ? 'Deletando...' : 'Sim, delete essa sessão de treino'}
         </Button>
         <Button
           fullWidth
@@ -60,7 +60,7 @@ const DeleteBottomSheet = ({ isOpen, close }: DeleteBottomSheetProps) => {
           size="sm"
           disabled={isLoading}
         >
-          No, don't delete
+          Não, não delete
         </Button>
       </div>
     </BottomSheet>

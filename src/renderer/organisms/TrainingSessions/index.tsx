@@ -28,7 +28,7 @@ const TrainingSessions = () => {
 
   return (
     <>
-      <Section title="Training Sessions" actions={<SectionActionsIcons />}>
+      <Section title="Sessões de Treino" actions={<SectionActionsIcons />}>
         <div
           className={clsx(
             'flex flex-wrap gap-4 no-scrollbar md:grid md:grid-cols-3',

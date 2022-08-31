@@ -13,7 +13,7 @@ const AddTrainingUnitButton = ({ onClick }: AddTrainingUnitButtonProps) => {
         type="button"
         className="flex justify-center items-center text-sm gap-2 w-full pb-2 pt-2"
       >
-        <PlusClean /> <span>Add training unit</span>
+        <PlusClean /> <span>Adicionar unidade de treinamento</span>
       </button>
     </div>
   );

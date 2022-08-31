@@ -127,7 +127,7 @@ const Chart = ({ data }: ChartProps) => {
               showPoints && 'bg-highlight'
             )}
           />
-          Points
+          Pontos
         </div>
         <div
           onKeyDown={(e) => ifSpaceBar(e, toggleShowPoints)}
@@ -142,7 +142,7 @@ const Chart = ({ data }: ChartProps) => {
               showComprehension && 'bg-danger'
             )}
           />
-          Comprehension
+          Compreensão
         </div>
         <div
           onKeyDown={(e) => ifSpaceBar(e, toggleShowPoints)}
@@ -157,7 +157,7 @@ const Chart = ({ data }: ChartProps) => {
               showWPM && 'bg-success'
             )}
           />
-          Words Per Minute
+          Palavras por minuto
         </div>
       </div>
     </div>

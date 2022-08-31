@@ -92,7 +92,7 @@ const Countdown = ({
             {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
           </span>
         ) : (
-          'Start now'
+          'Começar agora'
         )}
       </div>
     </div>

@@ -7,7 +7,7 @@ import Chart from './Chart';
 import LoadingState from './LoadingState';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-  <Section title="Evolution Over Time">{children}</Section>
+  <Section title="Evolução">{children}</Section>
 );
 
 const Evolution = () => {
@@ -31,7 +31,7 @@ const Evolution = () => {
           <div className="max-w-min flex flex-col items-center justify-center gap-6">
             <NoEvolutionData />
             <span className="text-base text-white text-center w-full block">
-              Start training to begin tracking your progress!
+              Comece a treinar para ver o ranking de evolução
             </span>
           </div>
         </div>

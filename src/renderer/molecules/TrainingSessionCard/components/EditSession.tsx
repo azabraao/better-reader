@@ -26,7 +26,7 @@ const EditSession = () => {
       onKeyDown={(e) => ifSpaceBar(e, onClick)}
     >
       <Edit />
-      <span>Edit Training Session</span>
+      <span>Editar sessão de treino</span>
     </div>
   );
 };

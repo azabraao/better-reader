@@ -1,5 +1,5 @@
 export const monthNameByDate = (date: Date): string => {
-  const monthName = new Date(date).toLocaleString('default', {
+  const monthName = new Date(date).toLocaleString('pt-BR', {
     month: 'long',
   });
 

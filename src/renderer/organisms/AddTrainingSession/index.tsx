@@ -13,7 +13,7 @@ import { addTrainingSession } from 'renderer/services';
 
 const validationSchema = {
   sessionName: {
-    required: { value: true, message: 'Provide a name' },
+    required: { value: true, message: 'Escolha um nome' },
   },
 };
 
@@ -104,7 +104,7 @@ const AddTrainingSession = () => {
         <div className="flex p-8 gap-4 justify-center flex-col items-center">
           <Error />
           <span className="text-base">
-            Sorry! There was an error, try again later
+            Desculpe, ocorreu um erro ao tentar criar a sessão de treino.
           </span>
         </div>
       </BottomSheet>
@@ -128,7 +128,7 @@ const AddTrainingSession = () => {
       >
         <div className="flex px-3 py-8 gap-4 justify-center flex-col items-center">
           <Checked />
-          <span className="text-base">Training saved!</span>
+          <span className="text-base">Treino salvo!</span>
         </div>
       </BottomSheet>
     );
@@ -141,7 +141,7 @@ const AddTrainingSession = () => {
           <div>
             <Spinner />
           </div>
-          <span className="text-base">Loading</span>
+          <span className="text-base">Carregando</span>
         </div>
       </BottomSheet>
     );
@@ -156,8 +156,8 @@ const AddTrainingSession = () => {
     >
       <div className="flex flex-col gap-4 pb-5">
         <TextInput
-          label="Name your session:"
-          placeholder="Focused on speed"
+          label="Nomeie sua sessão:"
+          placeholder="Focado em velocidade"
           {...register('sessionName', validationSchema.sessionName)}
           error={errors.sessionName?.message}
         />
@@ -183,7 +183,7 @@ const AddTrainingSession = () => {
             onClick={handleSubmit(onSubmit)}
             theme="primary"
           >
-            Save training session
+            Salvar sessão de treino
           </Button>
         )}
       </div>

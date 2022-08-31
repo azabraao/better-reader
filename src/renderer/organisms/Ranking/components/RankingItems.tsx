@@ -18,7 +18,7 @@ const RankingItems = ({ items }: RankingItemsProps) => {
   }, [items]);
 
   if (items.length === 0) {
-    return <p className="text-white">No items to show</p>;
+    return <p className="text-white">Sem itens para mostrar</p>;
   }
 
   return (

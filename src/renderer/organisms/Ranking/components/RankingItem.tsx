@@ -43,7 +43,7 @@ const RankingItem = ({
           {points}pts
         </span>
         <span className="text-muted font-medium text-xs whitespace-nowrap">
-          {words} words
+          {words} palavras
         </span>
       </div>
       <div className="flex flex-col">
@@ -56,12 +56,12 @@ const RankingItem = ({
           {ppm}ppm
         </span>
         <span className="text-muted font-medium text-xs whitespace-nowrap">
-          %{comprehension} comprehension
+          %{comprehension} compreensão
         </span>
       </div>
       <div className="flex flex-col items-start xs:items-end justify-end flex-grow">
         <span className="text-muted font-medium text-xs text-right">
-          {new Date(date).toLocaleDateString('en-US', {
+          {new Date(date).toLocaleDateString('pt-BR', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',

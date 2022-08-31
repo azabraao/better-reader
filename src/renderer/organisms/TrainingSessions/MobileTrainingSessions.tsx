@@ -25,7 +25,7 @@ const MobileTrainingSessions = ({ sessions }: MobileTrainingSessionsProps) => {
       <BottomSheet isOpen={isOpen} close={close}>
         <Section
           justifyBetween
-          title="Training Sessions"
+          title="Sessões de Treino"
           actions={<SectionActionsIcons />}
         >
           <div className="flex flex-wrap gap-4 no-scrollbar overflow-y-auto md:grid md:grid-cols-3">
