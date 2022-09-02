@@ -13,3 +13,4 @@ export { default as Checked } from './Checked';
 export { default as Countdown } from './Countdown';
 export { default as CountdownWaiting } from './CountdownWaiting';
 export { default as TimedGrowing } from './TimedGrowing';
+export { default as CountdownButton } from './CountdownButton';

@@ -28,7 +28,7 @@ const TrainingUnit = ({
     setActiveTrainingIndex,
     setTrainingIsFinished,
     isOnPreCountdown,
-    setIsOnPreCountdown,
+    setTrainingUnitIsFinished,
   } = useTrainingSessionCard();
   const [isTesting, setIsTesting] = useState<boolean>(false);
   const [isFinished, setIsFinished] = useState<boolean>(false);
@@ -58,8 +58,7 @@ const TrainingUnit = ({
       activeTrainingIndex < session.units.length - 1;
 
     if (shouldStartNextLesson) {
-      setIsOnPreCountdown(true);
-      setActiveTrainingIndex(activeTrainingIndex + 1);
+      setTrainingUnitIsFinished(true);
     } else {
       setActiveTrainingIndex(-1);
       setTrainingIsFinished(true);

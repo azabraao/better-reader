@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAudioFeedback, useInterval } from 'renderer/hooks';
 import { useTrainingSessionCard } from 'renderer/molecules/TrainingSessionCard/Context';
 import { ifSpaceBar, twoDigits } from 'renderer/utils';
+import CountdownButton from '../CountdownButton';
 import Icon from '../Icon';
 
 const minutesToSeconds = (minutes: number) => minutes * 60;
@@ -75,27 +76,15 @@ const Countdown = ({
   );
 
   return (
-    <div
-      onClick={handleStart}
-      onKeyDown={(e) => ifSpaceBar(e, handleStart)}
-      tabIndex={0}
-      role="button"
-      className={clsx(
-        'flex justify-center py-6',
-        isStarted && 'pointer-events-none cursor-not-allowed'
+    <CountdownButton active={isStarted} onClick={handleStart}>
+      {isStarted || isOnPreCountdown ? (
+        <span>
+          {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
+        </span>
+      ) : (
+        'Começar agora'
       )}
-    >
-      <div className="flex gap-2 items-center">
-        <Icon name="play" />
-        {isStarted || isOnPreCountdown ? (
-          <span>
-            {twoDigits(minutesToDisplay)}:{twoDigits(secondsToDisplay)}
-          </span>
-        ) : (
-          'Começar agora'
-        )}
-      </div>
-    </div>
+    </CountdownButton>
   );
 };
 

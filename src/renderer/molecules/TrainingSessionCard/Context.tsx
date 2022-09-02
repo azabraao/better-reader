@@ -14,6 +14,8 @@ interface TrainingSessionCardContextValues {
   wordsPerPage: number;
   trainingIsFinished: boolean;
   isOnPreCountdown: boolean;
+  trainingUnitIsFinished: boolean;
+  setTrainingUnitIsFinished: (value: boolean) => void;
   setIsOnPreCountdown: (isOnPreCountdown: boolean) => void;
   setTrainingIsFinished: (value: boolean) => void;
   setWordsPerPage: (wordsPerPage: number) => void;
@@ -46,6 +48,9 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
   const [wordsPerPage, setWordsPerPage] = useState<number>(initialWordsPerPage);
   const [trainingIsFinished, setTrainingIsFinished] = useState<boolean>(false);
   const [isOnPreCountdown, setIsOnPreCountdown] = useState<boolean>(false);
+  const [trainingUnitIsFinished, setTrainingUnitIsFinished] =
+    useState<boolean>(false);
+
   const { isOpen } = useTrainingUnitBottomSheet();
 
   useEffect(() => {
@@ -55,6 +60,7 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
       setIsWaiting(false);
       setIsOnPreCountdown(false);
       setTrainingIsFinished(false);
+      setTrainingUnitIsFinished(false);
     }
   }, [isOpen]);
 
@@ -68,8 +74,10 @@ export const TrainingSessionCardProvider: React.FC<ViewUserProps> = ({
         wordsPerPage,
         trainingIsFinished,
         isOnPreCountdown,
+        setTrainingUnitIsFinished,
         setIsOnPreCountdown,
         setTrainingIsFinished,
+        trainingUnitIsFinished,
         setWordsPerPage,
         setTrainingStarted,
         setActiveTrainingIndex,

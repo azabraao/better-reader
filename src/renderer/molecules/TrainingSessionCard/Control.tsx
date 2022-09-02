@@ -1,5 +1,10 @@
 import { memo } from 'react';
-import { Button, Countdown, CountdownWaiting } from 'renderer/atoms';
+import {
+  Button,
+  Countdown,
+  CountdownButton,
+  CountdownWaiting,
+} from 'renderer/atoms';
 import { millisecondsToMinutes } from 'renderer/utils';
 import { useTrainingUnitBottomSheet } from './BottomSheetContext';
 import { useTrainingSessionCard } from './Context';
@@ -9,10 +14,14 @@ const SessionControl = () => {
     activeTrainingIndex,
     isWaiting,
     trainingIsFinished,
+    trainingUnitIsFinished,
     session,
+    setIsOnPreCountdown,
+    setActiveTrainingIndex,
     setIsWaiting,
     trainingStarted,
     setTrainingStarted,
+    setTrainingUnitIsFinished,
   } = useTrainingSessionCard();
 
   const { closeBottomSheet, isOpen: trainingBottomSheetIsOpen } =
@@ -29,6 +38,21 @@ const SessionControl = () => {
           Close training
         </Button>
       </div>
+    );
+  }
+
+  if (trainingUnitIsFinished) {
+    return (
+      <CountdownButton
+        onClick={() => {
+          setIsOnPreCountdown(true);
+          setActiveTrainingIndex(activeTrainingIndex + 1);
+          setTrainingUnitIsFinished(false);
+        }}
+        active
+      >
+        Começar próxima
+      </CountdownButton>
     );
   }
 

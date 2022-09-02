@@ -95,7 +95,7 @@ const Chart = ({ data }: ChartProps) => {
             <Line
               dot={false}
               type="monotone"
-              dataKey="words"
+              dataKey="comprehension"
               stroke="#E53170"
               strokeWidth={5}
             />
