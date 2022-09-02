@@ -36,8 +36,8 @@ class PracticeStore {
   async create({ words = 0, ppm, comprehension, techniques }: PracticePayload) {
     const data = {
       words,
-      ppm,
-      comprehension,
+      ppm: Math.round(ppm),
+      comprehension: Math.round(comprehension),
       techniques,
     };
 
