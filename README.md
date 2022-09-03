@@ -26,6 +26,6 @@ comprehension = percentage of confidence you have on what you just read
 wordsWeight = to note words has a weight of 0.5
 comprehensionWeight = the comprehension is the more important, so has a weight of 1
 
-points = ppm + words * 0.5 * comprehension * 1
+points = wpm + words * 0.5 * comprehension * 1
 
 ```
