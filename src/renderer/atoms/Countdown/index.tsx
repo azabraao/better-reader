@@ -1,12 +1,10 @@
 /* eslint-disable no-nested-ternary */
 
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { useAudioFeedback, useInterval } from 'renderer/hooks';
 import { useTrainingSessionCard } from 'renderer/molecules/TrainingSessionCard/Context';
-import { ifSpaceBar, twoDigits } from 'renderer/utils';
+import { twoDigits } from 'renderer/utils';
 import CountdownButton from '../CountdownButton';
-import Icon from '../Icon';
 
 const minutesToSeconds = (minutes: number) => minutes * 60;
 
