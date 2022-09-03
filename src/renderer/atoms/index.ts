@@ -14,3 +14,4 @@ export { default as Countdown } from './Countdown';
 export { default as CountdownWaiting } from './CountdownWaiting';
 export { default as TimedGrowing } from './TimedGrowing';
 export { default as CountdownButton } from './CountdownButton';
+export { default as PerformanceBadge } from './PerformanceBadge';

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { memo, useEffect, useState } from 'react';
-import { TimedGrowing } from 'renderer/atoms';
+import { PerformanceBadge, TimedGrowing } from 'renderer/atoms';
 import Icon from 'renderer/atoms/Icon';
 import { useAudioFeedback } from 'renderer/hooks';
 import { millisecondsToMinutes, techniquesToItems } from 'renderer/utils';
@@ -34,6 +34,9 @@ const TrainingUnit = ({
   const [isFinished, setIsFinished] = useState<boolean>(false);
   const isActive = trainingStarted && activeTrainingIndex === index;
   const { lessonBell } = useAudioFeedback();
+  const [testResults, setTestResults] = useState<TestResults>(
+    {} as TestResults
+  );
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -50,7 +53,8 @@ const TrainingUnit = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, isOnPreCountdown]);
 
-  const onLessonFinish = () => {
+  const onLessonFinish = (results: TestResults) => {
+    setTestResults(results);
     setIsFinished(true);
     setIsTesting(false);
     setIsWaiting(false);
@@ -70,10 +74,19 @@ const TrainingUnit = ({
   return (
     <div
       className={clsx(
-        'border-2 border-solid rounded-lg overflow-hidden',
-        isFinished && 'border-success-300 text-success-300'
+        'border-2 border-solid rounded-lg relative',
+        isFinished ? 'border-success-300 text-success-300' : 'overflow-hidden'
       )}
     >
+      {isFinished && (
+        <div className="absolute -right-2 -top-3 z-10">
+          <PerformanceBadge
+            pts={testResults.pts}
+            wpm={testResults.wpm}
+            target={target}
+          />
+        </div>
+      )}
       <div className="flex flex-wrap gap-y-2 md:gap-y-4 gap-x-5 w-full relative p-2 md:p-4">
         <TimedGrowing
           start={isActive && !isOnPreCountdown}

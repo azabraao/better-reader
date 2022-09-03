@@ -1,16 +1,17 @@
 /* eslint-disable no-nested-ternary */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from 'renderer/atoms';
 import { addPractice } from 'renderer/services';
+import { calculatePracticePoints } from 'renderer/utils';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import { useTrainingSessionCard } from '../TrainingSessionCard/Context';
 
 interface TestProps {
   techniques: TechniqueItem[];
-  onFinish: () => void;
+  onFinish: (results: TestResults) => void;
 }
 
 type TestFormData = {
@@ -61,17 +62,10 @@ const Test = ({ techniques, onFinish }: TestProps) => {
   const { wordsPerPage } = useTrainingSessionCard();
 
   const queryClient = useQueryClient();
-  const { isError, isLoading, isSuccess, mutate } = useMutation(
+  const { isError, isLoading, mutate } = useMutation(
     ['addPractice'],
     addPractice
   );
-
-  useEffect(() => {
-    if (isSuccess) {
-      onFinish();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
 
   const {
     register,
@@ -82,17 +76,25 @@ const Test = ({ techniques, onFinish }: TestProps) => {
   const onSubmit = (data: TestFormData) => {
     const words = data.words?.trim()?.split(' ')?.length;
 
-    const ppm = wordsPerPage * Number(data.pagesAmount);
+    const wpm = wordsPerPage * Number(data.pagesAmount);
 
     mutate(
       {
-        ppm,
+        ppm: wpm,
         words,
         comprehension: Number(data.comprehension),
         techniques: techniques.map((technique) => technique.value),
       },
       {
         onSuccess: () => {
+          onFinish({
+            wpm,
+            pts: calculatePracticePoints({
+              wpm,
+              comprehension: Number(data.comprehension),
+              words,
+            }),
+          });
           queryClient.invalidateQueries(['getRanking']);
           queryClient.invalidateQueries(['getPracticesEvolution']);
         },

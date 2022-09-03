@@ -77,3 +77,8 @@ type DropdownItem = {
   icon?: React.ReactNode;
   value: string;
 };
+
+type TestResults = {
+  wpm: number;
+  pts: number;
+};
