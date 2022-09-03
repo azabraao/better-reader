@@ -49,7 +49,7 @@ const SessionControl = () => {
           setActiveTrainingIndex(activeTrainingIndex + 1);
           setTrainingUnitIsFinished(false);
         }}
-        active
+        active={false}
       >
         Começar próxima
       </CountdownButton>
